@@ -1,17 +1,34 @@
 import React, { Component } from 'react'
+import PropTypes from 'react-proptypes'
 import './style.css'
 
-class AreaOfSybols extends Component {
-    state = {
-      some: 'some',
+class AreaOfSymbols extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
     }
-    render() {
-      return (
-        <div className="AreaOfSybols">
-            Area Of Sybols
-        </div>
-      )
-    }
+  }
+
+  render() {
+    const { symbols } = this.props
+    return (
+      <div className="areaOfSymbols">
+        {symbols.map(item =>
+          (<div>
+            <div className="symbol" dangerouslySetInnerHTML={{ __html: item.value }} />
+            <br />
+            <div className="text" dangerouslySetInnerHTML={{ __html: item.text }} />
+          </div>),
+        )}
+      </div>
+    )
+  }
 }
 
-export default AreaOfSybols
+AreaOfSymbols.propTypes = {
+  symbols: PropTypes.array,
+}
+
+
+export default AreaOfSymbols

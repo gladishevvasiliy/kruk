@@ -1,0 +1,17 @@
+@font-face {
+    font-family: Kruk; /* Имя шрифта */
+    src: url(../../res/fonts/Kruk.ttf); /* Путь к файлу со шрифтом */
+   }
+
+.areaOfSymbols {
+    padding: 50px;
+}
+
+.symbol {
+    font-size: 60pt;
+    font-family: "Kruk";
+}
+
+.red {
+    color: red;
+}
