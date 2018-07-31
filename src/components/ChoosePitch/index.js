@@ -50,7 +50,7 @@ class ChoosePitch extends Component {
                 </datalist>
               </label>
             </form>
-            <InputText getDataForInsert={context.getDataForInsert} data={filter(this.props.data, ({ pitch }) => pitch === this.state.currentPitchOfSymbol)} />
+            <InputText getDataForInsert={context.getDataForInsert} data={filter(this.props.data, ({ pitch }) => pitch === this.state.currentPitchOfSymbol)[0]} />
           </div>)
         }
       </PaperContext.Consumer>

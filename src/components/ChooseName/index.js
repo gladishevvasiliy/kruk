@@ -36,7 +36,6 @@ class ChooseName extends Component {
   handleKeyPress(e) { 
     if (e.key === 'Enter'){
       e.preventDefault()
-      console.log('do validate');
     }
   } 
   /*  eslint-enable */
@@ -73,7 +72,6 @@ class ChooseName extends Component {
 
 ChooseName.propTypes = {
   data: PropTypes.array,
-  getDataForInsert: PropTypes.func,
 }
 
 export default ChooseName

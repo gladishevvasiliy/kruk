@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'react-proptypes'
-import { isNil } from 'lodash'
+import { isNil, clone } from 'lodash'
 
 import './style.css'
 
@@ -21,8 +21,9 @@ class InputText extends Component {
     const { data, getDataForInsert } = this.props
     if (e.key === 'Enter') {
       e.preventDefault()
-      data[0].text = this.state.textToInsert
-      getDataForInsert(data[0])
+      const dataToSend = clone(data)
+      dataToSend.text = this.state.textToInsert
+      getDataForInsert(dataToSend)
     }
   }
 
@@ -35,7 +36,6 @@ class InputText extends Component {
   render() {
     const { data } = this.props
     if (isNil(data) || data === '' || data === []) return null
-    console.log(data)
     const { textToInsert } = this.state
 
     return (
@@ -56,7 +56,8 @@ class InputText extends Component {
 }
 
 InputText.propTypes = {
-  data: PropTypes.array,    
+  data: PropTypes.object,
+  getDataForInsert: PropTypes.func,
 }
 
 export default InputText

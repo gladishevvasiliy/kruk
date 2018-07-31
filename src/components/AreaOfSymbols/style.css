@@ -5,6 +5,14 @@
 
 .areaOfSymbols {
     padding: 50px;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    
+}
+
+.syllable {
+    margin-bottom: 50px;
 }
 
 .symbol {

@@ -14,13 +14,13 @@ class AreaOfSymbols extends Component {
     const { symbols } = this.props
     return (
       <div className="areaOfSymbols">
-        {symbols.map(item =>
-          (<div>
-            <div className="symbol" dangerouslySetInnerHTML={{ __html: item.value }} />
-            <br />
-            <div className="text" dangerouslySetInnerHTML={{ __html: item.text }} />
-          </div>),
-        )}
+        {symbols.map(({ value, text }, index) => (
+          // eslint-disable-next-line
+          <div key={index} className="syllable"> 
+            <div className="symbol" dangerouslySetInnerHTML={{ __html: value }} />
+            <div className="text" dangerouslySetInnerHTML={{ __html: text }} />
+          </div>
+        ))}
       </div>
     )
   }

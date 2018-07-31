@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
+import { isNil } from 'lodash'
 import InputSymbol from '../InputSymbol'
 import AreaOfSymbols from '../AreaOfSymbols'
 import PaperContext from '../../context'
-import { isNil } from 'lodash'
 import './style.css'
 
 
