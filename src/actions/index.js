@@ -1,4 +1,4 @@
-import { SET_SYLLABLES, ADD_SYLLABLE, FILTER_SYMBOLS_BY_NAME, FILTER_SYMBOLS_BY_OPTIONS, FILTER_SYMBOLS_BY_PITCH, ADD_TEXT_TO_SYLLABLE, TEST_MSG } from '../constants/'
+import { SET_SYLLABLES, ADD_SYLLABLE, FILTER_SYMBOLS_BY_NAME, FILTER_SYMBOLS_BY_OPTIONS, FILTER_SYMBOLS_BY_PITCH, ADD_TEXT_TO_SYLLABLE, TEST_MSG, GET_SYMBOLS } from '../constants/'
 
 export const addSyllable = (syllable) => {
   console.log('syllables setted') // eslint-disable-line no-console
@@ -55,3 +55,12 @@ export const testMessage = (state) => {
     payload: state,
   }
 }
+
+export const getSymbols = (state) => {
+  console.log('getSymbols') // eslint-disable-line no-console
+  return {
+    type: GET_SYMBOLS,
+    payload: state,
+  }
+}
+

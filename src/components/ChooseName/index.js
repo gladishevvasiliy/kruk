@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import PropTypes from 'react-proptypes'
 // import Select from 'react-select'
-// import { find } from 'lodash'
+import { map, assignIn, clone } from 'lodash'
 import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { filterSymbolsByName, filterSymbolsByOptions, filterSymbolsByPitch, addTextToSyllable, addSyllable, setSyllables } from '../../actions'
+import { getSymbols, filterSymbolsByName, filterSymbolsByOptions, filterSymbolsByPitch, addTextToSyllable, addSyllable, setSyllables } from '../../actions'
 // import multiSelect from '../../utils/multiSelect/index.js'
 import { NAMES_OF_SYMBOLS } from '../../constants'
 
@@ -58,9 +58,13 @@ class ChooseName extends Component {
         case 'syllable': {
           
           const { symbols, actions, syllableForInsert } = this.props
-          actions.addTextToSyllable(syllableForInsert.values.syllable)
-          // console.log(symbols)
-          actions.addSyllable(symbols[0])
+          const onlyValues = map( symbols, ({ value }) => ({ value: value }))
+          onlyValues[0].text = syllableForInsert.values.syllable
+          console.log(onlyValues[0])
+          console.log(symbols)
+          actions.addSyllable(onlyValues[0])
+          actions.getSymbols()
+          
           
           break;
         }
@@ -159,7 +163,7 @@ const ChooseNameWithForm = reduxForm({
 
 const mapStateToProps = state => ({ syllableForInsert: state.form.syllableForInsert, paper: state.paper, symbols: state.symbols.symbols })
 
-const mapDispatchToProps = dispatch => ({ actions: bindActionCreators({ filterSymbolsByName, filterSymbolsByOptions, filterSymbolsByPitch, addTextToSyllable, addSyllable, setSyllables }, dispatch) }) // eslint-disable-line max-len
+const mapDispatchToProps = dispatch => ({ actions: bindActionCreators({ getSymbols, filterSymbolsByName, filterSymbolsByOptions, filterSymbolsByPitch, addTextToSyllable, addSyllable, setSyllables }, dispatch) }) // eslint-disable-line max-len
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChooseNameWithForm)

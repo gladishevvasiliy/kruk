@@ -52,8 +52,8 @@ export default (state = initialState, action) => {
       console.log(ADD_TEXT_TO_SYLLABLE)
       const { symbols } = state
       const textForInsert = action.payload
-      const symbolWithText = clone(symbols)
-      symbolWithText[0].text = textForInsert
+      const symbolWithText = clone(symbols)[0]
+      symbolWithText.text = textForInsert
       console.log(symbolWithText)
       return {
         ...state,
@@ -62,10 +62,11 @@ export default (state = initialState, action) => {
     }
 
     case GET_SYMBOLS:
+      console.log(GET_SYMBOLS)
       return {
-        loading: false,
-        symbols: action.payload,
+        symbols: KRUKI,
       }
+
     default: {
       return state
     }
