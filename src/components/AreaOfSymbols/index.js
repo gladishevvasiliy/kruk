@@ -1,5 +1,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'react-proptypes'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { setSyllables } from '../../actions'
+
+
 import './style.css'
 
 class AreaOfSymbols extends Component {
@@ -10,11 +15,14 @@ class AreaOfSymbols extends Component {
     }
   }
 
+  componentDidMount() {
+  }
+
   render() {
-    const { symbols } = this.props
+    const { syllables } = this.props
     return (
       <div className="areaOfSymbols">
-        {symbols.map(({ value, text }, index) => (
+        {syllables.map(({ value, text }, index) => (
           // eslint-disable-next-line
           <div key={index} className="syllable"> 
             <div className="symbol" dangerouslySetInnerHTML={{ __html: value }} />
@@ -27,8 +35,11 @@ class AreaOfSymbols extends Component {
 }
 
 AreaOfSymbols.propTypes = {
-  symbols: PropTypes.array,
+  syllables: PropTypes.array,
 }
 
+const mapStateToProps = state => ({ syllables: state.paper.syllables })
 
-export default AreaOfSymbols
+const mapDispatchToProps = dispatch => ({ actions: bindActionCreators({ setSyllables }, dispatch) })
+
+export default connect(mapStateToProps, mapDispatchToProps)(AreaOfSymbols)

@@ -3,6 +3,11 @@
     src: url(../../res/fonts/Kruk.ttf); /* Путь к файлу со шрифтом */
    }
 
+   @font-face {
+    font-family: Text; /* Имя шрифта */
+    src: url(../../res/fonts/GrebnevUCS.ttf); /* Путь к файлу со шрифтом */
+   }
+
 .areaOfSymbols {
     padding: 50px;
     display: flex;
@@ -13,6 +18,11 @@
 
 .syllable {
     margin-bottom: 50px;
+}
+
+.text {
+    font-size: 30pt;
+    font-family: "Text";
 }
 
 .symbol {

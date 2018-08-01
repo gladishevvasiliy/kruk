@@ -1,0 +1,12 @@
+.inputForm {
+    display: flex;
+    flex-direction: column;
+    width: 250px;
+    margin-left: 40px;
+}
+
+.field {
+    display: inline-grid;
+    grid-template-columns: 90px auto;
+    justify-items: start;
+}

@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
-import PropTypes from 'react-proptypes'
+import PropTypes from 'react-proptypes' // eslint-disable
 import { isNil, clone } from 'lodash'
-
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+// import { Field, reduxForm } from 'redux-form'
+import { addSyllable, setSyllables, testMessage } from '../../actions'
 import './style.css'
 
 
@@ -18,12 +21,12 @@ class InputText extends Component {
   }
 
   handleKeyPress(e) {
-    const { data, getDataForInsert } = this.props
+    const { data, actions } = this.props
     if (e.key === 'Enter') {
       e.preventDefault()
       const dataToSend = clone(data)
       dataToSend.text = this.state.textToInsert
-      getDataForInsert(dataToSend)
+      actions.addSyllable(dataToSend)
     }
   }
 
@@ -32,6 +35,7 @@ class InputText extends Component {
       textToInsert: event.target.value,
     })
   }
+
 
   render() {
     const { data } = this.props
@@ -57,7 +61,13 @@ class InputText extends Component {
 
 InputText.propTypes = {
   data: PropTypes.object,
-  getDataForInsert: PropTypes.func,
+  actions: PropTypes.object,
 }
 
-export default InputText
+const mapStateToProps = state => ({ store: state })
+
+const mapDispatchToProps = dispatch => ({
+  actions: bindActionCreators({ addSyllable, setSyllables, testMessage }, dispatch),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(InputText)
