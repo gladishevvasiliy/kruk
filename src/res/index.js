@@ -44,8 +44,12 @@ export const PEREVODKA = [
     {"value":"<span class='red'>á</span>P","pitch":"Соль","name":"Переводка","sounds":2,"opts":["Борзая"]},{"value":"<span class='red'>á</span>P)","pitch":"Соль","name":"Переводка","sounds":2,"opts":["Борзая","Отсечка"]},{"value":"<span class='red'>áÖù</span>P","pitch":"Ми низкое","name":"Переводка","sounds":2,"opts":["Борзая"]},{"value":"<span class='red'>áãú</span>P","pitch":"Ут","name":"Переводка","sounds":2,"opts":["Борзая"]},{"value":"<span class='red'>áí÷</span>P","pitch":"Ре","name":"Переводка","sounds":2,"opts":["Борзая"]},{"value":"<span class='red'>áöÿ</span>P","pitch":"Ми","name":"Переводка","sounds":2,"opts":["Борзая"]},{"value":"<span class='red'>áìû</span>P","pitch":"Фа","name":"Переводка","sounds":2,"opts":["Борзая"]},{"value":"<span class='red'>áïü</span>P","pitch":"Соль","name":"Переводка","sounds":2,"opts":["Борзая"]},{"value":"<span class='red'>-</span>P","pitch":"Соль","name":"Переводка","sounds":"2","opts":["Тихая"]},{"value":"<span class='red'>Öù-</span>P","pitch":"Ми низкое","name":"Переводка","sounds":"2","opts":["Тихая"]},{"value":"<span class='red'>ãú-</span>P","pitch":"Ут","name":"Переводка","sounds":2,"opts":["Тихая"]},{"value":"<span class='red'>í÷-</span>P","pitch":"Ре","name":"Переводка","sounds":2,"opts":["Тихая"]},{"value":"<span class='red'>öÿ-</span>P","pitch":"Ми","name":"Переводка","sounds":2,"opts":["Тихая"]},{"value":"<span class='red'>ìû-</span>P","pitch":"Фа","name":"Переводка","sounds":2,"opts":["Тихая"]},{"value":"<span class='red'>ïü-</span>P","pitch":"Соль","name":"Переводка","sounds":2,"opts":["Тихая"]},{"value":"<span class='red'>ë</span>O","pitch":"Ми","name":"Переводка в лице Скачек средний","sounds":2,"opts":["Ломка"]},{"value":"<span class='red'>Жë</span>O","pitch":"Ми","name":"Переводка в лице Скачек средний","sounds":2,"opts":["Ломка"]},{"value":"<span class='red'>ìë</span>P|","pitch":"Фа","name":"Переводка","sounds":"3","opts":["Ломка","Подчашие"]},{"value":"<span class='red'>Îë</span>O|","pitch":"Фа высокое","name":"Переводка","sounds":3,"opts":["Ломка","Подчашие"]},{"value":"<span class='red'>öó</span>O","pitch":"Ми","name":"Переводка в лице Скачек большой","sounds":"3","opts":["Ударка"]}
 ]
 
-export const GOLUBCHIK = [
-    {"value":"g","pitch":"Соль","name":"Голубчик борзый","sounds":2,"opts":[]},{"value":"g)","pitch":"Соль","name":"Голубчик борзый","sounds":2,"opts":["Отсечка"]},{"value":"<span class='red'>Öù</span>g","pitch":"Ми низкое","name":"Голубчик борзый","sounds":2,"opts":[]},{"value":"<span class='red'>ãú</span>g","pitch":"Ут","name":"Голубчик борзый","sounds":2,"opts":[]},{"value":"<span class='red'>í÷</span>g","pitch":"Ре","name":"Голубчик борзый","sounds":2,"opts":[]},{"value":"<span class='red'>öÿ</span>g","pitch":"Ми","name":"Голубчик борзый","sounds":2,"opts":[]},{"value":"<span class='red'>ìû</span>g","pitch":"Фа","name":"Голубчик борзый","sounds":2,"opts":[]},{"value":"<span class='red'>ïü</span>g","pitch":"Соль","name":"Голубчик борзый","sounds":2,"opts":[]},{"value":"<span class='red'>-</span>G","pitch":"Соль","name":"Голубчик тихий","sounds":2,"opts":["Тихая"]},{"value":"<span class='red'>Öù-</span>G","pitch":"Ми низкое","name":"Голубчик тихий","sounds":2,"opts":["Тихая"]},{"value":"<span class='red'>ãú-</span>G","pitch":"Ут","name":"Голубчик тихий","sounds":2,"opts":["Тихая"]},{"value":"<span class='red'>í÷-</span>G","pitch":"Ре","name":"Голубчик тихий","sounds":2,"opts":["Тихая"]},{"value":"<span class='red'>öÿ-</span>G","pitch":"Ми","name":"Голубчик тихий","sounds":2,"opts":["Тихая"]},{"value":"<span class='red'>ìû-</span>G","pitch":"Фа","name":"Голубчик тихий","sounds":"2","opts":["Тихая"]},{"value":"<span class='red'>ïü-</span>G","pitch":"Соль","name":"Голубчик тихий","sounds":2,"opts":["Тихая"]}
+export const GOLUBCHIK_BORZIY = [
+    {"value":"g","pitch":"Соль","name":"Голубчик борзый","sounds":2,"opts":[]},{"value":"g)","pitch":"Соль","name":"Голубчик борзый","sounds":2,"opts":["Отсечка"]},{"value":"<span class='red'>Öù</span>g","pitch":"Ми низкое","name":"Голубчик борзый","sounds":2,"opts":[]},{"value":"<span class='red'>ãú</span>g","pitch":"Ут","name":"Голубчик борзый","sounds":2,"opts":[]},{"value":"<span class='red'>í÷</span>g","pitch":"Ре","name":"Голубчик борзый","sounds":2,"opts":[]},{"value":"<span class='red'>öÿ</span>g","pitch":"Ми","name":"Голубчик борзый","sounds":2,"opts":[]},{"value":"<span class='red'>ìû</span>g","pitch":"Фа","name":"Голубчик борзый","sounds":2,"opts":[]},{"value":"<span class='red'>ïü</span>g","pitch":"Соль","name":"Голубчик борзый","sounds":2,"opts":[]}
+]
+
+export const GOLUBCHIK_TIHIY = [
+    {"value":"<span class='red'>-</span>G","pitch":"Соль","name":"Голубчик тихий","sounds":2,"opts":["Тихая"]},{"value":"<span class='red'>Öù-</span>G","pitch":"Ми низкое","name":"Голубчик тихий","sounds":2,"opts":["Тихая"]},{"value":"<span class='red'>ãú-</span>G","pitch":"Ут","name":"Голубчик тихий","sounds":2,"opts":["Тихая"]},{"value":"<span class='red'>í÷-</span>G","pitch":"Ре","name":"Голубчик тихий","sounds":2,"opts":["Тихая"]},{"value":"<span class='red'>öÿ-</span>G","pitch":"Ми","name":"Голубчик тихий","sounds":2,"opts":["Тихая"]},{"value":"<span class='red'>ìû-</span>G","pitch":"Фа","name":"Голубчик тихий","sounds":"2","opts":["Тихая"]},{"value":"<span class='red'>ïü-</span>G","pitch":"Соль","name":"Голубчик тихий","sounds":2,"opts":["Тихая"]}
 ]
 export const CHASHKA = [
     {"value":"<span class='red'>Ö</span>H","pitch":"Ми низкое","name":"Чашка","sounds":1,"opts":[]},{"value":"<span class='red'>ã</span>H","pitch":"Ут","name":"Чашка","sounds":1,"opts":[]},{"value":"<span class='red'>í</span>H","pitch":"Ре","name":"Чашка","sounds":"1","opts":[]},{"value":"<span class='red'>ö</span>H","pitch":"Ми","name":"Чашка","sounds":"1","opts":[]},{"value":"<span class='red'>ì</span>H","pitch":"Фа","name":"Чашка","sounds":"1","opts":[]},{"value":"<span class='red'>ï</span>H","pitch":"Соль","name":"Чашка","sounds":"1","opts":[]},{"value":"<span class='red'>â</span>H","pitch":"Ля","name":"Чашка","sounds":"1","opts":[]},{"value":"<span class='red'>Öë</span>H","pitch":"Ми низкое","name":"Чашка","sounds":"2","opts":["Ломка"]},{"value":"<span class='red'>öë</span>H","pitch":"Ми","name":"Чашка","sounds":"2","opts":["Ломка"]},{"value":"<span class='red'>âë</span>H","pitch":"Ля","name":"Чашка","sounds":"2","opts":["Ломка"]},{"value":"<span class='red'>ö+</span>F","pitch":"Ми","name":"Чашка полная","sounds":"3","opts":["Тихая"]},{"value":"<span class='red'>î</span>H","pitch":"Ре","name":"Чашка со скобкой","sounds":2,"opts":[]}
@@ -177,4 +181,51 @@ export const KRUKI = [
   { id: 1, name: 'Крюк', value: KRUK },
   { id: 2, name: 'Параклит', value: PARAKLIT },
   { id: 3, name: 'Запятая', value: ZAPYATAYA },
+  { id: 4, name: 'Стопица', value: STOPICA },
+  { id: 5, name: 'Челюстка', value: CHELUSTKA },
+  { id: 6, name: 'Ключ', value: KLUCH },
+  { id: 7, name: 'Подчашие', value: PODCHASHIE },
+  { id: 8, name: 'Палка', value: PALKA },
+  { id: 9, name: 'Скамейца', value: SKAMEITCA },
+  { id: 10, name: 'Дербица', value: DERBICA },
+  { id: 11, name: 'Переводка', value: PEREVODKA },
+  { id: 12, name: 'Голубчик борзый', value: GOLUBCHIK_BORZIY },
+  { id: 13, name: 'Голубчик тихий', value: GOLUBCHIK_TIHIY },
+  { id: 14, name: 'Чашка', value: CHASHKA },
+  { id: 15, name: 'Статья', value: STATYA },
+  { id: 16, name: 'Статья светлая', value: STATYA_SVETLAYA },
+  { id: 17, name: 'Статья с запятой', value: STATYA_S_ZAPYATOY },
+  { id: 18, name: 'Статья мрачная', value: STATYA_MRACHNAYA },
+  { id: 19, name: 'Малая закрытая', value: MALAYA_ZAKRITAYA },
+  { id: 20, name: 'Средняя закрытая', value: SREDNAYA_ZAKRITAYA },
+  { id: 21, name: 'Крыж', value: KRIZH },
+  { id: 22, name: 'Рог', value: ROG },
+  { id: 23, name: 'Сложитие', value: SLOZHITIE },
+  { id: 24, name: 'Сложитие с купной', value: SLOZHITIE_S_KUPNOI },
+  { id: 25, name: 'Сложитие с запятой', value: SLOZHITIE_S_ZAPYATOI },
+  { id: 26, name: 'Полукулизма', value: POLUKULIZMA },
+  { id: 27, name: 'Два в челну', value: DVA_V_CHELNU },
+  { id: 28, name: 'Труба', value: TRUBA },
+  { id: 29, name: 'Дуда', value: DUDA },
+  { id: 30, name: 'Мечник', value: MECHNIK },
+  { id: 31, name: 'Стрела мрачная', value: STRELA_MRACHNAYA },
+  { id: 32, name: 'Стрела крыжевая', value: STRELA_KRIZHEVAYA },
+  { id: 33, name: 'Стрела поводная', value: STRELA_POVODNAYA },
+  { id: 34, name: 'Стрела светлая', value: STRELA_SVETLAYA },
+  { id: 35, name: 'Стрела тресветлая', value: STRELA_TRESVETLAYA },
+  { id: 36, name: 'Стрела светлотихая', value: STRELA_SVETLOTIHAYA },
+  { id: 37, name: 'Стрела поездная', value: STRELA_POEZDNAYA },
+  { id: 38, name: 'Стрела громная', value: STRELA_GROMNAYA },
+  { id: 39, name: 'Стрела громосветлая', value: STRELA_GROMOSVETLAYA },
+  { id: 40, name: 'Стрела громотресветлая', value: STRELA_GROMOTRESVETLAYA },
+  { id: 41, name: 'Стрела возводная', value: STRELA_VOZVODNAYA },
+  { id: 42, name: 'Стрела громокрыжная', value: STRELA_GROMOKRIZHNAYA },
+  { id: 43, name: 'Стрела трясосветлая', value: STRELA_TRYASOSVETLAYA },
+  { id: 44, name: 'Хамило', value: HAMILO },
+  { id: 45, name: 'Паук малый', value: PAUK_MALIY },
+  { id: 46, name: 'Паук большой', value: PAUK_BOLSHOY },
+  { id: 47, name: 'Фита', value: FITA },
+  { id: 48, name: 'Полукулизма малая', value: POLUKULIZMA_MALAYA },
+  { id: 49, name: 'Фотиза', value: FOTIZA },
+  { id: 50, name: 'Змийца', value: ZMIYCA },
 ]

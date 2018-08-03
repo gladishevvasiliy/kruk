@@ -1,9 +1,8 @@
-// import AutoFocusTextInput from './AutofocusTextInput'
-// import RFReactSelect from './RFReactSelect'
-// import multiSelect from './multiSelect'
+import AutoFocusTextInput from './AutofocusTextInput'
+import RFReactSelect from './RFReactSelect'
+import multiSelect from './multiSelect'
 
-// export default {
-//   AutoFocusTextInput,
-//   multiSelect,
-//   RFReactSelect,
-// }
+export default {
+  AutoFocusTextInput,
+  RFReactSelect,
+}
