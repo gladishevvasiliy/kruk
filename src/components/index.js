@@ -2,7 +2,7 @@ import InputSymbol from './InputSymbol'
 import Paper from './Paper'
 import AreaOfSymbols from './AreaOfSymbols'
 import ChooseName from './ChooseName'
-import ChooseOptions from './ChooseOptions'
+// import ChooseOptions from './ChooseOptions'
 import ChoosePitch from './ChoosePitch'
 
 
@@ -11,7 +11,7 @@ export {
   Paper,
   AreaOfSymbols,
   ChooseName,
-  ChooseOptions,
+  // ChooseOptions,
   ChoosePitch,
 
 }

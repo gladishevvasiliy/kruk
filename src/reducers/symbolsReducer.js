@@ -1,4 +1,4 @@
-import { filter, find, join, clone } from 'lodash'
+import { filter, find, clone, intersection } from 'lodash'
 import { KRUKI } from '../res/index'
 
 import { FILTER_SYMBOLS_BY_NAME, FILTER_SYMBOLS_BY_OPTIONS, FILTER_SYMBOLS_BY_PITCH, ADD_TEXT_TO_SYLLABLE, GET_SYMBOLS } from '../constants/'
@@ -26,44 +26,47 @@ export default (state = initialState, action) => {
       console.log(FILTER_SYMBOLS_BY_OPTIONS)
       const { symbols } = state
       const currentOptionsOfSymbol = action.payload
-      const symbolsFilteredByOptions = filter(symbols.value, symbol => join(symbol.opts, ',') === currentOptionsOfSymbol)
+      console.log(action.payload)
+      const symbolsFilteredByOptions = filter(symbols.value, symbol => intersection(symbol.opts, currentOptionsOfSymbol).join(' ') === symbol.opts.join(' ')
+               && intersection(symbol.opts, currentOptionsOfSymbol).join(' ') === currentOptionsOfSymbol.join(' '))
       console.log(symbolsFilteredByOptions)
 
       return {
         ...state,
-        symbols: symbolsFilteredByOptions,
+        symbolsFilteredByOptions,
       }
     }
 
     case FILTER_SYMBOLS_BY_PITCH: {
       console.log(FILTER_SYMBOLS_BY_PITCH)
-      const { symbols } = state
+      const { symbolsFilteredByOptions } = state
       const currentPitchOfSymbol = action.payload
-      const symbolsFilteredByPitch = filter(symbols, ({ pitch }) => pitch === currentPitchOfSymbol)
+      const symbolsFilteredByPitch = filter(symbolsFilteredByOptions, ({ pitch }) => pitch === currentPitchOfSymbol) // eslint-disable-line max-len
       console.log(symbolsFilteredByPitch)
 
       return {
         ...state,
-        symbols: symbolsFilteredByPitch,
+        symbolsFilteredByPitch,
       }
     }
 
     case ADD_TEXT_TO_SYLLABLE: {
       console.log(ADD_TEXT_TO_SYLLABLE)
-      const { symbols } = state
+      const { symbolsFilteredByPitch } = state
       const textForInsert = action.payload
-      const symbolWithText = clone(symbols)[0]
+      const symbolWithText = clone(symbolsFilteredByPitch)[0]
       symbolWithText.text = textForInsert
       console.log(symbolWithText)
       return {
         ...state,
-        symbols: symbolWithText,
+        symbolWithText,
       }
     }
 
     case GET_SYMBOLS:
       console.log(GET_SYMBOLS)
       return {
+        ...state,
         symbols: KRUKI,
       }
 

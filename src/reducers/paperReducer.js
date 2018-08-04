@@ -9,9 +9,6 @@ export default (state = initialState, action) => {
     case ADD_SYLLABLE: {
       const { syllables } = state
       const syllablesWithNew = [...syllables, action.payload]
-      // const uniqMessages = uniqBy(messagesWithNew, m => m.id)
-      // const sortedMessages = sortBy(uniqMessages, m => m.id) // TODO asc vs desc поосмотреть
-
       return {
         ...state,
         syllables: syllablesWithNew,

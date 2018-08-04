@@ -10,3 +10,7 @@
     grid-template-columns: 90px auto;
     justify-items: start;
 }
+
+.input {
+    width: 250px;
+}
