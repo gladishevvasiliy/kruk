@@ -1,11 +1,11 @@
 @font-face {
     font-family: Kruk; /* Имя шрифта */
-    src: url(../../res/fonts/Kruk.ttf); /* Путь к файлу со шрифтом */
+    src: url(../../res/fonts/Kalashnikov.ttf); /* Путь к файлу со шрифтом */
    }
 
    @font-face {
-    font-family: Text; /* Имя шрифта */
-    src: url(../../res/fonts/GrebnevUCS.ttf); /* Путь к файлу со шрифтом */
+    font-family: NewDamaskin; /* Имя шрифта */
+    src: url(../../res/fonts/NewDamaskin.ttf); /* Путь к файлу со шрифтом */
    }
 
 .areaOfSymbols {
@@ -22,7 +22,7 @@
 
 .text {
     font-size: 30pt;
-    font-family: "Text";
+    font-family: NewDamaskin;
 }
 
 .symbol {

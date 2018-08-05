@@ -8,6 +8,8 @@ export const FILTER_SYMBOLS_BY_NAME = 'FILTER_SYMBOLS_BY_NAME'
 export const FILTER_SYMBOLS_BY_OPTIONS = 'FILTER_SYMBOLS_BY_OPTIONS'
 export const FILTER_SYMBOLS_BY_PITCH = 'FILTER_SYMBOLS_BY_PITCH'
 export const ADD_TEXT_TO_SYLLABLE = 'ADD_TEXT_TO_SYLLABLE'
+export const REMOVE_SYLLABLE = 'REMOVE_SYLLABLE'
+
 
 // NAMES OF SYMBOLS
 
@@ -62,6 +64,8 @@ export const NAMES_OF_SYMBOLS = [
   { id: 48, name: 'Полукулизма малая' },
   { id: 49, name: 'Фотиза' },
   { id: 50, name: 'Змийца' },
+  { id: 51, label: 'Статья с крыжом' },
+  { id: 51, label: 'Статья в кулизме' },
 ]
 
 
@@ -116,6 +120,8 @@ export const SYMBOLS = [
   { value: 48, label: 'Полукулизма малая' },
   { value: 49, label: 'Фотиза' },
   { value: 50, label: 'Змийца' },
+  { value: 51, label: 'Статья с крыжом' },
+  { value: 52, label: 'Статья в кулизме' },
 ]
 
 export const OPTIONS = [

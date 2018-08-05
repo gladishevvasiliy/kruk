@@ -4,7 +4,7 @@ import { map, values } from 'lodash'
 import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { getSymbols, filterSymbolsByName, filterSymbolsByOptions, filterSymbolsByPitch, addTextToSyllable, addSyllable, setSyllables } from '../../actions'
+import { getSymbols, filterSymbolsByName, filterSymbolsByOptions, filterSymbolsByPitch, addTextToSyllable, addSyllable, removeSyllable, setSyllables } from '../../actions'
 import { RFReactSelect, RFReactMultiSelect } from '../../utils/RFReactSelect'
 import { SYMBOLS, OPTIONS, PITCH } from '../../constants'
 
@@ -14,16 +14,11 @@ class ChooseName extends Component {
   constructor(props) {
     super(props)
 
-    this.state = {
-      currentNameOfSymbol: '',
-    }
-
     this.handleKeyPress = this.handleKeyPress.bind(this)
     this.handleChangeName = this.handleChangeName.bind(this)
     this.handleChangeOptions = this.handleChangeOptions.bind(this)
     this.handleChangePitch = this.handleChangePitch.bind(this)
-    // this.handleChangeText = this.handleChangeText.bind(this)
-    this.inputName = React.createRef()
+    this.handleRemoveSyllable = this.handleRemoveSyllable.bind(this)
   }
 
   handleKeyPress(e) {
@@ -40,6 +35,7 @@ class ChooseName extends Component {
   handleChangeName(item) {
     const { actions } = this.props
     actions.filterSymbolsByName(item.label)
+    actions.filterSymbolsByOptions([])
   }
 
   handleChangeOptions(options) {
@@ -54,12 +50,10 @@ class ChooseName extends Component {
     actions.filterSymbolsByPitch(item.label)
   }
 
-  // handleChangeText(item) {
-  //   const { symbols, actions } = this.props
-  //   const onlyValues = map(symbols.symbolsFilteredByPitch, ({ value }) => ({ value }))
-  //   onlyValues[0].text = item.lable
-  //   actions.addSyllable(onlyValues[0])
-  // }
+  handleRemoveSyllable() {
+    const { actions } = this.props
+    actions.removeSyllable()
+  }
 
   render() {
     return (
@@ -74,6 +68,7 @@ class ChooseName extends Component {
               onChange={this.handleChangeName}
               component={RFReactSelect}
               className="input"
+              ref={this.NameRef}
             />
           </div>
           <div className="field" >
@@ -85,6 +80,7 @@ class ChooseName extends Component {
               onChange={this.handleChangeOptions}
               component={RFReactMultiSelect}
               className="input"
+              ref={this.OptionsRef}
             />
           </div>
           <div className="field" >
@@ -105,10 +101,14 @@ class ChooseName extends Component {
                 label="Слог"
                 name="syllable"
                 component="input"
-                className="input"
+                className="inputTextUCS"
               />
             </div>
           </form>
+          <div className="rmButton">
+            <div />
+            <button onClick={this.handleRemoveSyllable} >Удалить слог</button>
+          </div>
         </div>
       </React.Fragment>
     )
@@ -132,14 +132,8 @@ const mapDispatchToProps = dispatch => ({
     filterSymbolsByPitch,
     addTextToSyllable,
     addSyllable,
+    removeSyllable,
     setSyllables,
   }, dispatch) })
-
-
-ChooseName.propTypes = {
-  symbols: PropTypes.obj,
-  actions: PropTypes.func,
-}
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChooseNameWithForm)

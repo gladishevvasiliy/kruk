@@ -1,4 +1,5 @@
-import { ADD_SYLLABLE, SET_SYLLABLES, TEST_MSG } from '../constants/'
+import { dropRight } from 'lodash'
+import { ADD_SYLLABLE, SET_SYLLABLES, REMOVE_SYLLABLE, TEST_MSG } from '../constants/'
 
 const initialState = {
   syllables: [],
@@ -14,6 +15,16 @@ export default (state = initialState, action) => {
         syllables: syllablesWithNew,
       }
     }
+
+    case REMOVE_SYLLABLE: {
+      const { syllables } = state
+      const syllablesDropRight = dropRight(syllables)
+      return {
+        ...state,
+        syllables: syllablesDropRight,
+      }
+    }
+
     case SET_SYLLABLES:
       return {
         loading: false,

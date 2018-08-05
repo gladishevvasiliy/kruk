@@ -1,3 +1,9 @@
+@font-face {
+    font-family: NewDamaskin; /* Имя шрифта */
+    src: url(../../res/fonts/NewDamaskin.ttf); /* Путь к файлу со шрифтом */
+   }
+
+
 .inputForm {
     display: flex;
     flex-direction: column;
@@ -13,4 +19,23 @@
 
 .input {
     width: 250px;
+    padding: 5px;
+}
+
+.inputTextUCS {
+    font-family: NewDamaskin;
+    font-size: 20pt;
+    width: 222px;
+    padding: 5px;
+}
+
+.perevodka {
+    margin-left: 50px;
+}
+
+.rmButton {
+    margin-top: 5px;
+    display: inline-grid;
+    grid-template-columns: 90px auto;
+    justify-items: start;
 }
