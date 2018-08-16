@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'react-proptypes'
-import ChooseName from '../ChooseName'
+import InsertSyllable from '../InsertSyllable'
 import './style.css'
 import { KRUKI } from '../../res/index'
 
@@ -14,7 +14,7 @@ class InputSymbol extends Component {
   render() {
     return (
       <div className="InputSymbol">
-        <ChooseName data={KRUKI} getDataForInsert={this.props.getDataForInsert} />
+        <InsertSyllable data={KRUKI} getDataForInsert={this.props.getDataForInsert} />
       </div>
     )
   }

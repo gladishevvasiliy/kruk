@@ -1,11 +1,14 @@
 import React from 'react'
 import { createStore } from 'redux'
+import { Route, Router, hashHistory } from 'react-router'
+
 import { Provider } from 'react-redux'
 import rootReducer from './reducers'
 
 import './App.css'
 import { Paper } from './components'
 
+const history = hashHistory
 /* eslint-disable no-underscore-dangle */
 const store = createStore(
   rootReducer,
@@ -14,11 +17,13 @@ const store = createStore(
 /* eslint-enable */
 
 const App = () => (
-  <div className="App">
-    <Provider store={store}>
-      <Paper />
-    </Provider>
-  </div>
+  <Provider store={store}>
+    <div className="App">
+      <Router history={history}>
+        <Route path="/" component={Paper} />
+      </Router>
+    </div>
+  </Provider>
 )
 
 export default App

@@ -26,7 +26,6 @@ export default (state = initialState, action) => {
       console.log(FILTER_SYMBOLS_BY_OPTIONS)
       const { symbols } = state
       const currentOptionsOfSymbol = action.payload
-      console.log(action.payload)
       const symbolsFilteredByOptions = filter(symbols.value, symbol => intersection(symbol.opts, currentOptionsOfSymbol).join(' ') === symbol.opts.join(' ')
                && intersection(symbol.opts, currentOptionsOfSymbol).join(' ') === currentOptionsOfSymbol.join(' '))
       console.log(symbolsFilteredByOptions)

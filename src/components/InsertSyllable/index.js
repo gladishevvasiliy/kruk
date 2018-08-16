@@ -1,16 +1,33 @@
 import React, { Component } from 'react'
-import PropTypes from 'react-proptypes'
-import { map, values } from 'lodash'
-import { Field, reduxForm } from 'redux-form'
-import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { getSymbols, filterSymbolsByName, filterSymbolsByOptions, filterSymbolsByPitch, addTextToSyllable, addSyllable, removeSyllable, setSyllables } from '../../actions'
-import { RFReactSelect, RFReactMultiSelect } from '../../utils/RFReactSelect'
-import { SYMBOLS, OPTIONS, PITCH } from '../../constants'
+import { connect } from 'react-redux'
+import { Field, reduxForm } from 'redux-form'
+import { map, values } from 'lodash'
+import {
+  getSymbols,
+  filterSymbolsByName,
+  filterSymbolsByOptions,
+  filterSymbolsByPitch,
+  addTextToSyllable,
+  addSyllable,
+  removeSyllable,
+  setSyllables,
+} from '../../actions'
+
+import {
+  RFReactSelect,
+  RFReactMultiSelect,
+} from '../../utils/RFReactSelect'
+
+import {
+  SYMBOLS,
+  OPTIONS,
+  PITCH,
+} from '../../constants'
 
 import './style.css'
 
-class ChooseName extends Component {
+class InsertSyllable extends Component {
   constructor(props) {
     super(props)
 
@@ -115,9 +132,9 @@ class ChooseName extends Component {
   }
 }
 
-const ChooseNameWithForm = reduxForm({
+const InsertSyllableWithForm = reduxForm({
   form: 'syllableForInsert',
-})(ChooseName)
+})(InsertSyllable)
 
 const mapStateToProps = state => ({
   paper: state.paper,
@@ -136,4 +153,4 @@ const mapDispatchToProps = dispatch => ({
     setSyllables,
   }, dispatch) })
 
-export default connect(mapStateToProps, mapDispatchToProps)(ChooseNameWithForm)
+export default connect(mapStateToProps, mapDispatchToProps)(InsertSyllableWithForm)

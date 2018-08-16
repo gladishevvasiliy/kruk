@@ -1,13 +1,13 @@
 import InputSymbol from './InputSymbol'
 import Paper from './Paper'
 import AreaOfSymbols from './AreaOfSymbols'
-import ChooseName from './ChooseName'
+import InsertSyllable from './InsertSyllable'
 
 
 export {
   InputSymbol,
   Paper,
   AreaOfSymbols,
-  ChooseName,
+  InsertSyllable,
 
 }
