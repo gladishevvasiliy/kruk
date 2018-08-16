@@ -18,6 +18,11 @@
 
 .syllable {
     margin-bottom: 50px;
+    position: relative;
+}
+
+.syllable:hover .remove {
+    display: block;
 }
 
 .text {
@@ -32,4 +37,13 @@
 
 .red {
     color: red;
+}
+
+.remove {
+    color: red;
+    background-color: #fffc;
+    position: absolute;
+    right:0;
+    top:0;
+    display: none;
 }

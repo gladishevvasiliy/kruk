@@ -10,7 +10,7 @@ import {
   filterSymbolsByPitch,
   addTextToSyllable,
   addSyllable,
-  removeSyllable,
+  removeLastSyllable,
   setSyllables,
 } from '../../actions'
 
@@ -30,7 +30,7 @@ class InsertSyllable extends Component {
     this.handleChangeName = this.handleChangeName.bind(this)
     this.handleChangeOptions = this.handleChangeOptions.bind(this)
     this.handleChangePitch = this.handleChangePitch.bind(this)
-    this.handleRemoveSyllable = this.handleRemoveSyllable.bind(this)
+    this.handleremoveLastSyllable = this.handleremoveLastSyllable.bind(this)
 
     this.inputNameRef = React.createRef()
     this.inputOptionsRef = React.createRef()
@@ -75,9 +75,9 @@ class InsertSyllable extends Component {
     this.inputTextRef.current.focus()
   }
 
-  handleRemoveSyllable() {
+  handleremoveLastSyllable() {
     const { actions } = this.props
-    actions.removeSyllable()
+    actions.removeLastSyllable()
   }
 
   render() {
@@ -133,7 +133,7 @@ class InsertSyllable extends Component {
           </form>
           <div className="rmButton">
             <div />
-            <button onClick={this.handleRemoveSyllable} >Удалить слог</button>
+            <button onClick={this.handleremoveLastSyllable} >Удалить слог</button>
           </div>
         </div>
       </React.Fragment>
@@ -154,7 +154,7 @@ const mapDispatchToProps = dispatch => ({
     filterSymbolsByPitch,
     addTextToSyllable,
     addSyllable,
-    removeSyllable,
+    removeLastSyllable,
     setSyllables,
   }, dispatch) })
 
