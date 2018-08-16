@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { Field, reduxForm } from 'redux-form'
+import Select from 'react-select'
 import { map, values } from 'lodash'
 import {
   getSymbols,
@@ -13,11 +13,6 @@ import {
   removeSyllable,
   setSyllables,
 } from '../../actions'
-
-import {
-  RFReactSelect,
-  RFReactMultiSelect,
-} from '../../utils/RFReactSelect'
 
 import {
   SYMBOLS,
@@ -36,6 +31,15 @@ class InsertSyllable extends Component {
     this.handleChangeOptions = this.handleChangeOptions.bind(this)
     this.handleChangePitch = this.handleChangePitch.bind(this)
     this.handleRemoveSyllable = this.handleRemoveSyllable.bind(this)
+
+    this.inputNameRef = React.createRef()
+    this.inputOptionsRef = React.createRef()
+    this.inputPitchRef = React.createRef()
+    this.inputTextRef = React.createRef()
+  }
+
+  componentDidMount() {
+    this.inputNameRef.current.focus()
   }
 
   handleKeyPress(e) {
@@ -46,6 +50,7 @@ class InsertSyllable extends Component {
       onlyValues[0].text = e.target.value
       actions.addSyllable(onlyValues[0])
       actions.getSymbols()
+      this.inputNameRef.current.focus()
     }
   }
 
@@ -53,6 +58,7 @@ class InsertSyllable extends Component {
     const { actions } = this.props
     actions.filterSymbolsByName(item.label)
     actions.filterSymbolsByOptions([])
+    this.inputOptionsRef.current.focus()
   }
 
   handleChangeOptions(options) {
@@ -60,11 +66,13 @@ class InsertSyllable extends Component {
     delete options.preventDefault // eslint-disable-line
     const currentOptions = values(options).map(item => item.label)
     actions.filterSymbolsByOptions(currentOptions)
+    this.inputPitchRef.current.focus()
   }
 
   handleChangePitch(item) {
     const { actions } = this.props
     actions.filterSymbolsByPitch(item.label)
+    this.inputTextRef.current.focus()
   }
 
   handleRemoveSyllable() {
@@ -78,47 +86,48 @@ class InsertSyllable extends Component {
         <div className="inputForm">
           <div className="field" >
             <label htmlFor="Name">Крюк</label>
-            <Field
+            <Select
               name="name"
               list="symbols"
               options={SYMBOLS}
               onChange={this.handleChangeName}
-              component={RFReactSelect}
               className="input"
-              ref={this.NameRef}
+              valueKey="value"
+              ref={this.inputNameRef}
             />
           </div>
           <div className="field" >
             <label htmlFor="Name">Опции</label>
-            <Field
+            <Select
               name="options"
               list="options"
               options={OPTIONS}
               onChange={this.handleChangeOptions}
-              component={RFReactMultiSelect}
+              isMulti
               className="input"
-              ref={this.OptionsRef}
+              valueKey="value"
+              ref={this.inputOptionsRef}
             />
           </div>
           <div className="field" >
             <label htmlFor="Name">Помета</label>
-            <Field
+            <Select
               label="Помета"
               name="pitch"
               options={PITCH}
               onChange={this.handleChangePitch}
-              component={RFReactSelect}
               className="input"
+              ref={this.inputPitchRef}
             />
           </div>
           <form onKeyPress={this.handleKeyPress}>  {/* eslint-disable-line */}
             <div className="field" >
               <label htmlFor="Name">Текст</label>
-              <Field
+              <input
                 label="Слог"
                 name="syllable"
-                component="input"
                 className="inputTextUCS"
+                ref={this.inputTextRef}
               />
             </div>
           </form>
@@ -131,10 +140,6 @@ class InsertSyllable extends Component {
     )
   }
 }
-
-const InsertSyllableWithForm = reduxForm({
-  form: 'syllableForInsert',
-})(InsertSyllable)
 
 const mapStateToProps = state => ({
   paper: state.paper,
@@ -153,4 +158,4 @@ const mapDispatchToProps = dispatch => ({
     setSyllables,
   }, dispatch) })
 
-export default connect(mapStateToProps, mapDispatchToProps)(InsertSyllableWithForm)
+export default connect(mapStateToProps, mapDispatchToProps)(InsertSyllable)

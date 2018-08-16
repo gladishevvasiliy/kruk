@@ -1,12 +1,10 @@
 import React from 'react'
 import { createStore } from 'redux'
 import { Route, Router, hashHistory } from 'react-router'
-
 import { Provider } from 'react-redux'
 import rootReducer from './reducers'
-
-import './App.css'
 import { Paper } from './components'
+import './App.css'
 
 const history = hashHistory
 /* eslint-disable no-underscore-dangle */
