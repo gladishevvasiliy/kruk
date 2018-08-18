@@ -1,39 +1,50 @@
 import React, { Component } from 'react'
-import './style.css'
-import InputSymbol from '../InputSymbol'
+import { isNil } from 'lodash'
+import 'font-awesome/css/font-awesome.min.css'
+import InsertSyllable from '../InsertSyllable'
 import AreaOfSymbols from '../AreaOfSymbols'
+import PaperContext from '../../context'
+import PaperStyle from '../PaperStyle'
+
+import './style.css'
+import '../../res/bootstrap/css/bootstrap.min.css'
+import { KRUKI } from '../../res/index'
 
 class Paper extends Component {
   constructor(props) {
     super(props)
 
-    this.state = {
-      dataForSeach: {
-        currentNameOfSymbol: '',
-        currentOptionsOfSymbol: '',
-        currentPitchOfSymbol: '',
-      },
+    this.getDataForInsert = (dataForInsert) => {
+      if (!isNil(dataForInsert)) {
+        this.setState(prevState => ({
+          dataOfArea: [...prevState.dataOfArea, dataForInsert],
+        }))
+      }
     }
 
-    this.getDataForSearch = this.getDataForSearch.bind(this)
-  }
-
-  getDataForSearch(value) {
-    this.setState({ dataForSeach: value })
+    this.state = {
+      dataOfArea: [],
+      getDataForInsert: this.getDataForInsert,
+    }
   }
 
   render() {
-    const { dataForSeach: { currentNameOfSymbol, currentOptionsOfSymbol, currentPitchOfSymbol } } = this.state
     return (
-      <div className="Paper">
-        <AreaOfSymbols />
-        <InputSymbol getDataForSearch={this.getDataForSearch} />
-        <div>
-          <h1>{currentNameOfSymbol}</h1>
-          <h2>{currentOptionsOfSymbol}</h2>
-          <h2>{currentPitchOfSymbol}</h2>
-        </div>
-      </div>
+      <PaperContext.Provider value={this.state}>
+        <React.Fragment>
+          <div className="Paper">
+            <AreaOfSymbols symbols={this.state.dataOfArea} />
+            <hr className="hr" />
+            <div className="control">
+              <div className="InputSymbol">
+                <InsertSyllable data={KRUKI} getDataForInsert={this.getDataForInsert} />
+              </div>
+              <div />
+              <PaperStyle />
+            </div>
+          </div>
+        </React.Fragment>
+      </PaperContext.Provider>
     )
   }
 }

@@ -1,0 +1,169 @@
+@font-face {
+    font-family: Kruk;
+    src: url(../../res/fonts/Kalashnikov.ttf);
+   }
+
+   @font-face {
+    font-family: NewDamaskin;
+    src: url(../../res/fonts/NewDamaskin.ttf);
+   }
+
+   @font-face {
+    font-family: Afonit;
+    src: url(../../res/fonts/afonit01.ttf);
+   }
+
+.areaOfSymbols {
+    padding: 50px;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    
+}
+
+.syllable {
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.syllable:hover .remove {
+    display: inline-block;
+}
+
+.syllable:hover .fa {
+    display: block;
+}
+
+.text {
+    font-size: 30pt;
+    margin-left: 20px;
+    font-family: NewDamaskin;
+}
+
+.symbol {
+    font-size: 60pt;
+    font-family: "Kruk";
+}
+
+.red {
+    color: red;
+}
+
+.remove {
+    cursor: pointer;
+    color: red;
+    background-color: #fffc;
+    position: absolute;
+    right:0;
+    top:0;
+    display: none;
+    color: #fff;
+    background-color: #dc354599;;
+    border-color: #dc3545;
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    -webkit-transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;
+    -o-transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;
+}
+
+.remove > .fa{
+    display: none;
+}
+
+
+
+@media print {
+    body {
+      visibility: hidden;
+    }
+
+    .areaOfSymbols {
+      visibility: visible;
+     }
+}
+
+/* SIZES OF SYLLABLES */
+
+/* SIZE 30 */
+
+.size30 > .symbol {
+    font-size: 30pt;
+    height: 40px;
+}
+
+.size30 > .text {
+font-size: 12pt;
+}
+
+/* SIZE 40 */
+
+.size40 > .symbol {
+    font-size: 40pt;
+    height: 50px;
+}
+
+.size40 > .text {
+font-size: 16pt;
+}
+
+/* SIZE 50 */
+
+.size50 > .symbol {
+    font-size: 50pt;
+    height: 65px;
+}
+
+.size50 > .text {
+font-size: 20pt;
+}
+
+/* SIZE 60 */
+
+.size60 > .symbol {
+    font-size: 60pt;
+    height: 80px;
+}
+
+.size60 > .text {
+font-size: 24pt;
+}
+
+/* SIZE 70 */
+
+.size70 > .symbol {
+    font-size: 70pt;
+    height: 90px;
+}
+
+.size70 > .text {
+font-size: 28pt;
+}
+
+/* SIZE 80 */
+
+.size80 > .symbol {
+    font-size: 80pt;
+    height: 100px;
+}
+
+.size80 > .text {
+    font-size: 32pt;
+    margin-left: 30px;
+}
+
+.bucvica {
+    font-family: Afonit;
+    color:red;
+    margin-top: -30px;
+    text-transform: uppercase;
+}

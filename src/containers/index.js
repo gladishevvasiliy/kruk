@@ -1,5 +1,5 @@
-import { Symbol } from './Symbol'
+import Syllable from './Syllable'
 
 export default {
-  Symbol,
+  Syllable,
 }

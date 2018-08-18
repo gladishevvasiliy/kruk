@@ -1,12 +1,30 @@
 import React from 'react'
-import './App.css'
+import { createStore } from 'redux'
+import { Route, Router, hashHistory } from 'react-router'
+import { Provider } from 'react-redux'
+import rootReducer from './reducers'
 import { Paper } from './components'
+import './App.css'
 
+
+const history = hashHistory
+/* eslint-disable no-underscore-dangle */
+const store = createStore(
+  rootReducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+)
+/* eslint-enable */
 
 const App = () => (
-  <div className="App">
-    <Paper />
-  </div>
+  <Provider store={store}>
+    <div className="App">
+      <Router history={history}>
+        <Route path="/" component={Paper} />
+        {/* <Route path="/download" component={Download} /> */}
+      </Router>
+      {/* <Link to='/download'>Download</Link> */}
+    </div>
+  </Provider>
 )
 
 export default App

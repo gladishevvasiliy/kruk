@@ -1,0 +1,64 @@
+@font-face {
+    font-family: NewDamaskin; /* Имя шрифта */
+    src: url(../../res/fonts/NewDamaskin.ttf); /* Путь к файлу со шрифтом */
+   }
+
+
+.inputForm {
+    display: flex;
+    flex-direction: column;
+    width: 340px;
+    margin-left: 40px;
+}
+
+.field {
+    display: inline-grid;
+    grid-template-columns: 90px auto;
+    justify-items: start;
+}
+
+.input {
+    width: 250px;
+    padding: 5px;
+}
+
+.inputTextUCS {
+    font-family: NewDamaskin;
+    font-size: 20pt;
+    width: 242px !important;
+    padding-top: 5px;
+    margin-top: 5px;
+}
+
+.perevodka {
+    margin-left: 50px;
+}
+
+.removeLast {
+    display: inline-grid;
+    grid-template-columns: 94px 241px;
+    justify-items: start;
+}
+
+.titleControlPanel {
+    text-align: left;
+}
+
+.removeButton {
+    width: 100%
+} 
+
+.hideMessage {
+    display: none;
+}
+
+.error {
+    display: grid;
+    grid-template-columns: 90px auto;
+    margin-top: 10px;
+}
+
+.error > .alert {
+    width: 240px;
+    margin-left: 5px;
+}
