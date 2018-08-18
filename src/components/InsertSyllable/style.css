@@ -7,7 +7,7 @@
 .inputForm {
     display: flex;
     flex-direction: column;
-    width: 250px;
+    width: 340px;
     margin-left: 40px;
 }
 
@@ -25,17 +25,40 @@
 .inputTextUCS {
     font-family: NewDamaskin;
     font-size: 20pt;
-    width: 222px;
-    padding: 5px;
+    width: 242px !important;
+    padding-top: 5px;
+    margin-top: 5px;
 }
 
 .perevodka {
     margin-left: 50px;
 }
 
-.rmButton {
-    margin-top: 5px;
+.removeLast {
     display: inline-grid;
-    grid-template-columns: 90px auto;
+    grid-template-columns: 94px 241px;
     justify-items: start;
+}
+
+.titleControlPanel {
+    text-align: left;
+}
+
+.removeButton {
+    width: 100%
+} 
+
+.hideMessage {
+    display: none;
+}
+
+.error {
+    display: grid;
+    grid-template-columns: 90px auto;
+    margin-top: 10px;
+}
+
+.error > .alert {
+    width: 240px;
+    margin-left: 5px;
 }

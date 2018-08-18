@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
+import PropTypes from 'react-proptypes'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import Select from 'react-select'
-import { map, values } from 'lodash'
+import { map, values, isNil } from 'lodash'
+
 import {
   getSymbols,
   filterSymbolsByName,
@@ -12,6 +14,8 @@ import {
   addSyllable,
   removeLastSyllable,
   setSyllables,
+  checkError,
+  ErrorNoDefineSymbol,
 } from '../../actions'
 
 import {
@@ -26,11 +30,16 @@ class InsertSyllable extends Component {
   constructor(props) {
     super(props)
 
+    this.state = {
+      error: '',
+    }
+
     this.handleKeyPress = this.handleKeyPress.bind(this)
     this.handleChangeName = this.handleChangeName.bind(this)
     this.handleChangeOptions = this.handleChangeOptions.bind(this)
     this.handleChangePitch = this.handleChangePitch.bind(this)
     this.handleremoveLastSyllable = this.handleremoveLastSyllable.bind(this)
+
 
     this.inputNameRef = React.createRef()
     this.inputOptionsRef = React.createRef()
@@ -46,6 +55,12 @@ class InsertSyllable extends Component {
     if (e.key === 'Enter') {
       e.preventDefault()
       const { symbols, actions } = this.props
+
+      if (isNil(symbols.symbolsFilteredByPitch)) {
+        actions.ErrorNoDefineSymbol()
+        return
+      }
+
       const onlyValues = map(symbols.symbolsFilteredByPitch, ({ value }) => ({ value }))
       onlyValues[0].text = e.target.value
       actions.addSyllable(onlyValues[0])
@@ -81,9 +96,11 @@ class InsertSyllable extends Component {
   }
 
   render() {
+    const { error } = this.props
     return (
       <React.Fragment>
         <div className="inputForm">
+          <h4 className="titleControlPanel">Введите знамя</h4>
           <div className="field" >
             <label htmlFor="Name">Крюк</label>
             <Select
@@ -126,14 +143,19 @@ class InsertSyllable extends Component {
               <input
                 label="Слог"
                 name="syllable"
-                className="inputTextUCS"
+                className="inputTextUCS form-control"
+                disabled={error !== ''}
                 ref={this.inputTextRef}
               />
             </div>
           </form>
-          <div className="rmButton">
+          <div className="error" >
             <div />
-            <button onClick={this.handleremoveLastSyllable} >Удалить слог</button>
+            <div className={`error-message alert alert-danger ${error !== '' ? '' : 'hideMessage'}`} role="alert">{error}</div>
+          </div>
+          <div className="removeLast">
+            <div />
+            <button type="button" className="removeButton btn btn-danger" onClick={this.handleremoveLastSyllable} ><i className="fa fa-trash" />  Удалить последний слог</button>
           </div>
         </div>
       </React.Fragment>
@@ -144,6 +166,7 @@ class InsertSyllable extends Component {
 const mapStateToProps = state => ({
   paper: state.paper,
   symbols: state.symbols,
+  error: state.symbols.error,
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -156,6 +179,14 @@ const mapDispatchToProps = dispatch => ({
     addSyllable,
     removeLastSyllable,
     setSyllables,
+    checkError,
+    ErrorNoDefineSymbol,
   }, dispatch) })
 
 export default connect(mapStateToProps, mapDispatchToProps)(InsertSyllable)
+
+InsertSyllable.propTypes = {
+  symbols: PropTypes.object,
+  actions: PropTypes.object,
+  error: PropTypes.string,
+}

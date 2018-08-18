@@ -6,6 +6,7 @@ import rootReducer from './reducers'
 import { Paper } from './components'
 import './App.css'
 
+
 const history = hashHistory
 /* eslint-disable no-underscore-dangle */
 const store = createStore(
@@ -19,7 +20,9 @@ const App = () => (
     <div className="App">
       <Router history={history}>
         <Route path="/" component={Paper} />
+        {/* <Route path="/download" component={Download} /> */}
       </Router>
+      {/* <Link to='/download'>Download</Link> */}
     </div>
   </Provider>
 )

@@ -26,7 +26,8 @@ export default (state = initialState, action) => {
 
     case REMOVE_SYLLABLE_BY_INDEX: {
       const index = action.payload
-      const newSyllables = syllables.slice().splice(index, 1)
+      const newSyllables = syllables.slice()
+      newSyllables.splice(index, 1)
       return {
         ...state,
         syllables: newSyllables,

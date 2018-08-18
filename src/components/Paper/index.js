@@ -1,10 +1,14 @@
 import React, { Component } from 'react'
 import { isNil } from 'lodash'
-import InputSymbol from '../InputSymbol'
+import 'font-awesome/css/font-awesome.min.css'
+import InsertSyllable from '../InsertSyllable'
 import AreaOfSymbols from '../AreaOfSymbols'
 import PaperContext from '../../context'
-import './style.css'
+import PaperStyle from '../PaperStyle'
 
+import './style.css'
+import '../../res/bootstrap/css/bootstrap.min.css'
+import { KRUKI } from '../../res/index'
 
 class Paper extends Component {
   constructor(props) {
@@ -30,7 +34,14 @@ class Paper extends Component {
         <React.Fragment>
           <div className="Paper">
             <AreaOfSymbols symbols={this.state.dataOfArea} />
-            <InputSymbol getDataForInsert={this.getDataForInsert} />
+            <hr className="hr" />
+            <div className="control">
+              <div className="InputSymbol">
+                <InsertSyllable data={KRUKI} getDataForInsert={this.getDataForInsert} />
+              </div>
+              <div />
+              <PaperStyle />
+            </div>
           </div>
         </React.Fragment>
       </PaperContext.Provider>

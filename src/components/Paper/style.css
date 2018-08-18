@@ -1,0 +1,14 @@
+.control {
+    display: grid;
+    grid-template-columns: 250px auto 350px;
+}
+
+.hr {
+    margin-top: 100px;
+}
+
+.download-file {
+    position: absolute;
+    bottom: 20px;
+
+}

@@ -1,10 +1,17 @@
 import { filter, find, clone, intersection } from 'lodash'
 import { KRUKI } from '../res/index'
 
-import { FILTER_SYMBOLS_BY_NAME, FILTER_SYMBOLS_BY_OPTIONS, FILTER_SYMBOLS_BY_PITCH, ADD_TEXT_TO_SYLLABLE, GET_SYMBOLS } from '../constants/'
+import { FILTER_SYMBOLS_BY_NAME, FILTER_SYMBOLS_BY_OPTIONS, FILTER_SYMBOLS_BY_PITCH, ADD_TEXT_TO_SYLLABLE, GET_SYMBOLS, CHECK_ERROR, ERROR_NO_DEFINE_SYMBOL } from '../constants/'
 
 const initialState = {
   symbols: KRUKI,
+  error: '',
+}
+
+const checkError = (symbols) => {
+  if (symbols.length === 0) {
+    return 'Ошибка. Такого крюка в базе нет.'
+  } else return ''
 }
 
 export default (state = initialState, action) => {
@@ -29,10 +36,10 @@ export default (state = initialState, action) => {
       const symbolsFilteredByOptions = filter(symbols.value, symbol => intersection(symbol.opts, currentOptionsOfSymbol).join(' ') === symbol.opts.join(' ')
                && intersection(symbol.opts, currentOptionsOfSymbol).join(' ') === currentOptionsOfSymbol.join(' '))
       console.log(symbolsFilteredByOptions)
-
       return {
         ...state,
         symbolsFilteredByOptions,
+        error: checkError(symbolsFilteredByOptions),
       }
     }
 
@@ -46,6 +53,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         symbolsFilteredByPitch,
+        error: checkError(symbolsFilteredByPitch),
       }
     }
 
@@ -68,6 +76,27 @@ export default (state = initialState, action) => {
         ...state,
         symbols: KRUKI,
       }
+
+    case CHECK_ERROR: {
+      const symbolsForCheck = action.payload
+      if (symbolsForCheck.length === 0) {
+        return {
+          ...state,
+          error: 'Ошибка. Такого крюка нет в базе',
+        }
+      }
+      return {
+        ...state,
+        error: '',
+      }
+    }
+
+    case ERROR_NO_DEFINE_SYMBOL: {
+      return {
+        ...state,
+        error: 'Ошибка. Не выбран крюк или его помета',
+      }
+    }
 
     default: {
       return state
