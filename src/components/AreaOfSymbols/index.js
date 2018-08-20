@@ -1,9 +1,15 @@
 import React, { Component } from 'react'
 import PropTypes from 'react-proptypes'
-import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { DragDropContext, Droppable } from 'react-beautiful-dnd'
 import { isNil } from 'lodash'
-import { setSyllables, removeSyllablebyIndex } from '../../actions'
+import { moveSyllable } from '../../actions'
+
+
+import Bucvica from '../../containers/Bucvica'
+import Syllable from '../../containers/Syllable'
+import Loading from '../../utils/Loading'
 import './style.css'
 
 class AreaOfSymbols extends Component {
@@ -12,44 +18,66 @@ class AreaOfSymbols extends Component {
 
     this.state = {
     }
+
+    this.onDragEnd = this.onDragEnd.bind(this)
   }
 
-  removeLastSyllable(e) {
+  onDragEnd(result) { // eslint-disable-line
+    const { source, destination } = result
+
+    if (!destination) {
+      return
+    }
+
+    if (
+      destination.droppableId === source.droppableId &&
+      destination.index === source.index
+    ) {
+      return
+    }
+
     const { actions } = this.props
-    actions.removeSyllablebyIndex(e.target.name)
+    actions.moveSyllable({ source, destination })
   }
 
   render() {
     const { syllables, form } = this.props
+
     if (isNil(form.paperStyle)) {
       return (
-        <React.Fragment>
-          <i className="fa fa-spinner fa-pulse fa-3x fa-fw" />
-          <span className="sr-only">Loading...</span>
-        </React.Fragment>
+        <Loading />
       )
     }
+
     return (
       <React.Fragment>
-        <div className="areaOfSymbols">
+        <div className="paperArea">
           <div
-            className="bucvica"
+            className="areaOfSymbols mx-auto"
             style={{
-              fontSize: form.paperStyle.values.sizeOfBucvica + 'pt', // eslint-disable-line
-              height: form.paperStyle.values.sizeOfBucvica * 0.9,
+              width: form.paperStyle.values.sizeOfPage + 'px', // eslint-disable-line
             }}
-            dangerouslySetInnerHTML={{
-              __html: form.paperStyle.values.bucvica,
-            }}
-          />
-          {syllables.map(({ value, text }, index) => (
-            // eslint-disable-next-line
-            <div key={index} className={`syllable size${form.paperStyle.values.fontSize}`}>
-              <div className="symbol" dangerouslySetInnerHTML={{ __html: value }} />
-              <div className="text" dangerouslySetInnerHTML={{ __html: text }} />
-              <button name={index} onClick={e => this.removeLastSyllable(e)} className="remove"><i className="fa fa-trash" /></button>
-            </div>
-          ))}
+          >
+            <DragDropContext onDragEnd={this.onDragEnd}>
+              <div className="paperMargin">
+                <Bucvica />
+                <Droppable droppableId="droppable-1" direction="horizontal">
+                  {provided => (
+                    <div
+                      ref={provided.innerRef}
+                      {...provided.droppableProps}
+                      className="droppable"
+                    >
+                      {syllables.map(({ value, text }, index) => (
+                        <Syllable value={value} text={text} key={index} index={index} />  // eslint-disable-line
+                      ))}
+                      {provided.placeholder}
+                    </div>
+                  )}
+                </Droppable>
+              </div>
+            </DragDropContext>
+          </div>
         </div>
       </React.Fragment>
     )
@@ -58,14 +86,14 @@ class AreaOfSymbols extends Component {
 
 AreaOfSymbols.propTypes = {
   syllables: PropTypes.array,
-  actions: PropTypes.object,
   form: PropTypes.object,
+  actions: PropTypes.object,
 }
 
-const mapStateToProps = state => ({ syllables: state.paper.syllables, form: state.form })
-
 const mapDispatchToProps = dispatch => (
-  { actions: bindActionCreators({ setSyllables, removeSyllablebyIndex }, dispatch) }
+  { actions: bindActionCreators({ moveSyllable }, dispatch) }
 )
+
+const mapStateToProps = state => ({ syllables: state.paper.syllables, form: state.form })
 
 export default connect(mapStateToProps, mapDispatchToProps)(AreaOfSymbols)

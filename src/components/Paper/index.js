@@ -5,6 +5,7 @@ import InsertSyllable from '../InsertSyllable'
 import AreaOfSymbols from '../AreaOfSymbols'
 import PaperContext from '../../context'
 import PaperStyle from '../PaperStyle'
+import Header from '../../utils/Header'
 
 import './style.css'
 import '../../res/bootstrap/css/bootstrap.min.css'
@@ -32,9 +33,10 @@ class Paper extends Component {
     return (
       <PaperContext.Provider value={this.state}>
         <React.Fragment>
+          <Header />
           <div className="Paper">
             <AreaOfSymbols symbols={this.state.dataOfArea} />
-            <hr className="hr" />
+            {/* <hr className="hr" /> */}
             <div className="control">
               <div className="InputSymbol">
                 <InsertSyllable data={KRUKI} getDataForInsert={this.getDataForInsert} />

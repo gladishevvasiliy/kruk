@@ -13,12 +13,34 @@
     src: url(../../res/fonts/afonit01.ttf);
    }
 
+
+.paperArea {
+    padding-top: 50px;
+    background-color: rgb(236, 236, 236);
+    padding-bottom: 50px;
+}
 .areaOfSymbols {
-    padding: 50px;
     display: flex;
     justify-content: flex-start;
     flex-wrap: wrap;
-    
+    width: 700px;
+    background: #fff;
+    /* min-height: 400px; */
+
+    /* border-top: 1px solid #d1d1d1;
+    border-left: 1px solid #d1d1d1;
+    border-right: 1px solid #d1d1d1; */
+}
+
+.paperMargin {
+    margin: 30px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.droppable {
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .syllable {
@@ -26,7 +48,7 @@
     position: relative;
 }
 
-.syllable:hover .remove {
+.syllable:hover .syllable-button {
     display: inline-block;
 }
 
@@ -41,7 +63,7 @@
 }
 
 .symbol {
-    font-size: 60pt;
+    /* font-size: 60pt; */
     font-family: "Kruk";
 }
 
@@ -49,17 +71,7 @@
     color: red;
 }
 
-.remove {
-    cursor: pointer;
-    color: red;
-    background-color: #fffc;
-    position: absolute;
-    right:0;
-    top:0;
-    display: none;
-    color: #fff;
-    background-color: #dc354599;;
-    border-color: #dc3545;
+.syllable-button {
     font-weight: 400;
     text-align: center;
     white-space: nowrap;
@@ -76,19 +88,40 @@
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;
 }
 
-.remove > .fa{
+.remove {
+    cursor: pointer;
+    background-color: #fffc;
+    position: absolute;
+    right:0;
+    top:0;
+    display: none;
+    color: #fff;
+    background-color: #dc354599;;
+}
+
+.syllable-button > .fa{
     display: none;
 }
 
-
+.repeat {
+    cursor: pointer;
+    background-color: #fffc;
+    position: absolute;
+    right:0;
+    top: 35px;
+    display: none;
+    color: #fff;
+    background-color: #3bdc3599;
+}
 
 @media print {
     body {
       visibility: hidden;
     }
 
-    .areaOfSymbols {
+    .paperMargin {
       visibility: visible;
+      
      }
 }
 
@@ -159,11 +192,4 @@ font-size: 28pt;
 .size80 > .text {
     font-size: 32pt;
     margin-left: 30px;
-}
-
-.bucvica {
-    font-family: Afonit;
-    color:red;
-    margin-top: -30px;
-    text-transform: uppercase;
 }

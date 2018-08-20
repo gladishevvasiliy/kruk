@@ -19,10 +19,12 @@ import {
 } from '../../actions'
 
 import {
-  SYMBOLS,
   OPTIONS,
   PITCH,
 } from '../../constants'
+
+import { KRUKI } from '../../res/'
+
 
 import './style.css'
 
@@ -64,13 +66,13 @@ class InsertSyllable extends Component {
       const onlyValues = map(symbols.symbolsFilteredByPitch, ({ value }) => ({ value }))
       onlyValues[0].text = e.target.value
       actions.addSyllable(onlyValues[0])
-      actions.getSymbols()
       this.inputNameRef.current.focus()
     }
   }
 
   handleChangeName(item) {
     const { actions } = this.props
+    actions.getSymbols()
     actions.filterSymbolsByName(item.label)
     actions.filterSymbolsByOptions([])
     this.inputOptionsRef.current.focus()
@@ -106,10 +108,10 @@ class InsertSyllable extends Component {
             <Select
               name="name"
               list="symbols"
-              options={SYMBOLS}
+              options={KRUKI}
               onChange={this.handleChangeName}
               className="input"
-              valueKey="value"
+              valueKey="id"
               ref={this.inputNameRef}
             />
           </div>

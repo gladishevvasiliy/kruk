@@ -12,6 +12,8 @@ export const REMOVE_LAST_SYLLABLE = 'REMOVE_LAST_SYLLABLE'
 export const REMOVE_SYLLABLE_BY_INDEX = 'REMOVE_SYLLABLE_BY_INDEX'
 export const CHECK_ERROR = 'CHECK_ERROR'
 export const ERROR_NO_DEFINE_SYMBOL = 'ERROR_NO_DEFINE_SYMBOL'
+export const REPEAT_SYLLABLE_BY_INDEX = 'REPEAT_SYLLABLE_BY_INDEX'
+export const MOVE_SYLLABLE = 'MOVE_SYLLABLE'
 
 export const SYMBOLS = [
   { value: 1, label: 'Параклит' },
@@ -66,6 +68,9 @@ export const SYMBOLS = [
   { value: 50, label: 'Змийца' },
   { value: 51, label: 'Статья с крыжом' },
   { value: 52, label: 'Статья в кулизме' },
+  { value: 53, label: 'Запятая с крыжом' },
+  { value: 54, label: 'Стрела простая' },
+
 ]
 
 export const OPTIONS = [

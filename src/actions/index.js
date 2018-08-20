@@ -3,6 +3,7 @@ import {
   ADD_SYLLABLE,
   REMOVE_LAST_SYLLABLE,
   REMOVE_SYLLABLE_BY_INDEX,
+  REPEAT_SYLLABLE_BY_INDEX,
   FILTER_SYMBOLS_BY_NAME,
   FILTER_SYMBOLS_BY_OPTIONS,
   FILTER_SYMBOLS_BY_PITCH,
@@ -10,6 +11,7 @@ import {
   GET_SYMBOLS,
   CHECK_ERROR,
   ERROR_NO_DEFINE_SYMBOL,
+  MOVE_SYLLABLE,
 } from '../constants/'
 
 export const addSyllable = syllable => ({ type: ADD_SYLLABLE, payload: syllable })
@@ -17,6 +19,10 @@ export const addSyllable = syllable => ({ type: ADD_SYLLABLE, payload: syllable 
 export const removeLastSyllable = syllable => ({ type: REMOVE_LAST_SYLLABLE, payload: syllable })
 
 export const removeSyllablebyIndex = id => ({ type: REMOVE_SYLLABLE_BY_INDEX, payload: id })
+
+export const repeatSyllableByIndex = index => ({ type: REPEAT_SYLLABLE_BY_INDEX, payload: index })
+
+export const moveSyllable = state => ({ type: MOVE_SYLLABLE, payload: state })
 
 export const setSyllables = syllables => ({ type: SET_SYLLABLES, payload: syllables })
 

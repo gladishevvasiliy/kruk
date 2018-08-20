@@ -11,7 +11,8 @@ const initialState = {
 const checkError = (symbols) => {
   if (symbols.length === 0) {
     return 'Ошибка. Такого крюка в базе нет.'
-  } else return ''
+  }
+  return ''
 }
 
 export default (state = initialState, action) => {
@@ -20,7 +21,7 @@ export default (state = initialState, action) => {
       console.log(FILTER_SYMBOLS_BY_NAME)
       const { symbols } = state
       const currentNameOfSymbol = action.payload
-      const symbolsFilteredByName = find(symbols, symbol => symbol.name === currentNameOfSymbol)
+      const symbolsFilteredByName = find(symbols, symbol => symbol.label === currentNameOfSymbol)
       console.log(symbolsFilteredByName)
 
       return {
