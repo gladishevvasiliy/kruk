@@ -1,5 +1,5 @@
 import { dropRight, isNil } from 'lodash'
-import { ADD_SYLLABLE, SET_SYLLABLES, REMOVE_LAST_SYLLABLE, REMOVE_SYLLABLE_BY_INDEX, REPEAT_SYLLABLE_BY_INDEX, MOVE_SYLLABLE } from '../constants/'
+import { ADD_SYLLABLE, SET_SYLLABLES, REMOVE_LAST_SYLLABLE, REMOVE_SYLLABLE_BY_INDEX, REPEAT_SYLLABLE_BY_INDEX, MOVE_SYLLABLE, EDIT_SYLLABLE } from '../constants/'
 
 const initialState = {
   syllables: isNil(localStorage.getItem('syllables')) ? [] : JSON.parse(localStorage.getItem('syllables')),
@@ -59,6 +59,13 @@ export default (state = initialState, action) => {
         ...state,
         syllables: newSyllables,
       }
+    }
+
+    case EDIT_SYLLABLE: {
+      const id = action.payload
+      console.log(id)
+
+      return state
     }
 
     case SET_SYLLABLES:

@@ -12,6 +12,7 @@ import {
   CHECK_ERROR,
   ERROR_NO_DEFINE_SYMBOL,
   MOVE_SYLLABLE,
+  EDIT_SYLLABLE,
 } from '../constants/'
 
 export const addSyllable = syllable => ({ type: ADD_SYLLABLE, payload: syllable })
@@ -23,6 +24,9 @@ export const removeSyllablebyIndex = id => ({ type: REMOVE_SYLLABLE_BY_INDEX, pa
 export const repeatSyllableByIndex = index => ({ type: REPEAT_SYLLABLE_BY_INDEX, payload: index })
 
 export const moveSyllable = state => ({ type: MOVE_SYLLABLE, payload: state })
+
+export const editSyllable = index => ({ type: EDIT_SYLLABLE, payload: index })
+
 
 export const setSyllables = syllables => ({ type: SET_SYLLABLES, payload: syllables })
 

@@ -16,15 +16,15 @@ const store = createStore(
 /* eslint-enable */
 
 const App = () => (
-  <Provider store={store}>
-    <div className="App">
-      <Router history={history}>
-        <Route path="/" component={Paper} />
-        {/* <Route path="/download" component={Download} /> */}
-      </Router>
-      {/* <Link to='/download'>Download</Link> */}
-    </div>
-  </Provider>
+  <React.Fragment>
+    <Provider store={store}>
+      <div className="App">
+        <Router history={history}>
+          <Route path="/" component={Paper} />
+        </Router>
+      </div>
+    </Provider>
+  </React.Fragment>
 )
 
 export default App

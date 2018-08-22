@@ -9,6 +9,7 @@ import Header from '../../utils/Header'
 
 import './style.css'
 import '../../res/bootstrap/css/bootstrap.min.css'
+
 import { KRUKI } from '../../res/index'
 
 class Paper extends Component {

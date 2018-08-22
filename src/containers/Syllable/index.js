@@ -2,8 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'react-proptypes'
 import { bindActionCreators } from 'redux'
-import { Draggable } from 'react-beautiful-dnd'
-import { removeSyllablebyIndex, repeatSyllableByIndex } from '../../actions'
+import { removeSyllablebyIndex, repeatSyllableByIndex, editSyllable } from '../../actions'
 
 class Syllable extends Component {
   removeLastSyllable(e) {
@@ -16,25 +15,23 @@ class Syllable extends Component {
     actions.repeatSyllableByIndex(e.target.name)
   }
 
+  editSyllable(e) {
+    const { actions } = this.props
+    actions.editSyllable(e.target.name)
+
+  }
+
   render() {
     const { form, value, text, index } = this.props
     return (
-      <Draggable key={index} draggableId={index} index={index}>
-        {provided => (
-          <div
-            ref={provided.innerRef}
-            {...provided.draggableProps}
-            {...provided.dragHandleProps}
-          >
-            <div className={`syllable size${form.paperStyle.values.fontSize}`}>
-              <div className="symbol" dangerouslySetInnerHTML={{ __html: value }} />
-              <div className="text" dangerouslySetInnerHTML={{ __html: text }} />
-              <button name={index} onClick={e => this.removeLastSyllable(e)} className="syllable-button remove"><i className="fa fa-trash" /></button>
-              <button name={index} onClick={e => this.repeatSyllableByIndex(e)} className="syllable-button repeat"><i className="fa fa-plus" /></button>
-            </div>
-          </div>
-        )}
-      </Draggable>
+      <div className={`syllable size${form.paperStyle.values.fontSize}`}>
+        <div className="symbol" dangerouslySetInnerHTML={{ __html: value }} />
+        <div className="text" dangerouslySetInnerHTML={{ __html: text }} />
+        <button name={index} onClick={e => this.removeLastSyllable(e)} className="syllable-button remove"><i className="fa fa-trash" /></button>
+        <button name={index} onClick={e => this.repeatSyllableByIndex(e)} className="syllable-button repeat"><i className="fa fa-plus" /></button>
+        <button name={index} onClick={e => this.editSyllable(e)} className="syllable-button edit"><i className="fa fa-pencil" /></button>
+
+      </div>
     )
   }
 }
@@ -43,7 +40,7 @@ class Syllable extends Component {
 const mapStateToProps = state => ({ form: state.form })
 
 const mapDispatchToProps = dispatch => (
-  { actions: bindActionCreators({ removeSyllablebyIndex, repeatSyllableByIndex }, dispatch) }
+  { actions: bindActionCreators({ removeSyllablebyIndex, repeatSyllableByIndex, editSyllable }, dispatch) }
 )
 
 export default connect(mapStateToProps, mapDispatchToProps)(Syllable)
