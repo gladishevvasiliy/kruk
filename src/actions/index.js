@@ -13,6 +13,9 @@ import {
   ERROR_NO_DEFINE_SYMBOL,
   MOVE_SYLLABLE,
   EDIT_SYLLABLE,
+  SHOW_MODAL_EDIT,
+  HIDE_MODAL_EDIT,
+  CHANGE_SYLLABLE,
 } from '../constants/'
 
 export const addSyllable = syllable => ({ type: ADD_SYLLABLE, payload: syllable })
@@ -26,7 +29,6 @@ export const repeatSyllableByIndex = index => ({ type: REPEAT_SYLLABLE_BY_INDEX,
 export const moveSyllable = state => ({ type: MOVE_SYLLABLE, payload: state })
 
 export const editSyllable = index => ({ type: EDIT_SYLLABLE, payload: index })
-
 
 export const setSyllables = syllables => ({ type: SET_SYLLABLES, payload: syllables })
 
@@ -43,4 +45,10 @@ export const getSymbols = state => ({ type: GET_SYMBOLS, payload: state })
 export const checkError = symbolsForCheck => ({ type: CHECK_ERROR, payload: symbolsForCheck })
 
 export const ErrorNoDefineSymbol = state => ({ type: ERROR_NO_DEFINE_SYMBOL, payload: state })
+
+export const showModalEdit = editableSyllable => ({ type: SHOW_MODAL_EDIT, payload: editableSyllable }) //eslint-disable-line
+
+export const hideModalEdit = state => ({ type: HIDE_MODAL_EDIT, payload: state })
+
+export const changeSyllable = (indexOfChangingSyllable, syllable) => ({ type: CHANGE_SYLLABLE, payload: {indexOfChangingSyllable, syllable } }) //eslint-disable-line
 

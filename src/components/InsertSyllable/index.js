@@ -16,6 +16,7 @@ import {
   setSyllables,
   checkError,
   ErrorNoDefineSymbol,
+  changeSyllable,
 } from '../../actions'
 
 import {
@@ -56,7 +57,7 @@ class InsertSyllable extends Component {
   handleKeyPress(e) {
     if (e.key === 'Enter') {
       e.preventDefault()
-      const { symbols, actions } = this.props
+      const { symbols, actions, editableSyllable } = this.props
 
       if (isNil(symbols.symbolsFilteredByPitch)) {
         actions.ErrorNoDefineSymbol()
@@ -65,7 +66,11 @@ class InsertSyllable extends Component {
 
       const onlyValues = map(symbols.symbolsFilteredByPitch, ({ value }) => ({ value }))
       onlyValues[0].text = e.target.value
-      actions.addSyllable(onlyValues[0])
+      if (isNil(editableSyllable)) {
+        actions.addSyllable(onlyValues[0])
+      } else {
+        actions.changeSyllable(editableSyllable, onlyValues[0])
+      }
       this.inputNameRef.current.focus()
     }
   }
@@ -169,6 +174,7 @@ const mapStateToProps = state => ({
   paper: state.paper,
   symbols: state.symbols,
   error: state.symbols.error,
+  editableSyllable: state.paper.editableSyllable,
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -183,6 +189,7 @@ const mapDispatchToProps = dispatch => ({
     setSyllables,
     checkError,
     ErrorNoDefineSymbol,
+    changeSyllable,
   }, dispatch) })
 
 export default connect(mapStateToProps, mapDispatchToProps)(InsertSyllable)
@@ -191,4 +198,5 @@ InsertSyllable.propTypes = {
   symbols: PropTypes.object,
   actions: PropTypes.object,
   error: PropTypes.string,
+  editableSyllable: PropTypes.bool,
 }

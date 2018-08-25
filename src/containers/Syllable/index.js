@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'react-proptypes'
 import { bindActionCreators } from 'redux'
-import { removeSyllablebyIndex, repeatSyllableByIndex, editSyllable } from '../../actions'
+import { removeSyllablebyIndex, repeatSyllableByIndex, editSyllable, showModalEdit } from '../../actions'
 
 class Syllable extends Component {
   removeLastSyllable(e) {
@@ -17,8 +17,8 @@ class Syllable extends Component {
 
   editSyllable(e) {
     const { actions } = this.props
+    actions.showModalEdit(e.target.name)
     actions.editSyllable(e.target.name)
-
   }
 
   render() {
@@ -29,18 +29,22 @@ class Syllable extends Component {
         <div className="text" dangerouslySetInnerHTML={{ __html: text }} />
         <button name={index} onClick={e => this.removeLastSyllable(e)} className="syllable-button remove"><i className="fa fa-trash" /></button>
         <button name={index} onClick={e => this.repeatSyllableByIndex(e)} className="syllable-button repeat"><i className="fa fa-plus" /></button>
-        <button name={index} onClick={e => this.editSyllable(e)} className="syllable-button edit"><i className="fa fa-pencil" /></button>
+        <button name={index} onClick={e => this.editSyllable(e)} className="syllable-button edit"><i className="fa fa-pen" /></button>
 
       </div>
     )
   }
 }
 
-
 const mapStateToProps = state => ({ form: state.form })
 
 const mapDispatchToProps = dispatch => (
-  { actions: bindActionCreators({ removeSyllablebyIndex, repeatSyllableByIndex, editSyllable }, dispatch) }
+  { actions: bindActionCreators({
+    removeSyllablebyIndex,
+    repeatSyllableByIndex,
+    editSyllable,
+    showModalEdit,
+  }, dispatch) }
 )
 
 export default connect(mapStateToProps, mapDispatchToProps)(Syllable)

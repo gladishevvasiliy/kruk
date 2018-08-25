@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { isNil } from 'lodash'
-import 'font-awesome/css/font-awesome.min.css'
 import InsertSyllable from '../InsertSyllable'
 import AreaOfSymbols from '../AreaOfSymbols'
 import PaperContext from '../../context'

@@ -15,6 +15,9 @@ export const ERROR_NO_DEFINE_SYMBOL = 'ERROR_NO_DEFINE_SYMBOL'
 export const REPEAT_SYLLABLE_BY_INDEX = 'REPEAT_SYLLABLE_BY_INDEX'
 export const MOVE_SYLLABLE = 'MOVE_SYLLABLE'
 export const EDIT_SYLLABLE = 'EDIT_SYLLABLE'
+export const SHOW_MODAL_EDIT = 'SHOW_MODAL_EDIT'
+export const HIDE_MODAL_EDIT = 'HIDE_MODAL_EDIT'
+export const CHANGE_SYLLABLE = 'CHANGE_SYLLABLE'
 
 export const SYMBOLS = [
   { value: 1, label: 'Параклит' },
