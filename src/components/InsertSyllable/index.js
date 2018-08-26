@@ -160,10 +160,6 @@ class InsertSyllable extends Component {
             <div />
             <div className={`error-message alert alert-danger ${error !== '' ? '' : 'hideMessage'}`} role="alert">{error}</div>
           </div>
-          <div className="removeLast">
-            <div />
-            <button type="button" className="removeButton btn btn-danger" onClick={this.handleremoveLastSyllable} ><i className="fa fa-trash" />  Удалить последний слог</button>
-          </div>
         </div>
       </React.Fragment>
     )
@@ -198,5 +194,5 @@ InsertSyllable.propTypes = {
   symbols: PropTypes.object,
   actions: PropTypes.object,
   error: PropTypes.string,
-  editableSyllable: PropTypes.bool,
+  editableSyllable: PropTypes.string,
 }

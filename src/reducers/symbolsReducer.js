@@ -31,7 +31,7 @@ export default (state = initialState, action) => {
     }
 
     case FILTER_SYMBOLS_BY_OPTIONS: {
-      console.log(FILTER_SYMBOLS_BY_OPTIONS)
+      console.log(FILTER_SYMBOLS_BY_OPTIONS) // TODO без важности порядка опций
       const { symbols } = state
       const currentOptionsOfSymbol = action.payload
       const symbolsFilteredByOptions = filter(symbols.value, symbol => intersection(symbol.opts, currentOptionsOfSymbol).join(' ') === symbol.opts.join(' ')

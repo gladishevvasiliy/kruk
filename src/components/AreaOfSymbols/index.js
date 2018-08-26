@@ -14,10 +14,10 @@ import Loading from '../../utils/Loading'
 
 import './style.css'
 
-class AreaOfSymbols extends Component {
-  constructor(props) { // eslint-disable-line
-    super(props)
-  }
+class AreaOfSymbols extends Component { // eslint-disable-line
+  // constructor(props) {
+  //   super(props)
+  // }
 
   render() {
     const { syllables, form, showModalEdit, actions } = this.props
@@ -37,7 +37,12 @@ class AreaOfSymbols extends Component {
               width: form.paperStyle.values.sizeOfPage + 'px', // eslint-disable-line
             }}
           >
-            <div className="paperMargin">
+            <div
+              className="paperMargin"
+              style={{
+                width: form.paperStyle.values.sizeOfPage + 'px', // eslint-disable-line
+              }}
+            >
               <Bucvica />
               {syllables.map(({ value, text }, index) => (
                 <Syllable value={value} text={text} key={index} index={index} />  // eslint-disable-line
@@ -46,12 +51,11 @@ class AreaOfSymbols extends Component {
           </div>
         </div>
         <Modal isOpen={showModalEdit}>
-          <ModalHeader toggle={actions.hideModalEdit}>Редактировать крюк</ModalHeader>
+          <ModalHeader toggle={actions.hideModalEdit}>Заменить крюк</ModalHeader>
           <ModalBody>
             <InsertSyllable />
           </ModalBody>
           <ModalFooter>
-            <Button color="primary" onClick={this.toggle}>Сохранить</Button>{' '}
             <Button color="secondary" onClick={actions.hideModalEdit}>Отмена</Button>
           </ModalFooter>
         </Modal>

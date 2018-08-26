@@ -18,3 +18,10 @@
     bottom: 20px;
 
 }
+
+.removeLast {
+    display: inline-grid;
+    grid-template-columns: 94px 241px;
+    justify-items: start;
+    margin-left: 40px;
+}
