@@ -1,14 +1,10 @@
 {
-  "main.css": "static/css/main.81a6d6fb.css",
-  "main.css.map": "static/css/main.81a6d6fb.css.map",
-  "main.js": "static/js/main.05b66b4d.js",
-  "main.js.map": "static/js/main.05b66b4d.js.map",
+  "main.css": "static/css/main.ee2db8fa.css",
+  "main.css.map": "static/css/main.ee2db8fa.css.map",
+  "main.js": "static/js/main.62b17a9b.js",
+  "main.js.map": "static/js/main.62b17a9b.js.map",
   "static/media/Kalashnikov.ttf": "static/media/Kalashnikov.aa8c53b1.ttf",
   "static/media/NewDamaskin.ttf": "static/media/NewDamaskin.71ecd65d.ttf",
   "static/media/afonit01.ttf": "static/media/afonit01.ffbdd55a.ttf",
-  "static/media/fontawesome-webfont.eot": "static/media/fontawesome-webfont.674f50d2.eot",
-  "static/media/fontawesome-webfont.svg?v=4.7.0": "static/media/fontawesome-webfont.912ec66d.svg",
-  "static/media/fontawesome-webfont.ttf?v=4.7.0": "static/media/fontawesome-webfont.b06871f2.ttf",
-  "static/media/fontawesome-webfont.woff2?v=4.7.0": "static/media/fontawesome-webfont.af7ae505.woff2",
-  "static/media/fontawesome-webfont.woff?v=4.7.0": "static/media/fontawesome-webfont.fee66e71.woff"
+  "static/media/kruk.svg": "static/media/kruk.e12ced03.svg"
 }
