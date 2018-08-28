@@ -12,7 +12,7 @@ class CurrentSymbols extends Component { //eslint-disable-line
     const { currentSymbols } = this.props
     return (
       <div className="currentSymbols text-left">
-        <h3>Подходящие знамена</h3>
+        <h4>Подходящие знамена</h4>
         { isNil(currentSymbols) ?
           <p>Подходящих знамен нет</p>
           : <div className="currentSymbolsArea">{ currentSymbols.map(({ value }) => <div className="previewSymbol" dangerouslySetInnerHTML={{ __html: value }} />) }</div>}

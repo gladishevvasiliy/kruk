@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
+import React, { Component, ElementRef } from 'react'
 import PropTypes from 'react-proptypes'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import Select from 'react-select'
+import { Field, reduxForm } from 'redux-form'
 import { map, values, isNil } from 'lodash'
 
 import {
@@ -20,6 +20,11 @@ import {
 } from '../../actions'
 
 import {
+  RFReactSelect,
+  RFReactMultiSelect,
+} from '../../utils/RFReactSelect'
+
+import {
   OPTIONS,
   PITCH,
 } from '../../constants'
@@ -33,9 +38,9 @@ class InsertSyllable extends Component {
   constructor(props) {
     super(props)
 
-    this.state = {
-      error: '',
-    }
+    // this.state = {
+    //   error: '',
+    // }
 
     this.handleKeyPress = this.handleKeyPress.bind(this)
     this.handleChangeName = this.handleChangeName.bind(this)
@@ -43,15 +48,6 @@ class InsertSyllable extends Component {
     this.handleChangePitch = this.handleChangePitch.bind(this)
     this.handleremoveLastSyllable = this.handleremoveLastSyllable.bind(this)
 
-
-    this.inputNameRef = React.createRef()
-    this.inputOptionsRef = React.createRef()
-    this.inputPitchRef = React.createRef()
-    this.inputTextRef = React.createRef()
-  }
-
-  componentDidMount() {
-    this.inputNameRef.current.focus()
   }
 
   handleKeyPress(e) {
@@ -71,7 +67,6 @@ class InsertSyllable extends Component {
       } else {
         actions.changeSyllable(editableSyllable, onlyValues[0])
       }
-      this.inputNameRef.current.focus()
     }
   }
 
@@ -80,7 +75,6 @@ class InsertSyllable extends Component {
     actions.getSymbols()
     actions.filterSymbolsByName(item.label)
     actions.filterSymbolsByOptions([])
-    this.inputOptionsRef.current.focus()
   }
 
   handleChangeOptions(options) {
@@ -88,13 +82,11 @@ class InsertSyllable extends Component {
     delete options.preventDefault // eslint-disable-line
     const currentOptions = values(options).map(item => item.label)
     actions.filterSymbolsByOptions(currentOptions)
-    this.inputPitchRef.current.focus()
   }
 
   handleChangePitch(item) {
     const { actions } = this.props
     actions.filterSymbolsByPitch(item.label)
-    this.inputTextRef.current.focus()
   }
 
   handleremoveLastSyllable() {
@@ -107,41 +99,37 @@ class InsertSyllable extends Component {
     return (
       <React.Fragment>
         <div className="inputForm">
-          <h4 className="titleControlPanel">Введите знамя</h4>
           <div className="field" >
             <label htmlFor="Name">Крюк</label>
-            <Select
+            <Field
               name="name"
               list="symbols"
               options={KRUKI}
               onChange={this.handleChangeName}
+              component={RFReactSelect}
               className="input"
-              valueKey="id"
-              ref={this.inputNameRef}
             />
           </div>
           <div className="field" >
             <label htmlFor="Name">Опции</label>
-            <Select
+            <Field
               name="options"
               list="options"
               options={OPTIONS}
               onChange={this.handleChangeOptions}
-              isMulti
+              component={RFReactMultiSelect}
               className="input"
-              valueKey="value"
-              ref={this.inputOptionsRef}
             />
           </div>
           <div className="field" >
             <label htmlFor="Name">Помета</label>
-            <Select
+            <Field
               label="Помета"
               name="pitch"
               options={PITCH}
               onChange={this.handleChangePitch}
+              component={RFReactSelect}
               className="input"
-              ref={this.inputPitchRef}
             />
           </div>
           <form onKeyPress={this.handleKeyPress}>  {/* eslint-disable-line */}
@@ -152,19 +140,22 @@ class InsertSyllable extends Component {
                 name="syllable"
                 className="inputTextUCS form-control"
                 disabled={error !== ''}
-                ref={this.inputTextRef}
               />
             </div>
           </form>
           <div className="error" >
             <div />
-            <div className={`error-message alert alert-danger ${error !== '' ? '' : 'hideMessage'}`} role="alert">{error}</div>
+            <div className={`error-message alert alert-danger ${error === '' ? '' : 'hideMessage'}`} role="alert">{error}</div>
           </div>
         </div>
       </React.Fragment>
     )
   }
 }
+
+const InsertSyllableWithForm = reduxForm({
+  form: 'syllableForInsert',
+})(InsertSyllable)
 
 const mapStateToProps = state => ({
   paper: state.paper,
@@ -188,7 +179,7 @@ const mapDispatchToProps = dispatch => ({
     changeSyllable,
   }, dispatch) })
 
-export default connect(mapStateToProps, mapDispatchToProps)(InsertSyllable)
+export default connect(mapStateToProps, mapDispatchToProps)(InsertSyllableWithForm)
 
 InsertSyllable.propTypes = {
   symbols: PropTypes.object,
