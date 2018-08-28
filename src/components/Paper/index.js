@@ -8,6 +8,7 @@ import AreaOfSymbols from '../AreaOfSymbols'
 import PaperContext from '../../context'
 import PaperStyle from '../PaperStyle'
 import Header from '../../utils/Header'
+import CurrentSymbols from '../CurrentSymbols'
 
 import './style.css'
 import '../../res/bootstrap/css/bootstrap.min.css'
@@ -58,7 +59,7 @@ class Paper extends Component {
                   <button type="button" className="removeButton btn btn-danger" onClick={this.handleremoveLastSyllable} ><i className="fa fa-trash" />  Удалить последний слог</button>
                 </div>
               </div>
-              <div />
+              <CurrentSymbols />
               <PaperStyle />
             </div>
           </div>

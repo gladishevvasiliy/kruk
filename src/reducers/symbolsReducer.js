@@ -26,6 +26,7 @@ export default (state = initialState, action) => {
 
       return {
         ...state,
+        currentSymbols: symbolsFilteredByName,
         symbols: symbolsFilteredByName,
       }
     }
@@ -40,6 +41,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         symbolsFilteredByOptions,
+        currentSymbols: symbolsFilteredByOptions,
         error: checkError(symbolsFilteredByOptions),
       }
     }
@@ -54,6 +56,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         symbolsFilteredByPitch,
+        currentSymbols: symbolsFilteredByPitch,
         error: checkError(symbolsFilteredByPitch),
       }
     }
