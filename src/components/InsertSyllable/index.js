@@ -1,4 +1,4 @@
-import React, { Component, ElementRef } from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'react-proptypes'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -17,6 +17,7 @@ import {
   checkError,
   ErrorNoDefineSymbol,
   changeSyllable,
+  insertSyllable,
 } from '../../actions'
 
 import {
@@ -49,13 +50,12 @@ class InsertSyllable extends Component {
     this.handleChangeOptions = this.handleChangeOptions.bind(this)
     this.handleChangePitch = this.handleChangePitch.bind(this)
     this.handleremoveLastSyllable = this.handleremoveLastSyllable.bind(this)
-
   }
 
   handleKeyPress(e) {
     if (e.key === 'Enter') {
       e.preventDefault()
-      const { symbols, actions, editableSyllable } = this.props
+      const { symbols, actions, editableSyllable, indexToInsert } = this.props
 
       if (isNil(symbols.symbolsFilteredByPitch)) {
         return
@@ -64,10 +64,12 @@ class InsertSyllable extends Component {
       const onlyValues = map(symbols.symbolsFilteredByPitch, ({ value }) => ({ value }))
       onlyValues[0].text = e.target.value
 
-      if (isNil(editableSyllable)) {
-        actions.addSyllable(onlyValues[0])
-      } else {
+      if (!isNil(editableSyllable)) {
         actions.changeSyllable(editableSyllable, onlyValues[0])
+      } if (!isNil(indexToInsert)) {
+        actions.insertSyllable(indexToInsert, onlyValues[0])
+      } else {
+        actions.addSyllable(onlyValues[0])
       }
     }
   }
@@ -162,6 +164,7 @@ const mapStateToProps = state => ({
   symbols: state.symbols,
   error: state.symbols.error,
   editableSyllable: state.paper.editableSyllable,
+  indexToInsert: state.paper.indexToInsert,
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -177,6 +180,7 @@ const mapDispatchToProps = dispatch => ({
     checkError,
     ErrorNoDefineSymbol,
     changeSyllable,
+    insertSyllable,
   }, dispatch) })
 
 export default connect(mapStateToProps, mapDispatchToProps)(InsertSyllableWithForm)
@@ -184,6 +188,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(InsertSyllableWithFo
 InsertSyllable.propTypes = {
   symbols: PropTypes.object,
   actions: PropTypes.object,
-  error: PropTypes.string,
   editableSyllable: PropTypes.string,
+  indexToInsert: PropTypes.string,
 }

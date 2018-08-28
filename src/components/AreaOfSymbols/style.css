@@ -94,7 +94,7 @@
     background-color: #fffc;
     position: absolute;
     right:0;
-    top:0;
+    top:42px;
     display: none;
     color: #fff;
     background-color: #dc354599;;
@@ -109,7 +109,7 @@
     background-color: #fffc;
     position: absolute;
     right:0;
-    top: 35px;
+    top: 0;
     display: none;
     color: #fff;
     background-color: #3bdc3599;
@@ -119,12 +119,24 @@
     cursor: pointer;
     background-color: #fffc;
     position: absolute;
-    right:0;
-    top: 70px;
+    right:45px;
+    top: 42px;
     display: none;
     color: #fff;
     background-color: #3546dc99;
 }
+
+.insert {
+    cursor: pointer;
+    background-color: #fffc;
+    position: absolute;
+    right:45px;
+    top: 0px;
+    display: none;
+    color: #fff;
+    background-color: #dcc33599;
+}
+
 
 @media print {
     body {

@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
 import { isNil } from 'lodash'
-import { moveSyllable, hideModalEdit } from '../../actions'
+import { moveSyllable, hideModal } from '../../actions'
 import InsertSyllable from '../InsertSyllable'
 
 
@@ -51,12 +51,12 @@ class AreaOfSymbols extends Component { // eslint-disable-line
           </div>
         </div>
         <Modal isOpen={showModalEdit}>
-          <ModalHeader toggle={actions.hideModalEdit}>Заменить крюк</ModalHeader>
+          <ModalHeader toggle={actions.hideModal}>Заменить крюк</ModalHeader>
           <ModalBody>
             <InsertSyllable />
           </ModalBody>
           <ModalFooter>
-            <Button color="secondary" onClick={actions.hideModalEdit}>Отмена</Button>
+            <Button color="secondary" onClick={actions.hideModal}>Отмена</Button>
           </ModalFooter>
         </Modal>
       </React.Fragment>
@@ -72,7 +72,7 @@ AreaOfSymbols.propTypes = {
 }
 
 const mapDispatchToProps = dispatch => (
-  { actions: bindActionCreators({ moveSyllable, hideModalEdit }, dispatch) }
+  { actions: bindActionCreators({ moveSyllable, hideModal }, dispatch) }
 )
 
 const mapStateToProps = state => ({

@@ -1,5 +1,5 @@
 import { dropRight, isNil } from 'lodash'
-import { ADD_SYLLABLE, CHANGE_SYLLABLE, SET_SYLLABLES, REMOVE_LAST_SYLLABLE, REMOVE_SYLLABLE_BY_INDEX, REPEAT_SYLLABLE_BY_INDEX, MOVE_SYLLABLE, EDIT_SYLLABLE, SHOW_MODAL_EDIT, HIDE_MODAL_EDIT } from '../constants/'
+import { ADD_SYLLABLE, CHANGE_SYLLABLE, SET_SYLLABLES, REMOVE_LAST_SYLLABLE, REMOVE_SYLLABLE_BY_INDEX, REPEAT_SYLLABLE_BY_INDEX, MOVE_SYLLABLE, SHOW_MODAL_INSERT, SHOW_MODAL_EDIT, HIDE_MODAL, INSERT_SYLLABLE } from '../constants/'
 
 const initialState = {
   syllables: isNil(localStorage.getItem('syllables')) ? [] : JSON.parse(localStorage.getItem('syllables')),
@@ -10,7 +10,6 @@ export default (state = initialState, action) => {
   switch (action.type) {
     case ADD_SYLLABLE: {
       const syllablesWithNew = [...syllables, action.payload]
-      //       const obj = JSON.parse(SymbolsToLocalStorage)
       localStorage.setItem('syllables', JSON.stringify(syllablesWithNew))
       return {
         ...state,
@@ -70,19 +69,34 @@ export default (state = initialState, action) => {
       }
     }
 
-    case HIDE_MODAL_EDIT: {
+    case SHOW_MODAL_INSERT: {
+      const indexToInsert = action.payload
+      return {
+        ...state,
+        showModalEdit: true,
+        indexToInsert,
+      }
+    }
+
+    case HIDE_MODAL: {
       return {
         ...state,
         showModalEdit: false,
         editableSyllable: null,
+        indexToInsert: null,
       }
     }
 
-    case EDIT_SYLLABLE: {
-      const id = action.payload
-      console.log(id)
-
-      return state
+    case INSERT_SYLLABLE: {
+      const { index, syllable } = action.payload
+      const newSyllables = Array.from(syllables)
+      const afterIndex = parseInt(index) + 1
+      newSyllables.splice(afterIndex, 0, syllable)
+      localStorage.setItem('syllables', JSON.stringify(newSyllables))
+      return {
+        ...state,
+        syllables: newSyllables,
+      }
     }
 
     case CHANGE_SYLLABLE: {
