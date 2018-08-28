@@ -6,6 +6,7 @@ import { FILTER_SYMBOLS_BY_NAME, FILTER_SYMBOLS_BY_OPTIONS, FILTER_SYMBOLS_BY_PI
 const initialState = {
   symbols: KRUKI,
   error: '',
+  currentSymbols: [],
 }
 
 const checkError = (symbols) => {

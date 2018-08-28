@@ -24,6 +24,8 @@ import {
   RFReactMultiSelect,
 } from '../../utils/RFReactSelect'
 
+import Loading from '../../utils/Loading'
+
 import {
   OPTIONS,
   PITCH,
@@ -56,12 +58,12 @@ class InsertSyllable extends Component {
       const { symbols, actions, editableSyllable } = this.props
 
       if (isNil(symbols.symbolsFilteredByPitch)) {
-        actions.ErrorNoDefineSymbol()
         return
       }
 
       const onlyValues = map(symbols.symbolsFilteredByPitch, ({ value }) => ({ value }))
       onlyValues[0].text = e.target.value
+
       if (isNil(editableSyllable)) {
         actions.addSyllable(onlyValues[0])
       } else {
@@ -95,7 +97,8 @@ class InsertSyllable extends Component {
   }
 
   render() {
-    const { error } = this.props
+    const { symbols } = this.props
+    if (isNil(symbols)) return <Loading />
     return (
       <React.Fragment>
         <div className="inputForm">
@@ -139,14 +142,11 @@ class InsertSyllable extends Component {
                 label="Слог"
                 name="syllable"
                 className="inputTextUCS form-control"
-                disabled={error !== ''}
+                disabled={symbols.currentSymbols.length !== 1}
               />
             </div>
           </form>
-          <div className="error" >
-            <div />
-            <div className={`error-message alert alert-danger ${error === '' ? '' : 'hideMessage'}`} role="alert">{error}</div>
-          </div>
+
         </div>
       </React.Fragment>
     )
