@@ -1,6 +1,12 @@
 .control {
     display: grid;
     grid-template-columns: 250px auto 350px;
+    background-color: #FFF;
+    border-top: 1px solid #e4e4e4;
+    padding-top: 30px;
+    position: sticky;
+    height: 530px;
+    bottom: 0;
 }
 
 .hr {
@@ -11,4 +17,11 @@
     position: absolute;
     bottom: 20px;
 
+}
+
+.removeLast {
+    display: inline-grid;
+    grid-template-columns: 94px 241px;
+    justify-items: start;
+    margin-left: 40px;
 }

@@ -49,7 +49,8 @@
     "striptags": "3.1.1",
     "universal-cookie-express": "2.1.2",
     "visibilityjs": "^1.2.6",
-    "font-awesome": "^4.7.0"
+    "font-awesome": "^4.7.0",
+    "react-beautiful-dnd": "^9.0.1"
 
   },
   "scripts": {

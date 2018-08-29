@@ -6,12 +6,14 @@ import { FILTER_SYMBOLS_BY_NAME, FILTER_SYMBOLS_BY_OPTIONS, FILTER_SYMBOLS_BY_PI
 const initialState = {
   symbols: KRUKI,
   error: '',
+  currentSymbols: [],
 }
 
 const checkError = (symbols) => {
   if (symbols.length === 0) {
     return 'Ошибка. Такого крюка в базе нет.'
-  } else return ''
+  }
+  return ''
 }
 
 export default (state = initialState, action) => {
@@ -20,17 +22,18 @@ export default (state = initialState, action) => {
       console.log(FILTER_SYMBOLS_BY_NAME)
       const { symbols } = state
       const currentNameOfSymbol = action.payload
-      const symbolsFilteredByName = find(symbols, symbol => symbol.name === currentNameOfSymbol)
+      const symbolsFilteredByName = find(symbols, symbol => symbol.label === currentNameOfSymbol)
       console.log(symbolsFilteredByName)
 
       return {
         ...state,
+        currentSymbols: symbolsFilteredByName,
         symbols: symbolsFilteredByName,
       }
     }
 
     case FILTER_SYMBOLS_BY_OPTIONS: {
-      console.log(FILTER_SYMBOLS_BY_OPTIONS)
+      console.log(FILTER_SYMBOLS_BY_OPTIONS) // TODO без важности порядка опций
       const { symbols } = state
       const currentOptionsOfSymbol = action.payload
       const symbolsFilteredByOptions = filter(symbols.value, symbol => intersection(symbol.opts, currentOptionsOfSymbol).join(' ') === symbol.opts.join(' ')
@@ -39,6 +42,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         symbolsFilteredByOptions,
+        currentSymbols: symbolsFilteredByOptions,
         error: checkError(symbolsFilteredByOptions),
       }
     }
@@ -53,6 +57,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         symbolsFilteredByPitch,
+        currentSymbols: symbolsFilteredByPitch,
         error: checkError(symbolsFilteredByPitch),
       }
     }

@@ -56,6 +56,16 @@ class PaperStyle extends Component {
           min="50"
           max="180"
         />
+        <label htmlFor="sizeOfPage">Ширина страницы</label>
+        <Field
+          name="sizeOfPage"
+          type="range"
+          className="custom-range"
+          component={RangeInput}
+          id="sizeOfPage"
+          min="700"
+          max="1600"
+        />
         {/* <label htmlFor="marginLine">Межстрочный интервал</label>
         <Field
           name="marginLine"
@@ -86,7 +96,7 @@ const PaperStyleWithForm = reduxForm({
 })(PaperStyle)
 
 const InitializePaperStyleWithForm = connect(
-  () => ({ initialValues: { fontSize: 40, sizeOfBucvica: 50 } }),
+  () => ({ initialValues: { fontSize: 40, sizeOfBucvica: 50, sizeOfPage: 900 } }),
 )(PaperStyleWithForm)
 
 export default InitializePaperStyleWithForm

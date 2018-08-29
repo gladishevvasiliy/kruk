@@ -1,0 +1,14 @@
+.previewSymbol {
+    font-family: "Kruk";
+    font-size: 37pt;
+}
+
+.currentSymbolsArea {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: start;
+}
+
+.currentSymbols {
+    margin-left: 160px;
+}
