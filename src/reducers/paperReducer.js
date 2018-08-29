@@ -1,5 +1,19 @@
-import { dropRight, isNil } from 'lodash'
-import { ADD_SYLLABLE, CHANGE_SYLLABLE, SET_SYLLABLES, REMOVE_LAST_SYLLABLE, REMOVE_SYLLABLE_BY_INDEX, REPEAT_SYLLABLE_BY_INDEX, MOVE_SYLLABLE, SHOW_MODAL_INSERT, SHOW_MODAL_EDIT, HIDE_MODAL, INSERT_SYLLABLE } from '../constants/'
+import { dropRight, isNil, clone } from 'lodash'
+import { ADD_SYLLABLE,
+  CHANGE_SYLLABLE,
+  SET_SYLLABLES,
+  REMOVE_LAST_SYLLABLE,
+  REMOVE_SYLLABLE_BY_INDEX,
+  REPEAT_SYLLABLE_BY_INDEX,
+  MOVE_SYLLABLE,
+  SHOW_MODAL_INSERT,
+  SHOW_MODAL_EDIT,
+  HIDE_MODAL,
+  INSERT_SYLLABLE,
+  SHOW_MODAL_EDIT_TEXT,
+  HIDE_MODAL_EDIT_TEXT,
+  EDIT_TEXT,
+} from '../constants/'
 
 const initialState = {
   syllables: isNil(localStorage.getItem('syllables')) ? [] : JSON.parse(localStorage.getItem('syllables')),
@@ -39,7 +53,7 @@ export default (state = initialState, action) => {
 
     case REPEAT_SYLLABLE_BY_INDEX: {
       const index = action.payload
-      const syllableToRepeat = syllables[index]
+      const syllableToRepeat = clone(syllables[index])
       localStorage.setItem('syllables', JSON.stringify([...syllables, syllableToRepeat]))
       return {
         ...state,
@@ -87,6 +101,24 @@ export default (state = initialState, action) => {
       }
     }
 
+    case SHOW_MODAL_EDIT_TEXT : {
+      const indexOfEditableText = action.payload
+      return {
+        ...state,
+        showModalEditText: true,
+        indexOfEditableText,
+      }
+    }
+
+    case HIDE_MODAL_EDIT_TEXT : {
+      return {
+        ...state,
+        showModalEditText: false,
+        indexOfEditableText: null,
+
+      }
+    }
+
     case INSERT_SYLLABLE: {
       const { index, syllable } = action.payload
       const newSyllables = Array.from(syllables)
@@ -103,6 +135,19 @@ export default (state = initialState, action) => {
       const { indexOfChangingSyllable, syllable } = action.payload
       const newSyllables = Array.from(syllables)
       newSyllables[indexOfChangingSyllable] = syllable
+      localStorage.setItem('syllables', JSON.stringify(newSyllables))
+      return {
+        ...state,
+        syllables: newSyllables,
+      }
+    }
+
+    case EDIT_TEXT: {
+      const newText = action.payload
+      const { indexOfEditableText } = state
+      const newSyllables = Array.from(syllables)
+      newSyllables[indexOfEditableText].text = newText
+      localStorage.setItem('syllables', JSON.stringify(newSyllables))
       return {
         ...state,
         syllables: newSyllables,

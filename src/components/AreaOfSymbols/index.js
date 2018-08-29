@@ -6,6 +6,7 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap' 
 import { isNil } from 'lodash'
 import { moveSyllable, hideModal } from '../../actions'
 import InsertSyllable from '../InsertSyllable'
+import EditText from '../EditText'
 
 
 import Bucvica from '../../containers/Bucvica'
@@ -56,6 +57,7 @@ class AreaOfSymbols extends Component { // eslint-disable-line
             <Button color="secondary" onClick={actions.hideModal}>Отмена</Button>
           </ModalFooter>
         </Modal>
+        <EditText />
       </React.Fragment>
     )
   }
@@ -76,6 +78,7 @@ const mapStateToProps = state => ({
   syllables: state.paper.syllables,
   form: state.form,
   showModalEdit: state.paper.showModalEdit,
+  showModalEditText: state.paper.showModalEditText,
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(AreaOfSymbols)

@@ -62,6 +62,11 @@
     margin-left: 20px;
     text-align: left;
     font-family: NewDamaskin;
+    cursor: pointer;
+}
+
+.text:hover {
+    color:red;
 }
 
 .symbol {
@@ -78,7 +83,7 @@
     white-space: nowrap;
     vertical-align: middle;
     border: 1px solid transparent;
-    padding: .375rem .75rem;
+    /* padding: .375rem .75rem; */
     font-size: 1rem;
     line-height: 1.5;
     border-radius: .25rem;
@@ -89,16 +94,6 @@
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;
 }
 
-.remove {
-    cursor: pointer;
-    background-color: #fffc;
-    position: absolute;
-    right:0;
-    top:42px;
-    display: none;
-    color: #fff;
-    background-color: #dc354599;;
-}
 
 .syllable-button > .fa{
     display: none;
@@ -115,28 +110,38 @@
     background-color: #3bdc3599;
 }
 
-.edit {
+.remove {
     cursor: pointer;
     background-color: #fffc;
     position: absolute;
-    right:45px;
-    top: 42px;
+    right:0;
+    top:30px;
     display: none;
     color: #fff;
-    background-color: #3546dc99;
+    background-color: #dc354599;
 }
 
 .insert {
     cursor: pointer;
     background-color: #fffc;
     position: absolute;
-    right:45px;
+    right:35px;
     top: 0px;
     display: none;
     color: #fff;
     background-color: #dcc33599;
 }
 
+.edit {
+    cursor: pointer;
+    background-color: #fffc;
+    position: absolute;
+    right:35px;
+    top: 30px;
+    display: none;
+    color: #fff;
+    background-color: #3546dc99;
+}
 
 @media print {
     body {
@@ -145,6 +150,7 @@
 
     .paperMargin {
       visibility: visible;
+      justify-content: space-between;
       
      }
 }

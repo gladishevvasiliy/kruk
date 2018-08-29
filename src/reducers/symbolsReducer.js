@@ -1,4 +1,4 @@
-import { filter, find, clone, difference, uniq, sortBy, concat } from 'lodash'
+import { filter, find, clone, difference, uniq, concat } from 'lodash'
 import { KRUKI } from '../res/index'
 
 import { FILTER_SYMBOLS_BY_NAME, CREATE_OPTIONS_LIST, FILTER_SYMBOLS_BY_OPTIONS, FILTER_SYMBOLS_BY_PITCH, ADD_TEXT_TO_SYLLABLE, GET_SYMBOLS, CHECK_ERROR, ERROR_NO_DEFINE_SYMBOL } from '../constants/'
@@ -15,10 +15,6 @@ const checkError = (symbols) => {
     return 'Ошибка. Такого крюка в базе нет.'
   }
   return ''
-}
-
-function getRandomInt(max) {
-  return Math.floor(Math.random() * Math.floor(max))
 }
 
 export default (state = initialState, action) => {
@@ -85,8 +81,9 @@ export default (state = initialState, action) => {
       console.log('there')
       const { symbols } = state
       const choosedSymbols = symbols.value
-      let emptyArray = [] 
-      choosedSymbols.map((symbol) => { emptyArray = concat(emptyArray, symbol.opts) }) // map array  of symbols, and in everi item add array of opts to emptyArray
+      let emptyArray = []
+      // map array  of symbols, and in everi item add array of opts to emptyArray
+      choosedSymbols.map((symbol) => { emptyArray = concat(emptyArray, symbol.opts) }) // eslint-disable-line
       const uniqOptions = uniq(emptyArray) // uniq our array of opts
       let index = 0
       const labels = uniqOptions.map(option => ({ value: index++, label: option })) // eslint-disable-line

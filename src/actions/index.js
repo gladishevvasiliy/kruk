@@ -18,6 +18,9 @@ import {
   CHANGE_SYLLABLE,
   INSERT_SYLLABLE,
   CREATE_OPTIONS_LIST,
+  SHOW_MODAL_EDIT_TEXT,
+  HIDE_MODAL_EDIT_TEXT,
+  EDIT_TEXT,
 } from '../constants/'
 
 export const addSyllable = syllable => ({ type: ADD_SYLLABLE, payload: syllable })
@@ -56,4 +59,11 @@ export const changeSyllable = (indexOfChangingSyllable, syllable) => ({ type: CH
 
 export const insertSyllable = (index, syllable) => ({ type: INSERT_SYLLABLE, payload: { index, syllable } }) // eslint-disable-line
 
-export const createOptionsList = nameofSymbol => ({ type: CREATE_OPTIONS_LIST, payload: nameofSymbol }) // eslint-disable-line max-len
+export const createOptionsList = nameOfSymbol => ({ type: CREATE_OPTIONS_LIST, payload: nameOfSymbol }) // eslint-disable-line max-len
+
+export const showModalEditText = indexOfEditableText => ({ type: SHOW_MODAL_EDIT_TEXT, payload: indexOfEditableText })
+
+export const hideModalEditText = state => ({ type: HIDE_MODAL_EDIT_TEXT, payload: state })
+
+export const editText = newText => ({ type: EDIT_TEXT, payload: newText })
+

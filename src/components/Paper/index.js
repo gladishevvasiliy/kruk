@@ -56,7 +56,7 @@ class Paper extends Component {
                 <InsertSyllable data={KRUKI} getDataForInsert={this.getDataForInsert} />
                 <div className="removeLast">
                   <div />
-                  <button type="button" className="removeButton btn btn-danger" onClick={this.handleremoveLastSyllable} ><i className="fa fa-trash" />  Удалить последний слог</button>
+                  <button type="button" className="removeButton btn btn-danger" onClick={this.handleremoveLastSyllable} ><i className="icon-bin" />  Удалить последний слог</button>
                 </div>
               </div>
               <CurrentSymbols />
