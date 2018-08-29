@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'react-proptypes'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'  // eslint-disable-line
 import { isNil } from 'lodash'
 import { moveSyllable, hideModal } from '../../actions'
 import InsertSyllable from '../InsertSyllable'
@@ -15,9 +15,6 @@ import Loading from '../../utils/Loading'
 import './style.css'
 
 class AreaOfSymbols extends Component { // eslint-disable-line
-  // constructor(props) {
-  //   super(props)
-  // }
 
   render() {
     const { syllables, form, showModalEdit, actions } = this.props
