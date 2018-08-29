@@ -101,6 +101,9 @@ export default (state = initialState, action) => {
 
     case CHANGE_SYLLABLE: {
       const { indexOfChangingSyllable, syllable } = action.payload
+      console.log('there')
+      console.log(indexOfChangingSyllable)
+      console.log(syllable)
       const newSyllables = Array.from(syllables)
       newSyllables[indexOfChangingSyllable] = syllable
       return {

@@ -18,6 +18,7 @@ import {
   ErrorNoDefineSymbol,
   changeSyllable,
   insertSyllable,
+  createOptionsList,
 } from '../../actions'
 
 import {
@@ -66,6 +67,7 @@ class InsertSyllable extends Component {
 
       if (!isNil(editableSyllable)) {
         actions.changeSyllable(editableSyllable, onlyValues[0])
+        return
       } if (!isNil(indexToInsert)) {
         actions.insertSyllable(indexToInsert, onlyValues[0])
       } else {
@@ -79,6 +81,7 @@ class InsertSyllable extends Component {
     actions.getSymbols()
     actions.filterSymbolsByName(item.label)
     actions.filterSymbolsByOptions([])
+    actions.createOptionsList(item.label)
   }
 
   handleChangeOptions(options) {
@@ -103,6 +106,7 @@ class InsertSyllable extends Component {
 
   render() {
     const { symbols } = this.props
+    console.log(symbols.options)
     if (isNil(symbols)) return <Loading />
     return (
       <React.Fragment>
@@ -124,7 +128,7 @@ class InsertSyllable extends Component {
             <Field
               name="options"
               list="options"
-              options={OPTIONS}
+              options={symbols.options}
               onChange={this.handleChangeOptions}
               component={RFReactMultiSelect}
               className="input"
@@ -192,6 +196,7 @@ const mapDispatchToProps = dispatch => ({
     ErrorNoDefineSymbol,
     changeSyllable,
     insertSyllable,
+    createOptionsList,
   }, dispatch) })
 
 export default connect(mapStateToProps, mapDispatchToProps)(InitializeFromStateForm)

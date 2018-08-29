@@ -19,6 +19,7 @@ export const SHOW_MODAL_EDIT = 'SHOW_MODAL_EDIT'
 export const HIDE_MODAL = 'HIDE_MODAL'
 export const CHANGE_SYLLABLE = 'CHANGE_SYLLABLE'
 export const INSERT_SYLLABLE = 'INSERT_SYLLABLE'
+export const CREATE_OPTIONS_LIST = 'CREATE_OPTIONS_LIST'
 
 export const SYMBOLS = [
   { value: 1, label: 'Параклит' },

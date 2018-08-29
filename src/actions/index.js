@@ -17,6 +17,7 @@ import {
   HIDE_MODAL,
   CHANGE_SYLLABLE,
   INSERT_SYLLABLE,
+  CREATE_OPTIONS_LIST,
 } from '../constants/'
 
 export const addSyllable = syllable => ({ type: ADD_SYLLABLE, payload: syllable })
@@ -54,3 +55,5 @@ export const hideModal = state => ({ type: HIDE_MODAL, payload: state })
 export const changeSyllable = (indexOfChangingSyllable, syllable) => ({ type: CHANGE_SYLLABLE, payload: {indexOfChangingSyllable, syllable } }) //eslint-disable-line
 
 export const insertSyllable = (index, syllable) => ({ type: INSERT_SYLLABLE, payload: { index, syllable } }) //eslint-disable-line
+
+export const createOptionsList = nameofSymbol => ({ type: CREATE_OPTIONS_LIST, payload: nameofSymbol })

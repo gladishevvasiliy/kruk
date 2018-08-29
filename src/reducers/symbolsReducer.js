@@ -1,12 +1,13 @@
-import { filter, find, clone, intersection, difference } from 'lodash'
+import { filter, find, clone, difference, uniq, sortBy } from 'lodash'
 import { KRUKI } from '../res/index'
 
-import { FILTER_SYMBOLS_BY_NAME, FILTER_SYMBOLS_BY_OPTIONS, FILTER_SYMBOLS_BY_PITCH, ADD_TEXT_TO_SYLLABLE, GET_SYMBOLS, CHECK_ERROR, ERROR_NO_DEFINE_SYMBOL } from '../constants/'
+import { FILTER_SYMBOLS_BY_NAME, CREATE_OPTIONS_LIST, FILTER_SYMBOLS_BY_OPTIONS, FILTER_SYMBOLS_BY_PITCH, ADD_TEXT_TO_SYLLABLE, GET_SYMBOLS, CHECK_ERROR, ERROR_NO_DEFINE_SYMBOL } from '../constants/'
 
 const initialState = {
   symbols: KRUKI,
   error: '',
   currentSymbols: [],
+  options: [],
 }
 
 const checkError = (symbols) => {
@@ -36,12 +37,7 @@ export default (state = initialState, action) => {
       console.log(FILTER_SYMBOLS_BY_OPTIONS) // TODO без важности порядка опций
       const { symbols } = state
       const currentOptionsOfSymbol = action.payload
-
       const symbolsFilteredByOptions = filter(symbols.value, symbol => difference(currentOptionsOfSymbol, symbol.opts).length === 0 && difference(symbol.opts, currentOptionsOfSymbol).length === 0)
-      
-      // const symbolsFilteredByOptions = filter(symbols.value, symbol => intersection(symbol.opts, currentOptionsOfSymbol).join(' ') === symbol.opts.join(' ')
-      //          && intersection(symbol.opts, currentOptionsOfSymbol).join(' ') === currentOptionsOfSymbol.join(' '))
-
       console.log(symbolsFilteredByOptions)
       return {
         ...state,
@@ -76,6 +72,23 @@ export default (state = initialState, action) => {
       return {
         ...state,
         symbolWithText,
+      }
+    }
+
+    case CREATE_OPTIONS_LIST: {
+      const { symbols } = state
+      const sortedSymbols = sortBy(symbols.value, [symbol => symbol.opts])
+      const options = sortedSymbols.map(symbol => symbol.opts.join(', '))
+      const newOptions = uniq(filter(options, option => option.length !== 0))
+      const labels = newOptions.map((option) => {
+        return { label: option }
+      })
+      console.log(labels)
+
+
+      return {
+        ...state,
+        options: labels,
       }
     }
 

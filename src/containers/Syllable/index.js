@@ -19,6 +19,7 @@ class Syllable extends Component {
 
   editSyllable(e) {
     const { actions } = this.props
+    console.log(e.target.name)
     actions.showModalEdit(e.target.name)
   }
 
