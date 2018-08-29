@@ -6,12 +6,8 @@ import { FILTER_SYMBOLS_BY_NAME, CREATE_OPTIONS_LIST, FILTER_SYMBOLS_BY_OPTIONS,
 const initialState = {
   symbols: KRUKI,
   error: '',
-<<<<<<< HEAD
   currentSymbols: [],
   options: [],
-=======
-  currentSymbols: '',
->>>>>>> Add default filterSymbolsByPitch "Ut"
 }
 
 const checkError = (symbols) => {
