@@ -1,4 +1,4 @@
-import { filter, find, clone, intersection } from 'lodash'
+import { filter, find, clone, intersection, difference } from 'lodash'
 import { KRUKI } from '../res/index'
 
 import { FILTER_SYMBOLS_BY_NAME, FILTER_SYMBOLS_BY_OPTIONS, FILTER_SYMBOLS_BY_PITCH, ADD_TEXT_TO_SYLLABLE, GET_SYMBOLS, CHECK_ERROR, ERROR_NO_DEFINE_SYMBOL } from '../constants/'
@@ -36,8 +36,12 @@ export default (state = initialState, action) => {
       console.log(FILTER_SYMBOLS_BY_OPTIONS) // TODO без важности порядка опций
       const { symbols } = state
       const currentOptionsOfSymbol = action.payload
-      const symbolsFilteredByOptions = filter(symbols.value, symbol => intersection(symbol.opts, currentOptionsOfSymbol).join(' ') === symbol.opts.join(' ')
-               && intersection(symbol.opts, currentOptionsOfSymbol).join(' ') === currentOptionsOfSymbol.join(' '))
+
+      const symbolsFilteredByOptions = filter(symbols.value, symbol => difference(currentOptionsOfSymbol, symbol.opts).length === 0 && difference(symbol.opts, currentOptionsOfSymbol).length === 0)
+      
+      // const symbolsFilteredByOptions = filter(symbols.value, symbol => intersection(symbol.opts, currentOptionsOfSymbol).join(' ') === symbol.opts.join(' ')
+      //          && intersection(symbol.opts, currentOptionsOfSymbol).join(' ') === currentOptionsOfSymbol.join(' '))
+
       console.log(symbolsFilteredByOptions)
       return {
         ...state,
