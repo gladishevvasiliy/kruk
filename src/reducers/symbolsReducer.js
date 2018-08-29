@@ -1,4 +1,4 @@
-import { filter, find, clone, difference, uniq, sortBy } from 'lodash'
+import { filter, find, clone, difference, uniq, sortBy, concat } from 'lodash'
 import { KRUKI } from '../res/index'
 
 import { FILTER_SYMBOLS_BY_NAME, CREATE_OPTIONS_LIST, FILTER_SYMBOLS_BY_OPTIONS, FILTER_SYMBOLS_BY_PITCH, ADD_TEXT_TO_SYLLABLE, GET_SYMBOLS, CHECK_ERROR, ERROR_NO_DEFINE_SYMBOL } from '../constants/'
@@ -15,6 +15,10 @@ const checkError = (symbols) => {
     return 'Ошибка. Такого крюка в базе нет.'
   }
   return ''
+}
+
+function getRandomInt(max) {
+  return Math.floor(Math.random() * Math.floor(max))
 }
 
 export default (state = initialState, action) => {
@@ -37,7 +41,9 @@ export default (state = initialState, action) => {
       console.log(FILTER_SYMBOLS_BY_OPTIONS) // TODO без важности порядка опций
       const { symbols } = state
       const currentOptionsOfSymbol = action.payload
-      const symbolsFilteredByOptions = filter(symbols.value, symbol => difference(currentOptionsOfSymbol, symbol.opts).length === 0 && difference(symbol.opts, currentOptionsOfSymbol).length === 0)
+      const symbolsFilteredByOptions = filter(symbols.value, symbol =>
+        difference(currentOptionsOfSymbol, symbol.opts).length === 0
+        && difference(symbol.opts, currentOptionsOfSymbol).length === 0)
       console.log(symbolsFilteredByOptions)
       return {
         ...state,
@@ -76,15 +82,14 @@ export default (state = initialState, action) => {
     }
 
     case CREATE_OPTIONS_LIST: {
+      console.log('there')
       const { symbols } = state
-      const sortedSymbols = sortBy(symbols.value, [symbol => symbol.opts])
-      const options = sortedSymbols.map(symbol => symbol.opts.join(', '))
-      const newOptions = uniq(filter(options, option => option.length !== 0))
-      const labels = newOptions.map((option) => {
-        return { label: option }
-      })
-      console.log(labels)
-
+      const choosedSymbols = symbols.value
+      let emptyArray = [] 
+      choosedSymbols.map((symbol) => { emptyArray = concat(emptyArray, symbol.opts) }) // map array  of symbols, and in everi item add array of opts to emptyArray
+      const uniqOptions = uniq(emptyArray) // uniq our array of opts
+      let index = 0
+      const labels = uniqOptions.map(option => ({ value: index++, label: option })) // eslint-disable-line
 
       return {
         ...state,

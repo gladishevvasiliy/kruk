@@ -29,7 +29,6 @@ import {
 import Loading from '../../utils/Loading'
 
 import {
-  OPTIONS,
   PITCH,
 } from '../../constants'
 
@@ -106,7 +105,7 @@ class InsertSyllable extends Component {
 
   render() {
     const { symbols } = this.props
-    console.log(symbols.options)
+    const options = symbols.options
     if (isNil(symbols)) return <Loading />
     return (
       <React.Fragment>
@@ -128,7 +127,7 @@ class InsertSyllable extends Component {
             <Field
               name="options"
               list="options"
-              options={symbols.options}
+              options={options}
               onChange={this.handleChangeOptions}
               component={RFReactMultiSelect}
               className="input"

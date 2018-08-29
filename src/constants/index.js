@@ -79,22 +79,6 @@ export const SYMBOLS = [
 
 ]
 
-export const OPTIONS = [
-  { value: 1, label: 'Борзая' },
-  { value: 2, label: 'Тихая' },
-  { value: 3, label: 'Качка' },
-  { value: 4, label: 'Ударка' },
-  { value: 5, label: 'Закидка' },
-  { value: 6, label: 'Равенство' },
-  { value: 7, label: 'Ломка' },
-  { value: 8, label: 'Подвертка' },
-  { value: 9, label: 'Отсечка' },
-  { value: 10, label: 'Задержка' },
-  { value: 11, label: 'Подчашие' },
-  { value: 12, label: 'Облачко' },
-  { value: 13, label: 'Сорочья ножка' },
-]
-
 export const PITCH = [
   { value: 1, label: 'Ут низкое' },
   { value: 2, label: 'Ре низкое' },
