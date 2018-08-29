@@ -82,10 +82,13 @@ class InsertSyllable extends Component {
   }
 
   handleChangeOptions(options) {
-    const { actions } = this.props
+    const { actions, syllableForInsert } = this.props
     delete options.preventDefault // eslint-disable-line
     const currentOptions = values(options).map(item => item.label)
     actions.filterSymbolsByOptions(currentOptions)
+    if (syllableForInsert.values.pitch.label !== '') {
+      actions.filterSymbolsByPitch(syllableForInsert.values.pitch.label)
+    }
   }
 
   handleChangePitch(item) {
@@ -160,12 +163,19 @@ const InsertSyllableWithForm = reduxForm({
   form: 'syllableForInsert',
 })(InsertSyllable)
 
+const InitializeFromStateForm = connect(
+  () => ({
+    initialValues: { pitch: { label: '' } },
+  }),
+)(InsertSyllableWithForm)
+
 const mapStateToProps = state => ({
   paper: state.paper,
   symbols: state.symbols,
   error: state.symbols.error,
   editableSyllable: state.paper.editableSyllable,
   indexToInsert: state.paper.indexToInsert,
+  syllableForInsert: state.form.syllableForInsert,
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -184,11 +194,12 @@ const mapDispatchToProps = dispatch => ({
     insertSyllable,
   }, dispatch) })
 
-export default connect(mapStateToProps, mapDispatchToProps)(InsertSyllableWithForm)
+export default connect(mapStateToProps, mapDispatchToProps)(InitializeFromStateForm)
 
 InsertSyllable.propTypes = {
   symbols: PropTypes.object,
   actions: PropTypes.object,
   editableSyllable: PropTypes.string,
   indexToInsert: PropTypes.string,
+  syllableForInsert: PropTypes.object,
 }
