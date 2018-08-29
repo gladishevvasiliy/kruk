@@ -4,6 +4,8 @@ import PropTypes from 'react-proptypes'
 import { connect } from 'react-redux'
 import { isNil } from 'lodash'
 
+import Loading from '../../utils/Loading'
+
 import { removeLastSyllable } from '../../actions'
 import './style.css'
 
@@ -15,7 +17,7 @@ class CurrentSymbols extends Component { //eslint-disable-line
         <h4>Подходящие знамена</h4>
         { isNil(currentSymbols) ?
           <p>Подходящих знамен нет</p>
-          : <div className="currentSymbolsArea">{ currentSymbols.map(({ value }) => <div className="previewSymbol" dangerouslySetInnerHTML={{ __html: value }} />) }</div>}
+          : <div className="currentSymbolsArea">{ currentSymbols.map(({ value, name, pitch }) => <div className="previewSymbol" dangerouslySetInnerHTML={{ __html: value }} data-toggle="tooltip" data-html="true" title={name + ', помета: ' + pitch } />) }</div>}
       </div>
     )
   }
