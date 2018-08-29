@@ -88,9 +88,13 @@ class InsertSyllable extends Component {
     delete options.preventDefault // eslint-disable-line
     const currentOptions = values(options).map(item => item.label)
     actions.filterSymbolsByOptions(currentOptions)
+<<<<<<< HEAD
     if (syllableForInsert.values.pitch.label !== '') {
       actions.filterSymbolsByPitch(syllableForInsert.values.pitch.label)
     }
+=======
+    actions.filterSymbolsByPitch('Ут')
+>>>>>>> Add default filterSymbolsByPitch "Ut"
   }
 
   handleChangePitch(item) {

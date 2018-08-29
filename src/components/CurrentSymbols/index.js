@@ -12,7 +12,11 @@ class CurrentSymbols extends Component { //eslint-disable-line
     return (
       <div className="currentSymbols text-left">
         <h4>Подходящие знамена</h4>
+<<<<<<< HEAD
         { currentSymbols.length === 0 ?
+=======
+        { currentSymbols === '' ?
+>>>>>>> Add default filterSymbolsByPitch "Ut"
           <p>Подходящих знамен нет</p>
           : <div className="currentSymbolsArea">{ currentSymbols.map(({ value, name, pitch }, index) => <React.Fragment><div key={index} className="previewSymbol" dangerouslySetInnerHTML={{ __html: value }} data-toggle="tooltip" data-html="true" title={`${name}, помета: ${pitch}`} /><div>{value}</div></React.Fragment>) }</div>}
       </div>
