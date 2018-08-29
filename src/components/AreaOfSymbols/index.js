@@ -1,56 +1,61 @@
 import React, { Component } from 'react'
 import PropTypes from 'react-proptypes'
-import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap' // eslint-disable-line
 import { isNil } from 'lodash'
-import { setSyllables, removeSyllablebyIndex } from '../../actions'
+import { moveSyllable, hideModal } from '../../actions'
+import InsertSyllable from '../InsertSyllable'
+
+
+import Bucvica from '../../containers/Bucvica'
+import Syllable from '../../containers/Syllable'
+import Loading from '../../utils/Loading'
+
 import './style.css'
 
-class AreaOfSymbols extends Component {
-  constructor(props) {
-    super(props)
-
-    this.state = {
-    }
-  }
-
-  removeLastSyllable(e) {
-    const { actions } = this.props
-    actions.removeSyllablebyIndex(e.target.name)
-  }
+class AreaOfSymbols extends Component { // eslint-disable-line
 
   render() {
-    const { syllables, form } = this.props
+    const { syllables, form, showModalEdit, actions } = this.props
+
     if (isNil(form.paperStyle)) {
       return (
-        <React.Fragment>
-          <i className="fa fa-spinner fa-pulse fa-3x fa-fw" />
-          <span className="sr-only">Loading...</span>
-        </React.Fragment>
+        <Loading />
       )
     }
+
     return (
       <React.Fragment>
-        <div className="areaOfSymbols">
+        <div className="paperArea">
           <div
-            className="bucvica"
+            className="areaOfSymbols mx-auto"
             style={{
-              fontSize: form.paperStyle.values.sizeOfBucvica + 'pt', // eslint-disable-line
-              height: form.paperStyle.values.sizeOfBucvica * 0.9,
+              width: form.paperStyle.values.sizeOfPage + 'px', // eslint-disable-line
             }}
-            dangerouslySetInnerHTML={{
-              __html: form.paperStyle.values.bucvica,
-            }}
-          />
-          {syllables.map(({ value, text }, index) => (
-            // eslint-disable-next-line
-            <div key={index} className={`syllable size${form.paperStyle.values.fontSize}`}>
-              <div className="symbol" dangerouslySetInnerHTML={{ __html: value }} />
-              <div className="text" dangerouslySetInnerHTML={{ __html: text }} />
-              <button name={index} onClick={e => this.removeLastSyllable(e)} className="remove"><i className="fa fa-trash" /></button>
+          >
+            <div
+              className="paperMargin"
+              style={{
+                width: form.paperStyle.values.sizeOfPage + 'px', // eslint-disable-line
+              }}
+            >
+              <Bucvica />
+              {syllables.map(({ value, text }, index) => (
+                <Syllable value={value} text={text} key={index} index={index} />  // eslint-disable-line
+              ))}
             </div>
-          ))}
+          </div>
         </div>
+        <Modal isOpen={showModalEdit}>
+          <ModalHeader toggle={actions.hideModal}>Заменить крюк</ModalHeader>
+          <ModalBody>
+            <InsertSyllable />
+          </ModalBody>
+          <ModalFooter>
+            <Button color="secondary" onClick={actions.hideModal}>Отмена</Button>
+          </ModalFooter>
+        </Modal>
       </React.Fragment>
     )
   }
@@ -58,14 +63,19 @@ class AreaOfSymbols extends Component {
 
 AreaOfSymbols.propTypes = {
   syllables: PropTypes.array,
-  actions: PropTypes.object,
   form: PropTypes.object,
+  actions: PropTypes.object,
+  showModalEdit: PropTypes.bool,
 }
 
-const mapStateToProps = state => ({ syllables: state.paper.syllables, form: state.form })
-
 const mapDispatchToProps = dispatch => (
-  { actions: bindActionCreators({ setSyllables, removeSyllablebyIndex }, dispatch) }
+  { actions: bindActionCreators({ moveSyllable, hideModal }, dispatch) }
 )
+
+const mapStateToProps = state => ({
+  syllables: state.paper.syllables,
+  form: state.form,
+  showModalEdit: state.paper.showModalEdit,
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(AreaOfSymbols)

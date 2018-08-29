@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'react-proptypes'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import Select from 'react-select'
+import { Field, reduxForm } from 'redux-form'
 import { map, values, isNil } from 'lodash'
 
 import {
@@ -16,13 +16,24 @@ import {
   setSyllables,
   checkError,
   ErrorNoDefineSymbol,
+  changeSyllable,
+  insertSyllable,
 } from '../../actions'
 
 import {
-  SYMBOLS,
+  RFReactSelect,
+  RFReactMultiSelect,
+} from '../../utils/RFReactSelect'
+
+import Loading from '../../utils/Loading'
+
+import {
   OPTIONS,
   PITCH,
 } from '../../constants'
+
+import { KRUKI } from '../../res/'
+
 
 import './style.css'
 
@@ -30,50 +41,44 @@ class InsertSyllable extends Component {
   constructor(props) {
     super(props)
 
-    this.state = {
-      error: '',
-    }
+    // this.state = {
+    //   error: '',
+    // }
 
     this.handleKeyPress = this.handleKeyPress.bind(this)
     this.handleChangeName = this.handleChangeName.bind(this)
     this.handleChangeOptions = this.handleChangeOptions.bind(this)
     this.handleChangePitch = this.handleChangePitch.bind(this)
     this.handleremoveLastSyllable = this.handleremoveLastSyllable.bind(this)
-
-
-    this.inputNameRef = React.createRef()
-    this.inputOptionsRef = React.createRef()
-    this.inputPitchRef = React.createRef()
-    this.inputTextRef = React.createRef()
-  }
-
-  componentDidMount() {
-    this.inputNameRef.current.focus()
   }
 
   handleKeyPress(e) {
     if (e.key === 'Enter') {
       e.preventDefault()
-      const { symbols, actions } = this.props
+      const { symbols, actions, editableSyllable, indexToInsert } = this.props
 
       if (isNil(symbols.symbolsFilteredByPitch)) {
-        actions.ErrorNoDefineSymbol()
         return
       }
 
       const onlyValues = map(symbols.symbolsFilteredByPitch, ({ value }) => ({ value }))
       onlyValues[0].text = e.target.value
-      actions.addSyllable(onlyValues[0])
-      actions.getSymbols()
-      this.inputNameRef.current.focus()
+
+      if (!isNil(editableSyllable)) {
+        actions.changeSyllable(editableSyllable, onlyValues[0])
+      } if (!isNil(indexToInsert)) {
+        actions.insertSyllable(indexToInsert, onlyValues[0])
+      } else {
+        actions.addSyllable(onlyValues[0])
+      }
     }
   }
 
   handleChangeName(item) {
     const { actions } = this.props
+    actions.getSymbols()
     actions.filterSymbolsByName(item.label)
     actions.filterSymbolsByOptions([])
-    this.inputOptionsRef.current.focus()
   }
 
   handleChangeOptions(options) {
@@ -81,13 +86,11 @@ class InsertSyllable extends Component {
     delete options.preventDefault // eslint-disable-line
     const currentOptions = values(options).map(item => item.label)
     actions.filterSymbolsByOptions(currentOptions)
-    this.inputPitchRef.current.focus()
   }
 
   handleChangePitch(item) {
     const { actions } = this.props
     actions.filterSymbolsByPitch(item.label)
-    this.inputTextRef.current.focus()
   }
 
   handleremoveLastSyllable() {
@@ -96,45 +99,43 @@ class InsertSyllable extends Component {
   }
 
   render() {
-    const { error } = this.props
+    const { symbols } = this.props
+    if (isNil(symbols)) return <Loading />
     return (
       <React.Fragment>
+        <h4>Введите знамя</h4>
         <div className="inputForm">
-          <h4 className="titleControlPanel">Введите знамя</h4>
           <div className="field" >
             <label htmlFor="Name">Крюк</label>
-            <Select
+            <Field
               name="name"
               list="symbols"
-              options={SYMBOLS}
+              options={KRUKI}
               onChange={this.handleChangeName}
+              component={RFReactSelect}
               className="input"
-              valueKey="value"
-              ref={this.inputNameRef}
             />
           </div>
           <div className="field" >
             <label htmlFor="Name">Опции</label>
-            <Select
+            <Field
               name="options"
               list="options"
               options={OPTIONS}
               onChange={this.handleChangeOptions}
-              isMulti
+              component={RFReactMultiSelect}
               className="input"
-              valueKey="value"
-              ref={this.inputOptionsRef}
             />
           </div>
           <div className="field" >
             <label htmlFor="Name">Помета</label>
-            <Select
+            <Field
               label="Помета"
               name="pitch"
               options={PITCH}
               onChange={this.handleChangePitch}
+              component={RFReactSelect}
               className="input"
-              ref={this.inputPitchRef}
             />
           </div>
           <form onKeyPress={this.handleKeyPress}>  {/* eslint-disable-line */}
@@ -144,29 +145,27 @@ class InsertSyllable extends Component {
                 label="Слог"
                 name="syllable"
                 className="inputTextUCS form-control"
-                disabled={error !== ''}
-                ref={this.inputTextRef}
+                disabled={symbols.currentSymbols.length !== 1}
               />
             </div>
           </form>
-          <div className="error" >
-            <div />
-            <div className={`error-message alert alert-danger ${error !== '' ? '' : 'hideMessage'}`} role="alert">{error}</div>
-          </div>
-          <div className="removeLast">
-            <div />
-            <button type="button" className="removeButton btn btn-danger" onClick={this.handleremoveLastSyllable} ><i className="fa fa-trash" />  Удалить последний слог</button>
-          </div>
+
         </div>
       </React.Fragment>
     )
   }
 }
 
+const InsertSyllableWithForm = reduxForm({
+  form: 'syllableForInsert',
+})(InsertSyllable)
+
 const mapStateToProps = state => ({
   paper: state.paper,
   symbols: state.symbols,
   error: state.symbols.error,
+  editableSyllable: state.paper.editableSyllable,
+  indexToInsert: state.paper.indexToInsert,
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -181,12 +180,15 @@ const mapDispatchToProps = dispatch => ({
     setSyllables,
     checkError,
     ErrorNoDefineSymbol,
+    changeSyllable,
+    insertSyllable,
   }, dispatch) })
 
-export default connect(mapStateToProps, mapDispatchToProps)(InsertSyllable)
+export default connect(mapStateToProps, mapDispatchToProps)(InsertSyllableWithForm)
 
 InsertSyllable.propTypes = {
   symbols: PropTypes.object,
   actions: PropTypes.object,
-  error: PropTypes.string,
+  editableSyllable: PropTypes.string,
+  indexToInsert: PropTypes.string,
 }
