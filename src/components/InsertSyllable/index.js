@@ -19,6 +19,7 @@ import {
   changeSyllable,
   insertSyllable,
   createOptionsList,
+  createPitchList,
 } from '../../actions'
 
 import {
@@ -81,12 +82,14 @@ class InsertSyllable extends Component {
     actions.filterSymbolsByName(item.label)
     actions.filterSymbolsByOptions([])
     actions.createOptionsList(item.label)
+    actions.createPitchList()
   }
 
   handleChangeOptions(options) {
     const { actions, syllableForInsert } = this.props
     delete options.preventDefault // eslint-disable-line
     const currentOptions = values(options).map(item => item.label)
+    actions.createPitchList()
     actions.filterSymbolsByOptions(currentOptions)
     if (syllableForInsert.values.pitch.label !== '') {
       actions.filterSymbolsByPitch(syllableForInsert.values.pitch.label)
@@ -106,6 +109,7 @@ class InsertSyllable extends Component {
   render() {
     const { symbols } = this.props
     const options = symbols.options
+    const pitchs = symbols.pitchs
     if (isNil(symbols)) return <Loading />
     return (
       <React.Fragment>
@@ -138,7 +142,7 @@ class InsertSyllable extends Component {
             <Field
               label="Помета"
               name="pitch"
-              options={PITCH}
+              options={pitchs}
               onChange={this.handleChangePitch}
               component={RFReactSelect}
               className="input"
@@ -196,6 +200,7 @@ const mapDispatchToProps = dispatch => ({
     changeSyllable,
     insertSyllable,
     createOptionsList,
+    createPitchList,
   }, dispatch) })
 
 export default connect(mapStateToProps, mapDispatchToProps)(InitializeFromStateForm)

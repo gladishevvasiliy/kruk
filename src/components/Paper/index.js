@@ -9,6 +9,7 @@ import PaperContext from '../../context'
 import PaperStyle from '../PaperStyle'
 import Header from '../../utils/Header'
 import CurrentSymbols from '../CurrentSymbols'
+import InsertComposition from '../InsertComposition'
 
 import './style.css'
 import '../../res/bootstrap/css/bootstrap.min.css'
@@ -60,6 +61,9 @@ class Paper extends Component {
                 </div>
               </div>
               <CurrentSymbols />
+              <div>
+                <InsertComposition />
+              </div>
               <PaperStyle />
             </div>
           </div>

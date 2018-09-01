@@ -21,6 +21,7 @@ import {
   SHOW_MODAL_EDIT_TEXT,
   HIDE_MODAL_EDIT_TEXT,
   EDIT_TEXT,
+  CREATE_PITCH_LIST,
 } from '../constants/'
 
 export const addSyllable = syllable => ({ type: ADD_SYLLABLE, payload: syllable })
@@ -67,3 +68,4 @@ export const hideModalEditText = state => ({ type: HIDE_MODAL_EDIT_TEXT, payload
 
 export const editText = newText => ({ type: EDIT_TEXT, payload: newText })
 
+export const createPitchList = state => ({ type: CREATE_PITCH_LIST, payload: state })

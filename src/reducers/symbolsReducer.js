@@ -1,10 +1,11 @@
 import { filter, find, clone, difference, uniq, concat } from 'lodash'
-import { KRUKI } from '../res/index'
+import { KRUKI, COMPOSITIONS } from '../res/index'
 
-import { FILTER_SYMBOLS_BY_NAME, CREATE_OPTIONS_LIST, FILTER_SYMBOLS_BY_OPTIONS, FILTER_SYMBOLS_BY_PITCH, ADD_TEXT_TO_SYLLABLE, GET_SYMBOLS, CHECK_ERROR, ERROR_NO_DEFINE_SYMBOL } from '../constants/'
+import { FILTER_SYMBOLS_BY_NAME, CREATE_OPTIONS_LIST, FILTER_SYMBOLS_BY_OPTIONS, FILTER_SYMBOLS_BY_PITCH, ADD_TEXT_TO_SYLLABLE, GET_SYMBOLS, CHECK_ERROR, ERROR_NO_DEFINE_SYMBOL, CREATE_PITCH_LIST } from '../constants/'
 
 const initialState = {
   symbols: KRUKI,
+  compositions: COMPOSITIONS,
   error: '',
   currentSymbols: [],
   options: [],
@@ -78,7 +79,6 @@ export default (state = initialState, action) => {
     }
 
     case CREATE_OPTIONS_LIST: {
-      console.log('there')
       const { symbols } = state
       const choosedSymbols = symbols.value
       let emptyArray = []
@@ -91,6 +91,21 @@ export default (state = initialState, action) => {
       return {
         ...state,
         options: labels,
+      }
+    }
+
+    case CREATE_PITCH_LIST: {
+      const { symbols } = state
+      const choosedSymbols = symbols.value
+      let emptyArray = []
+      choosedSymbols.map((symbol) => { emptyArray = concat(emptyArray, symbol.pitch) }) // eslint-disable-line
+      const uniqOptions = uniq(emptyArray) // uniq our array of opts
+      let index = 0
+      const labels = uniqOptions.map(pitch => ({ value: index++, label: pitch })) // eslint-disable-line
+
+      return {
+        ...state,
+        pitchs: labels,
       }
     }
 
