@@ -77,7 +77,7 @@ class InsertSyllable extends Component {
   }
 
   handleChangeName(item) {
-    const { actions } = this.props
+    const { actions, syllableForInsert } = this.props
     actions.getSymbols()
     actions.filterSymbolsByName(item.label)
     actions.filterSymbolsByOptions([])

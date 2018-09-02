@@ -15,6 +15,7 @@ class EditText extends Component { // eslint-disable-line
       const { actions } = this.props
       console.log(e.target.value)
       actions.editText(e.target.value)
+      actions.hideModalEditText()
     }
   }
 
