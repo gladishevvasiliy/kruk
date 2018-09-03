@@ -18,8 +18,8 @@ class InsertComposition extends Component {
 
   changeName = (e) => {
     const { actions } = this.props
-    console.log(e.value[0].value)
-    e.value[0].value.map(item => actions.addSyllable({ value: item, text: '-' }))
+    console.log(e.value.value)
+    e.value.value.map(item => actions.addSyllable({ value: item, text: '-' }))
     // actions.addSyllable()
   }
 
