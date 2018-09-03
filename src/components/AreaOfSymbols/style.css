@@ -50,6 +50,40 @@
     padding: 10mm;
 }
 
+.a4:hover {
+    box-shadow: 0 0 10px  #0059ffc5; 
+}
+
+.a4:hover .page-remove-button {
+    display: inline-block;
+}
+
+.page-remove-button {
+    cursor: pointer;
+    background-color: #fffc;
+    display: none;
+    color: #fff;
+    background-color: #dc354599;
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    border: 1px solid transparent;
+    /* padding: .375rem .75rem; */
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    -webkit-transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;
+    -o-transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;
+}
+
+.page-remove-button:hover {
+    background-color: #dc3546dc;
+}
+
 .droppable {
     display: flex;
     flex-wrap: wrap;

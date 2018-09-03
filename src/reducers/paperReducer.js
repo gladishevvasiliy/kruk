@@ -13,6 +13,8 @@ import { ADD_SYLLABLE,
   HIDE_MODAL_EDIT_TEXT,
   EDIT_TEXT,
   ADD_PAGE,
+  CHANGE_PAGE,
+  REMOVE_PAGE,
 } from '../constants/'
 
 const initialState = {
@@ -28,8 +30,6 @@ export default (state = initialState, action) => {
 
   switch (action.type) {
     case ADD_SYLLABLE: {
-      console.log(currentPageSyllables)
-
       const currentSyllablesWithNew = [...currentPageSyllables, action.payload]
       const newSyllables = Array.from(syllables)
       newSyllables[currentPageNum] = currentSyllablesWithNew
@@ -54,6 +54,13 @@ export default (state = initialState, action) => {
       const newCurrentSyllables = Array.from(currentPageSyllables)
       newCurrentSyllables.splice(index, 1) // remove from current page
       const newSyllables = Array.from(syllables)
+      // if (isEmpty(newCurrentSyllables) && currentPageNum !== 0) {
+      //   localStorage.setItem('pages', JSON.stringify(newSyllables.splice(currentPageNum, 1)))
+      //   return {
+      //     ...state,
+      //     syllables: newSyllables.splice(currentPageNum, 1),
+      //   }
+      // }
       newSyllables[currentPageNum] = newCurrentSyllables
       localStorage.setItem('pages', JSON.stringify(newSyllables))
       return {
@@ -186,15 +193,35 @@ export default (state = initialState, action) => {
       }
 
     case ADD_PAGE: {
-      const { pages } = state
+      // const { pages } = state
       const newPage = currentPageNum + 1
-      const newPages = [...pages, newPage]
+      // const newPages = [...pages, newPage]
 
       return {
         ...state,
-        pages: newPages,
+        // pages: newPages,
         currentPageNum: newPage,
         syllables: [...syllables, []],
+      }
+    }
+
+    case CHANGE_PAGE: {
+      const pageIndex = action.payload
+
+      return {
+        ...state,
+        currentPageNum: pageIndex,
+      }
+    }
+
+    case REMOVE_PAGE: {
+      const pageIndex = action.payload
+      const newSyllables = Array.from(syllables)
+      newSyllables.splice(pageIndex, 1)
+      localStorage.setItem('pages', JSON.stringify(newSyllables))
+      return {
+        ...state,
+        syllables: newSyllables,
       }
     }
 

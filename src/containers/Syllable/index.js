@@ -2,33 +2,51 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'react-proptypes'
 import { bindActionCreators } from 'redux'
-import { removeSyllablebyIndex, repeatSyllableByIndex, showModalEdit, showModalInsert, showModalEditText } from '../../actions'
+import { 
+  removeSyllablebyIndex,
+  repeatSyllableByIndex,
+  showModalEdit,
+  showModalInsert,
+  showModalEditText,
+  changePage,
+} from '../../actions'
 
 import './style.css'
 
 class Syllable extends Component {
   removeLastSyllable() {
-    const { actions, index } = this.props
+    const { actions, index, pageIndex } = this.props
+    // TODO при удалении с конкретной стр менять номер currentPageNum на это стр
+    console.log(pageIndex)
+    actions.changePage(pageIndex)
     actions.removeSyllablebyIndex(index)
   }
 
   repeatSyllableByIndex() {
-    const { actions, index } = this.props
+    const { actions, index, pageIndex } = this.props
+    console.log(pageIndex)
+    actions.changePage(pageIndex)
     actions.repeatSyllableByIndex(index)
   }
 
   editSyllable() {
-    const { actions, index } = this.props
+    const { actions, index, pageIndex } = this.props
+    console.log(pageIndex)
+    actions.changePage(pageIndex)
     actions.showModalEdit(index)
   }
 
   insertSyllable() {
-    const { actions, index } = this.props
+    const { actions, index, pageIndex } = this.props
+    console.log(pageIndex)
+    actions.changePage(pageIndex)
     actions.showModalInsert(index)
   }
 
   editText() {
-    const { actions, index } = this.props
+    const { actions, index, pageIndex } = this.props
+    console.log(pageIndex)
+    actions.changePage(pageIndex)
     actions.showModalEditText(index)
   }
 
@@ -56,6 +74,7 @@ const mapDispatchToProps = dispatch => (
     showModalEdit,
     showModalInsert,
     showModalEditText,
+    changePage,
   }, dispatch) }
 )
 

@@ -25,6 +25,8 @@ export const HIDE_MODAL_EDIT_TEXT = 'HIDE_MODAL_EDIT_TEXT'
 export const EDIT_TEXT = 'EDIT_TEXT'
 export const CREATE_PITCH_LIST = 'CREATE_PITCH_LIST'
 export const ADD_PAGE = 'ADD_PAGE'
+export const CHANGE_PAGE = 'CHANGE_PAGE'
+export const REMOVE_PAGE = 'REMOVE_PAGE'
 
 export const SYMBOLS = [
   { value: 1, label: 'Параклит' },

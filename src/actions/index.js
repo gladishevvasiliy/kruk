@@ -23,13 +23,15 @@ import {
   EDIT_TEXT,
   CREATE_PITCH_LIST,
   ADD_PAGE,
+  CHANGE_PAGE,
+  REMOVE_PAGE,
 } from '../constants/'
 
 export const addSyllable = syllable => ({ type: ADD_SYLLABLE, payload: syllable })
 
 export const removeLastSyllable = syllable => ({ type: REMOVE_LAST_SYLLABLE, payload: syllable })
 
-export const removeSyllablebyIndex = id => ({ type: REMOVE_SYLLABLE_BY_INDEX, payload: id })
+export const removeSyllablebyIndex = index => ({ type: REMOVE_SYLLABLE_BY_INDEX, payload: index })
 
 export const repeatSyllableByIndex = index => ({ type: REPEAT_SYLLABLE_BY_INDEX, payload: index })
 
@@ -72,3 +74,7 @@ export const editText = newText => ({ type: EDIT_TEXT, payload: newText })
 export const createPitchList = state => ({ type: CREATE_PITCH_LIST, payload: state })
 
 export const addPage = prevPageNum => ({ type: ADD_PAGE, payload: prevPageNum })
+
+export const changePage = pageIndex => ({ type: CHANGE_PAGE, payload: pageIndex })
+
+export const removePage = pageIndex => ({ type: REMOVE_PAGE, payload: pageIndex })
