@@ -20,11 +20,8 @@
     padding-bottom: 50px;
 }
 .areaOfSymbols {
-    display: flex;
-    justify-content: flex-start;
-    flex-wrap: wrap;
+    width: 900px;
     /* width: 700px; */
-    background: #fff;
     /* min-height: 400px; */
 
     /* border-top: 1px solid #d1d1d1;
@@ -34,8 +31,23 @@
 
 .paperMargin {
     margin: 30px;
+}
+
+.page {
     display: flex;
     flex-wrap: wrap;
+}
+
+.a4 {
+    width: 210mm;
+    height: 297mm;
+    overflow: hidden;
+    page-break-before: avoid;
+    page-break-after: avoid;
+    background: white;
+    margin-bottom: 50px;
+    border: solid 1px #e6e6e6;
+    padding: 10mm;
 }
 
 .droppable {
@@ -144,6 +156,11 @@
 }
 
 @media print {
+
+    @page {
+        margin: 0cm;
+    }
+
     body {
       visibility: hidden;
     }
@@ -151,7 +168,12 @@
     .paperMargin {
       visibility: visible;
       justify-content: space-between;
-      
+      margin: 0;
+     }
+
+     .a4 {
+         border: none;
+         margin: 0;
      }
 }
 

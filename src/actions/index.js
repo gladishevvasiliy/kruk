@@ -22,6 +22,7 @@ import {
   HIDE_MODAL_EDIT_TEXT,
   EDIT_TEXT,
   CREATE_PITCH_LIST,
+  ADD_PAGE,
 } from '../constants/'
 
 export const addSyllable = syllable => ({ type: ADD_SYLLABLE, payload: syllable })
@@ -62,10 +63,12 @@ export const insertSyllable = (index, syllable) => ({ type: INSERT_SYLLABLE, pay
 
 export const createOptionsList = nameOfSymbol => ({ type: CREATE_OPTIONS_LIST, payload: nameOfSymbol }) // eslint-disable-line max-len
 
-export const showModalEditText = indexOfEditableText => ({ type: SHOW_MODAL_EDIT_TEXT, payload: indexOfEditableText })
+export const showModalEditText = indexOfEditableText => ({ type: SHOW_MODAL_EDIT_TEXT, payload: indexOfEditableText }) // eslint-disable-line max-len
 
 export const hideModalEditText = state => ({ type: HIDE_MODAL_EDIT_TEXT, payload: state })
 
 export const editText = newText => ({ type: EDIT_TEXT, payload: newText })
 
 export const createPitchList = state => ({ type: CREATE_PITCH_LIST, payload: state })
+
+export const addPage = prevPageNum => ({ type: ADD_PAGE, payload: prevPageNum })

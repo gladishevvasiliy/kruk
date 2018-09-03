@@ -1,7 +1,12 @@
 import React, { Component } from 'react'
 import PropTypes from 'react-proptypes'
 import { Field, reduxForm } from 'redux-form'
+import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import { Button } from 'reactstrap' // eslint-disable-line
+import { addPage } from '../../actions'
+
+
 import './style.css'
 
 const RangeInput = ({ input, type, className, id, min, max, step }) => (
@@ -23,6 +28,7 @@ class PaperStyle extends Component {
   }
 
   render() {
+    const { actions } = this.props
     return (
       <div className="paperStyle text-left">
         <h4>Настройки</h4>
@@ -56,7 +62,8 @@ class PaperStyle extends Component {
           min="50"
           max="180"
         />
-        <label htmlFor="sizeOfPage">Ширина страницы</label>
+        <Button color="primary" onClick={actions.addPage}>Добавить страницу</Button>
+        {/* <label htmlFor="sizeOfPage">Ширина страницы</label>
         <Field
           name="sizeOfPage"
           type="range"
@@ -65,7 +72,7 @@ class PaperStyle extends Component {
           id="sizeOfPage"
           min="700"
           max="1600"
-        />
+        /> */}
         {/* <label htmlFor="marginLine">Межстрочный интервал</label>
         <Field
           name="marginLine"
@@ -95,8 +102,17 @@ const PaperStyleWithForm = reduxForm({
   form: 'paperStyle',
 })(PaperStyle)
 
+const mapDispatchToProps = dispatch => (
+  { actions: bindActionCreators({ addPage }, dispatch) }
+)
+
+const mapStateToProps = state => ({
+  pageNum: state.paper.pageNum,
+})
+
 const InitializePaperStyleWithForm = connect(
   () => ({ initialValues: { fontSize: 40, sizeOfBucvica: 50, sizeOfPage: 900 } }),
 )(PaperStyleWithForm)
 
-export default InitializePaperStyleWithForm
+export default connect(mapStateToProps, mapDispatchToProps)(InitializePaperStyleWithForm)
+

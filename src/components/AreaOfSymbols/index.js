@@ -17,8 +17,14 @@ import './style.css'
 
 class AreaOfSymbols extends Component { // eslint-disable-line
 
+  constructor(props) {
+    super(props)
+    this.myRef = React.createRef()
+  }
+
   render() {
     const { syllables, form, showModalEdit, actions } = this.props
+
 
     if (isNil(form.paperStyle)) {
       return (
@@ -29,22 +35,27 @@ class AreaOfSymbols extends Component { // eslint-disable-line
     return (
       <React.Fragment>
         <div className="paperArea">
-          <div
-            className="areaOfSymbols mx-auto"
-            style={{
-              width: form.paperStyle.values.sizeOfPage + 'px', // eslint-disable-line
-            }}
-          >
-            <div
-              className="paperMargin"
-              style={{
-                width: form.paperStyle.values.sizeOfPage + 'px', // eslint-disable-line
-              }}
-            >
-              <Bucvica />
-              {syllables.map(({ value, text }, index) => (
-                <Syllable value={value} text={text} key={index} index={index} />  // eslint-disable-line
-              ))}
+          <div className="areaOfSymbols mx-auto">
+            <div className="paperMargin" >
+              {syllables.map((item, pageIndex) => ( //eslint-disable-line
+                <div className="a4" key={pageIndex}>
+                  <div className="page">
+                    <Bucvica />
+                    {
+                      item.map(({ value, text }, index) => (
+                        <Syllable value={value} text={text} key={index} index={index} />
+                      ))
+                    }
+                  </div>
+                </div>
+              ))
+              }
+              {/* {syllables.map(({ value, text }, index) => (
+                <div className="page">
+                  <Bucvica />
+                  <Syllable value={value} text={text} key={index} index={index} />
+                </div>
+              ))} */}
             </div>
           </div>
         </div>

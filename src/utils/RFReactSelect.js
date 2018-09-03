@@ -1,7 +1,8 @@
 import React from 'react'
 import Select from 'react-select'
+import PropTypes from 'react-proptypes'
 
-export const RFReactSelect = ({ input, options, className, ref }) => {
+export const RFReactSelect = ({ input, options, className }) => {
   const { name, value, onBlur, onChange, onFocus } = input
   return (
     <Select
@@ -13,13 +14,19 @@ export const RFReactSelect = ({ input, options, className, ref }) => {
       onBlur={() => onBlur(value)}
       onFocus={onFocus}
       className={className}
-      ref={ref}
     />
   )
 }
 
+RFReactSelect.propTypes = {
+  input: PropTypes.object,
+  options: PropTypes.array,
+  className: PropTypes.string,
+
+}
+
 export const RFReactMultiSelect = ({ input, options, className }) => {
-  const { name, value, onBlur, onChange, onFocus, ref } = input
+  const { name, value, onBlur, onChange, onFocus } = input
   return (
     <Select
       valueKey="value"
@@ -31,7 +38,14 @@ export const RFReactMultiSelect = ({ input, options, className }) => {
       onBlur={() => onBlur(value)}
       onFocus={onFocus}
       className={className}
-      ref={ref}
     />
   )
 }
+
+RFReactMultiSelect.propTypes = {
+  input: PropTypes.object,
+  options: PropTypes.array,
+  className: PropTypes.string,
+
+}
+

@@ -7,30 +7,29 @@ import { removeSyllablebyIndex, repeatSyllableByIndex, showModalEdit, showModalI
 import './style.css'
 
 class Syllable extends Component {
-  removeLastSyllable(e) {
-    const { actions } = this.props
-    actions.removeSyllablebyIndex(e.target.name)
+  removeLastSyllable() {
+    const { actions, index } = this.props
+    actions.removeSyllablebyIndex(index)
   }
 
-  repeatSyllableByIndex(e) {
-    const { actions } = this.props
-    actions.repeatSyllableByIndex(e.target.name)
+  repeatSyllableByIndex() {
+    const { actions, index } = this.props
+    actions.repeatSyllableByIndex(index)
   }
 
-  editSyllable(e) {
-    const { actions } = this.props
-    console.log(e.target.name)
-    actions.showModalEdit(e.target.name)
+  editSyllable() {
+    const { actions, index } = this.props
+    actions.showModalEdit(index)
   }
 
-  insertSyllable(e) {
-    const { actions } = this.props
-    actions.showModalInsert(e.target.name)
+  insertSyllable() {
+    const { actions, index } = this.props
+    actions.showModalInsert(index)
   }
 
-  editText(e) {
-    const { actions } = this.props
-    actions.showModalEditText(e.target.id)
+  editText() {
+    const { actions, index } = this.props
+    actions.showModalEditText(index)
   }
 
   render() {

@@ -5,7 +5,6 @@ import { ADD_SYLLABLE,
   REMOVE_LAST_SYLLABLE,
   REMOVE_SYLLABLE_BY_INDEX,
   REPEAT_SYLLABLE_BY_INDEX,
-  MOVE_SYLLABLE,
   SHOW_MODAL_INSERT,
   SHOW_MODAL_EDIT,
   HIDE_MODAL,
@@ -13,27 +12,37 @@ import { ADD_SYLLABLE,
   SHOW_MODAL_EDIT_TEXT,
   HIDE_MODAL_EDIT_TEXT,
   EDIT_TEXT,
+  ADD_PAGE,
 } from '../constants/'
 
 const initialState = {
-  syllables: isNil(localStorage.getItem('syllables')) ? [] : JSON.parse(localStorage.getItem('syllables')),
+  syllablesHide: isNil(localStorage.getItem('syllables')) ? [] : JSON.parse(localStorage.getItem('syllables')),
+  syllables: isNil(localStorage.getItem('pages')) ? [[]] : JSON.parse(localStorage.getItem('pages')),
+  pages: [0],
+  currentPageNum: 0,
 }
 
 export default (state = initialState, action) => {
-  const { syllables } = state
+  const { syllables, currentPageNum } = state
+  const currentPageSyllables = state.syllables[currentPageNum] // current page
+
   switch (action.type) {
     case ADD_SYLLABLE: {
-      const syllablesWithNew = [...syllables, action.payload]
-      localStorage.setItem('syllables', JSON.stringify(syllablesWithNew))
+      console.log(currentPageSyllables)
+
+      const currentSyllablesWithNew = [...currentPageSyllables, action.payload]
+      const newSyllables = Array.from(syllables)
+      newSyllables[currentPageNum] = currentSyllablesWithNew
+      localStorage.setItem('pages', JSON.stringify(newSyllables))
       return {
         ...state,
-        syllables: syllablesWithNew,
+        syllables: newSyllables,
       }
     }
 
     case REMOVE_LAST_SYLLABLE: {
-      const syllablesDropRight = dropRight(syllables)
-      localStorage.setItem('syllables', JSON.stringify(syllablesDropRight))
+      const syllablesDropRight = dropRight(currentPageSyllables)
+      localStorage.setItem('pages', JSON.stringify(syllablesDropRight))
       return {
         ...state,
         syllables: syllablesDropRight,
@@ -42,9 +51,11 @@ export default (state = initialState, action) => {
 
     case REMOVE_SYLLABLE_BY_INDEX: {
       const index = action.payload
-      const newSyllables = syllables.slice()
-      newSyllables.splice(index, 1)
-      localStorage.setItem('syllables', JSON.stringify(newSyllables))
+      const newCurrentSyllables = Array.from(currentPageSyllables)
+      newCurrentSyllables.splice(index, 1) // remove from current page
+      const newSyllables = Array.from(syllables)
+      newSyllables[currentPageNum] = newCurrentSyllables
+      localStorage.setItem('pages', JSON.stringify(newSyllables))
       return {
         ...state,
         syllables: newSyllables,
@@ -53,26 +64,33 @@ export default (state = initialState, action) => {
 
     case REPEAT_SYLLABLE_BY_INDEX: {
       const index = action.payload
-      const syllableToRepeat = clone(syllables[index])
-      localStorage.setItem('syllables', JSON.stringify([...syllables, syllableToRepeat]))
-      return {
-        ...state,
-        syllables: [...syllables, syllableToRepeat],
-      }
-    }
-
-    case MOVE_SYLLABLE: {
-      const { source, destination } = action.payload
+      const syllableToRepeat = clone(currentPageSyllables[index])
+      // make new array with repeated syllable
+      const newSyllablesWithRepeat = [...currentPageSyllables, syllableToRepeat]
       const newSyllables = Array.from(syllables)
-      const [removed] = newSyllables.splice(source.index, 1)
-      newSyllables.splice(destination.index, 0, removed)
-      localStorage.setItem('syllables', JSON.stringify(newSyllables))
-
+      newSyllables[currentPageNum] = newSyllablesWithRepeat
+      localStorage.setItem('pages', JSON.stringify(newSyllables))
       return {
         ...state,
         syllables: newSyllables,
       }
     }
+
+    // case MOVE_SYLLABLE: {
+    //   const { source, destination } = action.payload
+    //   const newSyllablesMoved = Array.from(currentPageSyllables)
+    //   const [removed] = newSyllablesMoved.splice(source.index, 1)
+    //   newSyllablesMoved.splice(destination.index, 0, removed)
+    //   // localStorage.setItem('syllables', JSON.stringify(newSyllables))
+    //   const newSyllables = Array.from(syllables)
+    //   newSyllables[currentPageNum] = newSyllablesMoved
+
+
+    //   return {
+    //     ...state,
+    //     syllables: newSyllables,
+    //   }
+    // }
 
     case SHOW_MODAL_EDIT: {
       const editableSyllable = action.payload
@@ -121,10 +139,13 @@ export default (state = initialState, action) => {
 
     case INSERT_SYLLABLE: {
       const { index, syllable } = action.payload
-      const newSyllables = Array.from(syllables)
+      const currentSyllablesWithInsert = Array.from(currentPageSyllables)
       const afterIndex = parseInt(index) + 1 // eslint-disable-line
-      newSyllables.splice(afterIndex, 0, syllable)
-      localStorage.setItem('syllables', JSON.stringify(newSyllables))
+      currentSyllablesWithInsert.splice(afterIndex, 0, syllable)
+      const newSyllables = Array.from(syllables)
+      newSyllables[currentPageNum] = currentSyllablesWithInsert
+      localStorage.setItem('pages', JSON.stringify(newSyllables))
+
       return {
         ...state,
         syllables: newSyllables,
@@ -133,9 +154,11 @@ export default (state = initialState, action) => {
 
     case CHANGE_SYLLABLE: {
       const { indexOfChangingSyllable, syllable } = action.payload
+      const currentSyllablesWithChange = Array.from(currentPageSyllables)
+      currentSyllablesWithChange[indexOfChangingSyllable] = syllable
       const newSyllables = Array.from(syllables)
-      newSyllables[indexOfChangingSyllable] = syllable
-      localStorage.setItem('syllables', JSON.stringify(newSyllables))
+      newSyllables[currentPageNum] = currentSyllablesWithChange
+      localStorage.setItem('pages', JSON.stringify(newSyllables))
       return {
         ...state,
         syllables: newSyllables,
@@ -145,9 +168,11 @@ export default (state = initialState, action) => {
     case EDIT_TEXT: {
       const newText = action.payload
       const { indexOfEditableText } = state
+      const currentSyllablesEditText = Array.from(currentPageSyllables)
+      currentSyllablesEditText[indexOfEditableText].text = newText
       const newSyllables = Array.from(syllables)
-      newSyllables[indexOfEditableText].text = newText
-      localStorage.setItem('syllables', JSON.stringify(newSyllables))
+      newSyllables[currentPageNum] = currentSyllablesEditText
+      localStorage.setItem('pages', JSON.stringify(newSyllables))
       return {
         ...state,
         syllables: newSyllables,
@@ -159,6 +184,19 @@ export default (state = initialState, action) => {
         loading: false,
         messages: action.payload,
       }
+
+    case ADD_PAGE: {
+      const { pages } = state
+      const newPage = currentPageNum + 1
+      const newPages = [...pages, newPage]
+
+      return {
+        ...state,
+        pages: newPages,
+        currentPageNum: newPage,
+        syllables: [...syllables, []],
+      }
+    }
 
     default:
       return state

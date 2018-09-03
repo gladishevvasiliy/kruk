@@ -18,9 +18,7 @@ class InsertComposition extends Component {
 
   changeName = (e) => {
     const { actions } = this.props
-    console.log(e.value.value)
     e.value.value.map(item => actions.addSyllable({ value: item, text: '-' }))
-    // actions.addSyllable()
   }
 
   render() {
@@ -55,3 +53,6 @@ const mapDispatchToProps = dispatch => ({ actions: bindActionCreators({ addSylla
 
 export default connect(mapStateToProps, mapDispatchToProps)(InsertCompositionWithForm)
 
+InsertComposition.propTypes = {
+  actions: PropTypes.object,
+}

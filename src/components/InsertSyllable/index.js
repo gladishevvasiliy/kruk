@@ -29,10 +29,6 @@ import {
 
 import Loading from '../../utils/Loading'
 
-import {
-  PITCH,
-} from '../../constants'
-
 import { KRUKI } from '../../res/'
 
 
@@ -77,7 +73,7 @@ class InsertSyllable extends Component {
   }
 
   handleChangeName(item) {
-    const { actions, syllableForInsert } = this.props
+    const { actions } = this.props
     actions.getSymbols()
     actions.filterSymbolsByName(item.label)
     actions.filterSymbolsByOptions([])
@@ -127,7 +123,7 @@ class InsertSyllable extends Component {
             />
           </div>
           <div className="field" >
-            <label htmlFor="Name">Опции</label>
+            <label htmlFor="Options">Опции</label>
             <Field
               name="options"
               list="options"
@@ -138,10 +134,10 @@ class InsertSyllable extends Component {
             />
           </div>
           <div className="field" >
-            <label htmlFor="Name">Помета</label>
+            <label htmlFor="Pitch">Помета</label>
             <Field
-              label="Помета"
               name="pitch"
+              list="pitchs"
               options={pitchs}
               onChange={this.handleChangePitch}
               component={RFReactSelect}
@@ -208,7 +204,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(InitializeFromStateF
 InsertSyllable.propTypes = {
   symbols: PropTypes.object,
   actions: PropTypes.object,
-  editableSyllable: PropTypes.string,
-  indexToInsert: PropTypes.string,
+  editableSyllable: PropTypes.number,
+  indexToInsert: PropTypes.number,
   syllableForInsert: PropTypes.object,
 }

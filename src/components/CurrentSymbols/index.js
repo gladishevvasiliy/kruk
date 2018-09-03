@@ -4,6 +4,7 @@ import PropTypes from 'react-proptypes'
 import { connect } from 'react-redux'
 
 import { removeLastSyllable } from '../../actions'
+import Symbol from '../../containers/Symbol'
 import './style.css'
 
 class CurrentSymbols extends Component { //eslint-disable-line
@@ -14,7 +15,7 @@ class CurrentSymbols extends Component { //eslint-disable-line
         <h4>Подходящие знамена</h4>
         { currentSymbols.length === 0 ?
           <p>Подходящих знамен нет</p>
-          : <div className="currentSymbolsArea">{ currentSymbols.map(({ value, name, pitch }, index) => <React.Fragment><div key={index} className="previewSymbol" dangerouslySetInnerHTML={{ __html: value }} data-toggle="tooltip" data-html="true" title={`${name}, помета: ${pitch}`} /><div>{value}</div></React.Fragment>) }</div>}
+          : <div className="currentSymbolsArea">{ currentSymbols.map(({ value, name, pitch }, index) => <Symbol key={index} value={value} name={name} pitch={pitch} />) }</div>}
       </div>
     )
   }
