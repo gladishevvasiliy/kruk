@@ -188,6 +188,10 @@
     background-color: #3546dc99;
 }
 
+.break {
+    width: 100%;
+}
+
 @media print {
 
     @page {
@@ -203,10 +207,18 @@
       justify-content: space-between;
       margin: 0;
      }
+     
 
      .a4 {
          border: none;
          margin: 0;
+     }
+
+     .break {
+        visibility: hidden;
+     }
+     .add-page {
+        visibility: hidden;
      }
 }
 

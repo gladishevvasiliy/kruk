@@ -60,13 +60,13 @@ class Paper extends Component {
                   <div />
                   <button type="button" className="removeButton btn btn-danger" onClick={this.handleremoveLastSyllable} ><i className="icon-bin" />  Удалить последний слог</button>
                 </div>
+                <PaperStyle />
               </div>
               <CurrentSymbols />
+              <InsertComposition />
               <div>
-                <InsertComposition />
                 <InsertText />
               </div>
-              <PaperStyle />
             </div>
           </div>
         </React.Fragment>

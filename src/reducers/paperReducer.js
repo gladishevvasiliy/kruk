@@ -14,7 +14,7 @@ import { ADD_SYLLABLE,
   EDIT_TEXT,
   ADD_PAGE,
   CHANGE_PAGE,
-  REMOVE_PAGE,
+  REMOVE_PAGE, 
 } from '../constants/'
 
 const initialState = {
@@ -42,10 +42,12 @@ export default (state = initialState, action) => {
 
     case REMOVE_LAST_SYLLABLE: {
       const syllablesDropRight = dropRight(currentPageSyllables)
-      localStorage.setItem('pages', JSON.stringify(syllablesDropRight))
+      const newSyllables = Array.from(syllables)
+      newSyllables[currentPageNum] = syllablesDropRight
+      localStorage.setItem('pages', JSON.stringify(newSyllables))
       return {
         ...state,
-        syllables: syllablesDropRight,
+        syllables: newSyllables,
       }
     }
 

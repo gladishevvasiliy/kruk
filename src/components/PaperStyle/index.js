@@ -68,7 +68,7 @@ const PaperStyleWithForm = reduxForm({
 })(PaperStyle)
 
 const InitializePaperStyleWithForm = connect(
-  () => ({ initialValues: { fontSize: 40, sizeOfBucvica: 50, sizeOfPage: 900 } }),
+  () => ({ initialValues: { fontSize: 40, sizeOfBucvica: 72, sizeOfPage: 900 } }),
 )(PaperStyleWithForm)
 
 export default InitializePaperStyleWithForm

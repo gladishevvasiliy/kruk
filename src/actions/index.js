@@ -25,6 +25,8 @@ import {
   ADD_PAGE,
   CHANGE_PAGE,
   REMOVE_PAGE,
+  CREATE_TONE_LIST,
+  GET_COMPOSITIONS,
 } from '../constants/'
 
 export const addSyllable = syllable => ({ type: ADD_SYLLABLE, payload: syllable })
@@ -78,3 +80,7 @@ export const addPage = prevPageNum => ({ type: ADD_PAGE, payload: prevPageNum })
 export const changePage = pageIndex => ({ type: CHANGE_PAGE, payload: pageIndex })
 
 export const removePage = pageIndex => ({ type: REMOVE_PAGE, payload: pageIndex })
+
+export const createToneList = state => ({ type: CREATE_TONE_LIST, payload: state })
+
+export const getCompositions = state => ({ type: GET_COMPOSITIONS, payload: state })

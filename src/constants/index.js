@@ -27,6 +27,8 @@ export const CREATE_PITCH_LIST = 'CREATE_PITCH_LIST'
 export const ADD_PAGE = 'ADD_PAGE'
 export const CHANGE_PAGE = 'CHANGE_PAGE'
 export const REMOVE_PAGE = 'REMOVE_PAGE'
+export const CREATE_TONE_LIST = 'CREATE_TONE_LIST'
+export const GET_COMPOSITIONS = 'GET_COMPOSITIONS'
 
 export const SYMBOLS = [
   { value: 1, label: 'Параклит' },

@@ -1,0 +1,14 @@
+@font-face {
+    font-family: GrebnevUCS;
+    src: url(../../res/fonts/GrebnevUCS.ttf)
+}
+
+.ucs-text {
+    font-family: GrebnevUCS;
+    font-size: 24pt !important;
+    color: red !important;
+}
+.insert-text {
+    width: 300px;
+    padding-right: 20px;
+}

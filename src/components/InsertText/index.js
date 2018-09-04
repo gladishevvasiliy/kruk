@@ -28,10 +28,15 @@ class InsertText extends Component {
     }
   }
 
+  addBreak = () => {
+    const { actions } = this.props
+    actions.addSyllable({ value: '', text: '', type: 'BREAK' })
+  }
+
   render() {
     return (
       <div className="insert-text text-left">
-        <h4>Вставить текст</h4>
+        <h4>Вставка текста</h4>
         <form onKeyPress={this.addBucvica}>  {/* eslint-disable-line */}
           <div className="field" >
             <label htmlFor="Name">Вставить буквицу</label>
@@ -48,10 +53,11 @@ class InsertText extends Component {
             <input
               label="Текст"
               name="text"
-              className="form-control"
+              className="form-control ucs-text"
             />
           </div>
         </form>
+        <button type="button" className="btn btn-primary" onClick={this.addBreak} >Вставить перенос строки</button>
       </div>
     )
   }

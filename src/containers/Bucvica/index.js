@@ -47,7 +47,7 @@ Bucvica.propTypes = {
   form: PropTypes.object,
   text: PropTypes.string,
   actions: PropTypes.object,
-  pageIndex: PropTypes.pageIndex,
-  index: PropTypes.index,
+  pageIndex: PropTypes.number,
+  index: PropTypes.number,
 }
 

@@ -1,7 +1,19 @@
 import { filter, find, clone, difference, uniq, concat } from 'lodash'
 import { KRUKI, COMPOSITIONS } from '../res/index'
 
-import { FILTER_SYMBOLS_BY_NAME, CREATE_OPTIONS_LIST, FILTER_SYMBOLS_BY_OPTIONS, FILTER_SYMBOLS_BY_PITCH, ADD_TEXT_TO_SYLLABLE, GET_SYMBOLS, CHECK_ERROR, ERROR_NO_DEFINE_SYMBOL, CREATE_PITCH_LIST } from '../constants/'
+import {
+  FILTER_SYMBOLS_BY_NAME,
+  CREATE_OPTIONS_LIST,
+  FILTER_SYMBOLS_BY_OPTIONS,
+  FILTER_SYMBOLS_BY_PITCH,
+  ADD_TEXT_TO_SYLLABLE,
+  GET_SYMBOLS,
+  CHECK_ERROR,
+  ERROR_NO_DEFINE_SYMBOL,
+  CREATE_PITCH_LIST,
+  CREATE_TONE_LIST,
+  GET_COMPOSITIONS,
+} from '../constants/'
 
 const initialState = {
   symbols: KRUKI,
@@ -9,6 +21,7 @@ const initialState = {
   error: '',
   currentSymbols: [],
   options: [],
+  tones:[],
 }
 
 const checkError = (symbols) => {
@@ -110,11 +123,35 @@ export default (state = initialState, action) => {
       }
     }
 
+    case CREATE_TONE_LIST: {
+      const currentCompositions = action.payload
+      let emptyArray = []
+      currentCompositions.map((composition) => { emptyArray = concat(emptyArray, composition.tone) }) // eslint-disable-line
+      const uniqTones = uniq(emptyArray) // uniq our array of opts
+      let index = 0
+      const labels = uniqTones.map(tone => ({ value: index++, label: tone })) // eslint-disable-line
+      console.log('CREATE_TONE_LIST')
+      console.log(labels)
+
+      return {
+        ...state,
+        compositions: action.payload,
+        tones: labels,
+      }
+    }
+
     case GET_SYMBOLS:
       console.log(GET_SYMBOLS)
       return {
         ...state,
         symbols: KRUKI,
+      }
+
+    case GET_COMPOSITIONS:
+      console.log(GET_COMPOSITIONS)
+      return {
+        ...state,
+        compositions: COMPOSITIONS,
       }
 
     case CHECK_ERROR: {

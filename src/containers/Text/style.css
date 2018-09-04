@@ -10,6 +10,7 @@
     color:red;
     width: 100%;
     position: relative;
+    line-height: 52pt;
 }
 
 .text-line:hover .text-remove-button {

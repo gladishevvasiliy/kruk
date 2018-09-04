@@ -110,8 +110,8 @@ class InsertSyllable extends Component {
     if (isNil(symbols)) return <Loading />
     return (
       <React.Fragment>
-        <h4>Введите знамя</h4>
         <div className="inputForm">
+          <h4 className="text-left">Введите знамя</h4>
           <div className="field" >
             <label htmlFor="Name">Крюк</label>
             <Field

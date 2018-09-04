@@ -68,7 +68,8 @@ class AreaOfSymbols extends Component { // eslint-disable-line
                         /* eslint-disable */
                         type === 'KRUK' ? <Syllable value={value} text={text} key={index} index={index} pageIndex={pageIndex} /> : 
                         type === 'BUCVICA' ? <Bucvica text={text} index={index} pageIndex={pageIndex}/> : 
-                        type === 'TEXT' ? <Text text={text} index={index} pageIndex={pageIndex}/> : null
+                        type === 'TEXT' ? <Text text={text} index={index} pageIndex={pageIndex}/> : 
+                        type === 'BREAK' ? <hr className="break"/> : null
                         /* eslint-enable */
                       ))
                     }
@@ -76,7 +77,7 @@ class AreaOfSymbols extends Component { // eslint-disable-line
                 </div>
               ))
               }
-              <Button color="primary" onClick={actions.addPage}>Добавить страницу</Button>
+              <Button color="primary" className="add-page" onClick={actions.addPage}>Добавить страницу</Button>
             </div>
           </div>
         </div>
