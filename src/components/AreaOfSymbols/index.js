@@ -4,12 +4,13 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap' // eslint-disable-line
 import { isNil } from 'lodash'
-import { moveSyllable, hideModal, changePage, removePage } from '../../actions'
+import { moveSyllable, hideModal, changePage, removePage, addPage } from '../../actions'
 import InsertSyllable from '../InsertSyllable'
 import EditText from '../EditText'
 
 
 import Bucvica from '../../containers/Bucvica'
+import Text from '../../containers/Text'
 import Syllable from '../../containers/Syllable'
 import Loading from '../../utils/Loading'
 
@@ -25,7 +26,6 @@ class AreaOfSymbols extends Component { // eslint-disable-line
 
   changePage(pageIndex) {
     const { actions } = this.props
-    console.log(pageIndex)
     actions.changePage(pageIndex)
   }
 
@@ -64,20 +64,19 @@ class AreaOfSymbols extends Component { // eslint-disable-line
                   <div className="page">
                     <Bucvica />
                     {
-                      item.map(({ value, text }, index) => (
-                        <Syllable value={value} text={text} key={index} index={index} pageIndex={pageIndex} />
+                      item.map(({ value, text, type }, index) => (
+                        /* eslint-disable */
+                        type === 'KRUK' ? <Syllable value={value} text={text} key={index} index={index} pageIndex={pageIndex} /> : 
+                        type === 'BUCVICA' ? <Bucvica text={text} index={index} pageIndex={pageIndex}/> : 
+                        type === 'TEXT' ? <Text text={text} index={index} pageIndex={pageIndex}/> : null
+                        /* eslint-enable */
                       ))
                     }
                   </div>
                 </div>
               ))
               }
-              {/* {syllables.map(({ value, text }, index) => (
-                <div className="page">
-                  <Bucvica />
-                  <Syllable value={value} text={text} key={index} index={index} />
-                </div>
-              ))} */}
+              <Button color="primary" onClick={actions.addPage}>Добавить страницу</Button>
             </div>
           </div>
         </div>
@@ -104,7 +103,13 @@ AreaOfSymbols.propTypes = {
 }
 
 const mapDispatchToProps = dispatch => (
-  { actions: bindActionCreators({ moveSyllable, hideModal, changePage, removePage }, dispatch) }
+  { actions: bindActionCreators({
+    moveSyllable,
+    hideModal,
+    changePage,
+    removePage,
+    addPage,
+  }, dispatch) }
 )
 
 const mapStateToProps = state => ({

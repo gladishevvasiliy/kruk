@@ -60,6 +60,7 @@ class InsertSyllable extends Component {
 
       const onlyValues = map(symbols.symbolsFilteredByPitch, ({ value }) => ({ value }))
       onlyValues[0].text = e.target.value
+      onlyValues[0].type = 'KRUK'
 
       if (!isNil(editableSyllable)) {
         actions.changeSyllable(editableSyllable, onlyValues[0])
@@ -155,7 +156,6 @@ class InsertSyllable extends Component {
               />
             </div>
           </form>
-
         </div>
       </React.Fragment>
     )

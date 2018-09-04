@@ -71,6 +71,7 @@ export default (state = initialState, action) => {
       const textForInsert = action.payload
       const symbolWithText = clone(symbolsFilteredByPitch)[0]
       symbolWithText.text = textForInsert
+      symbolWithText.type = 'KRUK'
       console.log(symbolWithText)
       return {
         ...state,

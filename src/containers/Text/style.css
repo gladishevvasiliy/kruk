@@ -1,22 +1,24 @@
-.bucvica {
-    font-family: Afonit;
+@font-face {
+    font-family: GrebnevUCS;
+    src: url(../../res/fonts/GrebnevUCS.ttf)
+}
+
+.text-line {
+    text-align: left;
+    font-size: 24pt;
+    font-family: GrebnevUCS;
     color:red;
-    margin-top: -30px;
-    text-transform: uppercase;
+    width: 100%;
     position: relative;
 }
 
-.bucvica:hover .bucvica-button {
+.text-line:hover .text-remove-button {
     display: inline-block;
 }
 
-.bucvica-button {
+.text-remove-button {
     cursor: pointer;
     background-color: #fffc;
-    position: absolute;
-    position: absolute;
-    right:0;
-    top:30px;
     display: none;
     color: #fff;
     background-color: #dc354599;
