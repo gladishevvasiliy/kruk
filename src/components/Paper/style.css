@@ -1,12 +1,14 @@
 .control {
     display: flex;
-    justify-content: space-between;
     flex-wrap: wrap;
     background-color: #FFF;
     border-top: 1px solid #e4e4e4;
     padding-top: 30px;
+    padding-right: 30px;
+    padding-left: 30px;
+    padding-bottom: 30px;
     position: sticky;
-    height: 530px;
+    max-height: 530px;
     bottom: 0;
 }
 
@@ -25,4 +27,15 @@
     grid-template-columns: 94px 241px;
     justify-items: start;
     margin-left: 40px;
+}
+
+.control-block {
+    border-right: solid 1px silver;
+    padding-right: 30px;
+    padding-left: 30px;
+    height: 350px;
+}
+
+.control-block-last{
+    border-right: none;
 }

@@ -35,17 +35,19 @@ class ImportExport extends Component {
     hiddenElement.href = 'data:attachment/text,' + encodeURI(dataToDownload)
     hiddenElement.target = '_blank'
     hiddenElement.download = 'kruk.json'
+    document.getElementById('hidden-export-container').appendChild(hiddenElement)
     hiddenElement.click()
   }
 
   render() {
     return (
       <div className="import-export">
-        <div className="file btn btn-lg btn-primary">
+        <div id="hidden-export-container" style={{ display: 'none' }} />
+        <div className="file btn btn-primary">
           Загрузить из файла
           <input className="input-upload" type="file" name="myfile" onChange={e => this.handleFile(e)} />
         </div>
-        <button className="btn btn-lg btn-light button-download" onClick={this.downloadFile}>Экспорт в файл</button>
+        <button className="btn btn-light button-download" onClick={this.downloadFile}>Экспорт в файл</button>
 
       </div>
     )

@@ -54,17 +54,21 @@ class Paper extends Component {
             <AreaOfSymbols symbols={this.state.dataOfArea} />
             {/* <hr className="hr" /> */}
             <div className="control">
-              <div className="InputSymbol">
+              <div className="InputSymbol control-block">
                 <InsertSyllable data={KRUKI} getDataForInsert={this.getDataForInsert} />
                 <div className="removeLast">
                   <div />
                   <button type="button" className="removeButton btn btn-danger" onClick={this.handleremoveLastSyllable} ><i className="icon-bin" />  Удалить последний слог</button>
                 </div>
+              </div>
+              <div className="control-block">
+                <CurrentSymbols />
+              </div>
+              <div className="control-block">
+                <InsertComposition />
                 <PaperStyle />
               </div>
-              <CurrentSymbols />
-              <InsertComposition />
-              <div>
+              <div className="control-block control-block-last">
                 <InsertText />
               </div>
             </div>

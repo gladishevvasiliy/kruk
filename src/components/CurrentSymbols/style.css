@@ -11,5 +11,31 @@
 
 .currentSymbols {
     width: 300px;
-    margin-left: 50px;
+    height: 300px;
+    overflow: hidden;
+    position: relative; /* Относительное позиционирование */
+}
+
+.currentSymbols::after {
+    content: "";
+    text-align: right;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 5em;
+    height: 1.2em;
+    pointer-events: none;
+    background: white;
+}
+
+.currentSymbols::before {
+    content: "";
+    text-align: right;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 1.2em;
+    background: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 100%);
+    pointer-events: none;
 }
