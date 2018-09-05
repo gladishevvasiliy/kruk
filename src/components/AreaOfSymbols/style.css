@@ -47,7 +47,7 @@
     background: white;
     margin-bottom: 50px;
     border: solid 1px #e6e6e6;
-    padding: 10mm;
+    padding: 5mm;
 }
 
 .a4:hover {
@@ -190,6 +190,8 @@
 
 .break {
     width: 100%;
+    /* margin-top: 0 !important;
+    margin-bottom: 1 !important; */
 }
 
 @media print {
@@ -212,6 +214,7 @@
      .a4 {
          border: none;
          margin: 0;
+         page-break-inside: avoid;
      }
 
      .break {

@@ -1,0 +1,24 @@
+.btn-upload {
+    margin-right: 20px;
+}
+
+  .import-export {
+      display: flex;
+  }
+
+  .file {
+    position: relative;
+    overflow: hidden;
+    margin-right: 20px;
+  }
+  .input-upload {
+    position: absolute;
+    font-size: 50px;
+    opacity: 0;
+    right: 0;
+    top: 0;
+  }
+
+  .button-download {
+    font-size: 50px;
+  }

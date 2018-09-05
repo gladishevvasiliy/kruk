@@ -31,16 +31,11 @@ import Loading from '../../utils/Loading'
 
 import { KRUKI } from '../../res/'
 
-
 import './style.css'
 
 class InsertSyllable extends Component {
   constructor(props) {
     super(props)
-
-    // this.state = {
-    //   error: '',
-    // }
 
     this.handleKeyPress = this.handleKeyPress.bind(this)
     this.handleChangeName = this.handleChangeName.bind(this)

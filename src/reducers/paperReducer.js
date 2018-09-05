@@ -85,22 +85,6 @@ export default (state = initialState, action) => {
       }
     }
 
-    // case MOVE_SYLLABLE: {
-    //   const { source, destination } = action.payload
-    //   const newSyllablesMoved = Array.from(currentPageSyllables)
-    //   const [removed] = newSyllablesMoved.splice(source.index, 1)
-    //   newSyllablesMoved.splice(destination.index, 0, removed)
-    //   // localStorage.setItem('syllables', JSON.stringify(newSyllables))
-    //   const newSyllables = Array.from(syllables)
-    //   newSyllables[currentPageNum] = newSyllablesMoved
-
-
-    //   return {
-    //     ...state,
-    //     syllables: newSyllables,
-    //   }
-    // }
-
     case SHOW_MODAL_EDIT: {
       const editableSyllable = action.payload
       return {
@@ -188,20 +172,20 @@ export default (state = initialState, action) => {
       }
     }
 
-    case SET_SYLLABLES:
+    case SET_SYLLABLES: {
+      const syllablesForSetting = action.payload
+      localStorage.setItem('pages', JSON.stringify(syllablesForSetting))
       return {
-        loading: false,
-        messages: action.payload,
+        ...state,
+        syllables: syllablesForSetting,
       }
+    }
 
     case ADD_PAGE: {
-      // const { pages } = state
       const newPage = currentPageNum + 1
-      // const newPages = [...pages, newPage]
 
       return {
         ...state,
-        // pages: newPages,
         currentPageNum: newPage,
         syllables: [...syllables, []],
       }
