@@ -2,12 +2,11 @@ import React, { Component } from 'react'
 import PropTypes from 'react-proptypes'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-
+import { saveAs } from 'file-saver/FileSaver'
 import { setSyllables } from '../../actions'
 import './style.css'
 
 class ImportExport extends Component {
-
   handleFile = (e) => {
     const file = e.target.files[0]
     if (file) {
@@ -31,12 +30,8 @@ class ImportExport extends Component {
   downloadFile = () => {
     const { paper } = this.props
     const dataToDownload = JSON.stringify(paper.syllables)
-    const hiddenElement = document.createElement('a')
-    hiddenElement.href = 'data:attachment/text,' + encodeURI(dataToDownload)
-    hiddenElement.target = '_blank'
-    hiddenElement.download = 'kruk.json'
-    document.getElementById('hidden-export-container').appendChild(hiddenElement)
-    hiddenElement.click()
+    const blob = new Blob([dataToDownload], { type: 'application/json; charset=utf-8' })
+    saveAs(blob, 'domestikos.json')
   }
 
   render() {

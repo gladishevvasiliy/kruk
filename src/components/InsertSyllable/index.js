@@ -81,8 +81,8 @@ class InsertSyllable extends Component {
     const { actions, syllableForInsert } = this.props
     delete options.preventDefault // eslint-disable-line
     const currentOptions = values(options).map(item => item.label)
-    actions.createPitchList()
     actions.filterSymbolsByOptions(currentOptions)
+    actions.createPitchList()
     if (syllableForInsert.values.pitch.label !== '') {
       actions.filterSymbolsByPitch(syllableForInsert.values.pitch.label)
     }

@@ -109,8 +109,8 @@ export default (state = initialState, action) => {
     }
 
     case CREATE_PITCH_LIST: {
-      const { symbols } = state
-      const choosedSymbols = symbols.value
+      const { currentSymbols } = state
+      const choosedSymbols = currentSymbols
       let emptyArray = []
       choosedSymbols.map((symbol) => { emptyArray = concat(emptyArray, symbol.pitch) }) // eslint-disable-line
       const uniqOptions = uniq(emptyArray) // uniq our array of opts
