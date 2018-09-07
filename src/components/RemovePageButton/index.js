@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import PropTypes from 'prop-types'
+import PropTypes from 'react-proptypes'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { removePage } from '../../actions'
@@ -30,7 +30,6 @@ const mapDispatchToProps = dispatch => ({ actions: bindActionCreators({ removePa
 const mapStateToProps = () => ({})
 
 export default connect(mapStateToProps, mapDispatchToProps)(RemovePageButton)
-
 
 RemovePageButton.propTypes = {
   pageIndex: PropTypes.number,

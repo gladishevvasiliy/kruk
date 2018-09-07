@@ -2,12 +2,11 @@ import React, { Component } from 'react'
 import PropTypes from 'react-proptypes'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap' // eslint-disable-line
+import { Button } from 'reactstrap' // eslint-disable-line
 import { isNil } from 'lodash'
 import { moveSyllable, hideModal, changePage, removePage, addPage } from '../../actions'
-import InsertSyllable from '../InsertSyllable'
 import EditText from '../EditText'
-
+import EditSyllable from '../EditSyllable'
 import Bucvica from '../../containers/Bucvica'
 import Text from '../../containers/Text'
 import Syllable from '../../containers/Syllable'
@@ -18,13 +17,8 @@ import RemovePageButton from '../RemovePageButton'
 import './style.css'
 
 class AreaOfSymbols extends Component { // eslint-disable-line
-  constructor(props) {
-    super(props)
 
-    this.changePage = this.changePage.bind(this)
-  }
-
-  changePage(pageIndex) {
+  changePage = (pageIndex) => {
     const { actions } = this.props
     actions.changePage(pageIndex)
   }
@@ -32,7 +26,7 @@ class AreaOfSymbols extends Component { // eslint-disable-line
   renderPages = () => {
     const { syllables } = this.props
     let pageTemplate = null
-    
+
     if (syllables) {
       pageTemplate = syllables.map((item, pageIndex) => (
         <div className="a4" key={pageIndex} onClick={() => this.changePage(pageIndex)}>
@@ -48,7 +42,6 @@ class AreaOfSymbols extends Component { // eslint-disable-line
     return pageTemplate
   }
 
-
   renderSyllables = (item, pageIndex) => {
     const syllablesTemplate = item.map(({ value, text, type }, index) => (
     /* eslint-disable */
@@ -61,9 +54,8 @@ class AreaOfSymbols extends Component { // eslint-disable-line
     return syllablesTemplate
   }
 
-
   render() {
-    const { form, showModalEdit, actions } = this.props
+    const { form, actions } = this.props
 
 
     if (isNil(form.paperStyle)) {
@@ -78,19 +70,17 @@ class AreaOfSymbols extends Component { // eslint-disable-line
           <div className="areaOfSymbols mx-auto">
             <div className="paperMargin" >
               {this.renderPages()}
-              <Button color="primary" className="add-page" onClick={actions.addPage}>Добавить страницу</Button>
+              <Button
+                color="primary"
+                className="add-page"
+                onClick={actions.addPage}
+              >
+                Добавить страницу
+              </Button>
             </div>
           </div>
         </div>
-        <Modal isOpen={showModalEdit}>
-          <ModalHeader toggle={actions.hideModal}>Заменить крюк</ModalHeader>
-          <ModalBody>
-            <InsertSyllable />
-          </ModalBody>
-          <ModalFooter>
-            <Button color="secondary" onClick={actions.hideModal}>Отмена</Button>
-          </ModalFooter>
-        </Modal>
+        <EditSyllable />
         <EditText />
       </React.Fragment>
     )

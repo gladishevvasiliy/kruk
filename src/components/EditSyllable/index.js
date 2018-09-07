@@ -1,39 +1,37 @@
 import React, { Component } from 'react'
+import PropTypes from 'react-proptypes'
+import {Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap' // eslint-disable-line
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 
-class EditSyllable extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      title: '',
-      msg: '',
-    }
-  }
+import { hideModal } from '../../actions'
+import InsertSyllable from '../InsertSyllable'
+
+
+class EditSyllable extends Component { // eslint-disable-line
 
   render() {
-    const { show } = this.props
+    const { showModalEdit, actions } = this.props
     return (
-      <div style={{ opacity: show ? '100' : '0', display: 'block' }} className="modal fade" id="editModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div className="modal-dialog" role="document">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title" id="exampleModalLabel">Edit Jewel</h5>
-              <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div className="modal-body">
-              {/* <p><span className="modal-lable">Title:</span><input value={this.state.title} onChange={(e) => this.titleHandler(e)} /></p> */}
-              {/* <p><span className="modal-lable">Msg:</span><input value={this.state.msg} onChange={(e) => this.msgHandler(e)} /></p> */}
-            </div>
-            <div className="modal-footer">
-              <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-              {/* <button type="button" className="btn btn-primary" data-dismiss="modal" onClick={() => { this.handleSave() }}>Save changes</button> */}
-            </div>
-          </div>
-        </div>
-      </div>
+      <Modal isOpen={showModalEdit}>
+        <ModalHeader toggle={actions.hideModal}>Заменить крюк</ModalHeader>
+        <ModalBody>
+          <InsertSyllable />
+        </ModalBody>
+        <ModalFooter>
+          <Button color="secondary" onClick={actions.hideModal}>Отмена</Button>
+        </ModalFooter>
+      </Modal>
     )
   }
 }
 
-export default EditSyllable
+const mapDispatchToProps = dispatch => ({ actions: bindActionCreators({ hideModal }, dispatch) })
+const mapStateToProps = state => ({ showModalEdit: state.paper.showModalEdit })
+
+export default connect(mapStateToProps, mapDispatchToProps)(EditSyllable)
+
+EditSyllable.propTypes = {
+  actions: PropTypes.object,
+  showModalEdit: PropTypes.bool,
+}
