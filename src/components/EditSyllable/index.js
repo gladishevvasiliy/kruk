@@ -1,20 +1,24 @@
 import React, { Component } from 'react'
 import PropTypes from 'react-proptypes'
-import {Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap' // eslint-disable-line
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 import { hideModal } from '../../actions'
-import InsertSyllable from '../InsertSyllable'
+import { InsertSyllable } from '../index'
 
 
-class EditSyllable extends Component { // eslint-disable-line
+class EditSyllable extends Component {
+  hideModal = () => {
+    const { actions } = this.props
+    actions.hideModal()
+  }
 
   render() {
     const { showModalEdit, actions } = this.props
     return (
       <Modal isOpen={showModalEdit}>
-        <ModalHeader toggle={actions.hideModal}>Заменить крюк</ModalHeader>
+        <ModalHeader toggle={this.hideModal}>Заменить крюк</ModalHeader>
         <ModalBody>
           <InsertSyllable />
         </ModalBody>

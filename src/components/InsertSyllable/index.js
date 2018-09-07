@@ -25,10 +25,8 @@ import {
 import {
   RFReactSelect,
   RFReactMultiSelect,
-} from '../../utils/RFReactSelect'
-
-import Loading from '../../utils/Loading'
-
+  Loading,
+} from '../../utils'
 import { KRUKI } from '../../res/'
 
 import './style.css'
@@ -54,16 +52,18 @@ class InsertSyllable extends Component {
       }
 
       const onlyValues = map(symbols.symbolsFilteredByPitch, ({ value }) => ({ value }))
-      onlyValues[0].text = e.target.value
-      onlyValues[0].type = 'KRUK'
+
+      const syllableForInsert = onlyValues[0]
+      syllableForInsert.text = e.target.value
+      syllableForInsert.type = 'KRUK'
 
       if (!isNil(editableSyllable)) {
-        actions.changeSyllable(editableSyllable, onlyValues[0])
+        actions.changeSyllable(editableSyllable, syllableForInsert)
         return
       } if (!isNil(indexToInsert)) {
-        actions.insertSyllable(indexToInsert, onlyValues[0])
+        actions.insertSyllable(indexToInsert, syllableForInsert)
       } else {
-        actions.addSyllable(onlyValues[0])
+        actions.addSyllable(syllableForInsert)
       }
     }
   }
@@ -79,10 +79,12 @@ class InsertSyllable extends Component {
 
   handleChangeOptions(options) {
     const { actions, syllableForInsert } = this.props
+
     delete options.preventDefault // eslint-disable-line
     const currentOptions = values(options).map(item => item.label)
     actions.filterSymbolsByOptions(currentOptions)
     actions.createPitchList()
+
     if (syllableForInsert.values.pitch.label !== '') {
       actions.filterSymbolsByPitch(syllableForInsert.values.pitch.label)
     }

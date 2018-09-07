@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'react-proptypes'
 import { bindActionCreators } from 'redux'
+
 import {
   removeSyllablebyIndex,
   repeatSyllableByIndex,
@@ -53,8 +54,8 @@ class EditButtons extends Component {
 
 const mapStateToProps = state => ({ form: state.form })
 
-const mapDispatchToProps = dispatch => (
-  { actions: bindActionCreators({
+const mapDispatchToProps = dispatch => ({
+  actions: bindActionCreators({
     removeSyllablebyIndex,
     repeatSyllableByIndex,
     showModalEdit,

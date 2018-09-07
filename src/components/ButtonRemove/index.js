@@ -18,8 +18,6 @@ class ButtonRemove extends Component {
   }
 }
 
-const mapStateToProps = () => ({ })
-
 const mapDispatchToProps = dispatch => (
   { actions: bindActionCreators({
     removeSyllablebyIndex,
@@ -27,7 +25,7 @@ const mapDispatchToProps = dispatch => (
   }, dispatch) }
 )
 
-export default connect(mapStateToProps, mapDispatchToProps)(ButtonRemove)
+export default connect(() => ({ }), mapDispatchToProps)(ButtonRemove)
 
 ButtonRemove.propTypes = {
   actions: PropTypes.object,

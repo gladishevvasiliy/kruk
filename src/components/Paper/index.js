@@ -1,80 +1,63 @@
 import React, { Component } from 'react'
 import PropTypes from 'react-proptypes'
-import { isNil } from 'lodash'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import InsertSyllable from '../InsertSyllable'
-import AreaOfSymbols from '../AreaOfSymbols'
-import PaperContext from '../../context'
-import PaperStyle from '../PaperStyle'
-import Header from '../../utils/Header'
-import CurrentSymbols from '../CurrentSymbols'
-import InsertComposition from '../InsertComposition'
-import InsertText from '../InsertText'
 
-import './style.css'
-import '../../res/bootstrap/css/bootstrap.min.css'
+import {
+  InsertSyllable,
+  AreaOfSymbols,
+  PaperStyle,
+  InsertComposition,
+  CurrentSymbols,
+  InsertText,
+} from '../'
 
+import { Header } from '../../utils'
 import { removeLastSyllable } from '../../actions'
 
-import { KRUKI } from '../../res/index'
+import '../../res/bootstrap/css/bootstrap.min.css'
+import './style.css'
 
 class Paper extends Component {
-  constructor(props) {
-    super(props)
-
-    this.getDataForInsert = (dataForInsert) => {
-      if (!isNil(dataForInsert)) {
-        this.setState(prevState => ({
-          dataOfArea: [...prevState.dataOfArea, dataForInsert],
-        }))
-      }
-    }
-
-    this.state = {
-      dataOfArea: [],
-      getDataForInsert: this.getDataForInsert,
-    }
-
-    this.handleremoveLastSyllable = this.handleremoveLastSyllable.bind(this)
-  }
-
-  handleremoveLastSyllable() {
+  handleremoveLastSyllable = () => {
     const { actions } = this.props
     actions.removeLastSyllable()
   }
 
-
   render() {
     return (
-      <PaperContext.Provider value={this.state}>
-        <React.Fragment>
-          <Header />
-          <div className="Paper">
-            <AreaOfSymbols symbols={this.state.dataOfArea} />
-            {/* <hr className="hr" /> */}
-            <div className="control">
-              <div className="InputSymbol control-block">
-                <InsertSyllable data={KRUKI} getDataForInsert={this.getDataForInsert} />
-                <div className="removeLast">
-                  <div />
-                  <button type="button" className="removeButton btn btn-danger" onClick={this.handleremoveLastSyllable} ><i className="icon-bin" />  Удалить последний слог</button>
-                </div>
-              </div>
-              <div className="control-block">
-                <CurrentSymbols />
-              </div>
-              <div className="control-block">
-                <InsertComposition />
-                <PaperStyle />
-              </div>
-              <div className="control-block control-block-last">
-                <InsertText />
+      <React.Fragment>
+        <Header />
+        <div className="Paper">
+          <AreaOfSymbols />
+          <div className="control">
+            <div className="InputSymbol control-block">
+              <InsertSyllable />
+              <div className="removeLast">
+                <div />
+                <button
+                  type="button"
+                  className="removeButton btn btn-danger"
+                  onClick={this.handleremoveLastSyllable}
+                >
+                  <i className="icon-bin" />
+                  Удалить последний слог
+                </button>
               </div>
             </div>
+            <div className="control-block">
+              <CurrentSymbols />
+            </div>
+            <div className="control-block">
+              <InsertComposition />
+              <PaperStyle />
+            </div>
+            <div className="control-block control-block-last">
+              <InsertText />
+            </div>
           </div>
-        </React.Fragment>
-      </PaperContext.Provider>
+        </div>
+      </React.Fragment>
     )
   }
 }
@@ -87,7 +70,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators({
     removeLastSyllable,
-  }, dispatch) })
+  }, dispatch),
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(Paper)
 

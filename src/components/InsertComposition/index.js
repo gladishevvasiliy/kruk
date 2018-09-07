@@ -6,17 +6,12 @@ import { connect } from 'react-redux'
 import { filter } from 'lodash'
 import './style.css'
 
-import { RFReactSelect } from '../../utils/RFReactSelect'
-import { COMPOSITIONS } from '../../res/'
+import { RFReactSelect } from '../../utils'
+import { COMPOSITIONS } from '../../res'
 
 import { addSyllable, createToneList, getCompositions } from '../../actions'
 
 class InsertComposition extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {}
-  }
-
   changeName = (e) => {
     const { actions } = this.props
     actions.getCompositions()
@@ -25,7 +20,7 @@ class InsertComposition extends Component {
 
   changeTone = (e) => {
     const { actions, compositions } = this.props
-    const symbolsFilteredByPitch = filter(compositions, ({ tone }) => tone === e.label) // eslint-disable-line max-len
+    const symbolsFilteredByPitch = filter(compositions, ({ tone }) => tone === e.label)
     symbolsFilteredByPitch[0].value.map(item => actions.addSyllable({ value: item, text: '-', type: 'KRUK' }))
   }
 
@@ -70,11 +65,12 @@ const mapStateToProps = state => ({
   tones: state.symbols.tones,
 })
 
-const mapDispatchToProps = dispatch => ({ actions: bindActionCreators({
-  addSyllable,
-  createToneList,
-  getCompositions,
-}, dispatch) })
+const mapDispatchToProps = dispatch => ({
+  actions: bindActionCreators({
+    addSyllable,
+    createToneList,
+    getCompositions,
+  }, dispatch) })
 
 export default connect(mapStateToProps, mapDispatchToProps)(InsertCompositionWithForm)
 

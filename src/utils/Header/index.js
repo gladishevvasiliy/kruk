@@ -1,6 +1,6 @@
 import React from 'react'
 import logo from '../../res/kruk.svg'
-import ImportExport from '../../containers/ImportExport'
+import { ImportExport } from '../../containers'
 
 
 const Header = () => (

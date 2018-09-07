@@ -14,23 +14,26 @@ class InsertText extends Component {
 
   addBucvica = (e) => {
     if (e.key === 'Enter') {
-      const { actions } = this.props
       e.preventDefault()
-      actions.addSyllable({ value: '', text: e.target.value, type: 'BUCVICA' })
+      const { actions } = this.props
+      const bucvica = { value: '', text: e.target.value, type: 'BUCVICA' }
+      actions.addSyllable(bucvica)
     }
   }
 
   addText = (e) => {
     if (e.key === 'Enter') {
-      const { actions } = this.props
       e.preventDefault()
-      actions.addSyllable({ value: '', text: e.target.value, type: 'TEXT' })
+      const { actions } = this.props
+      const text = { value: '', text: e.target.value, type: 'TEXT' }
+      actions.addSyllable(text)
     }
   }
 
   addBreak = () => {
     const { actions } = this.props
-    actions.addSyllable({ value: '', text: '', type: 'BREAK' })
+    const breakLine = { value: '', text: '', type: 'BREAK' }
+    actions.addSyllable(breakLine)
   }
 
   render() {
@@ -63,10 +66,7 @@ class InsertText extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  compositions: state.compositions,
-})
-
+const mapStateToProps = state => ({ compositions: state.compositions })
 const mapDispatchToProps = dispatch => ({ actions: bindActionCreators({ addSyllable }, dispatch) })
 
 export default connect(mapStateToProps, mapDispatchToProps)(InsertText)

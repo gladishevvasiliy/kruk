@@ -4,7 +4,7 @@ import PropTypes from 'react-proptypes'
 import { connect } from 'react-redux'
 
 import { removeLastSyllable } from '../../actions'
-import Symbol from '../../containers/Symbol'
+import { Symbol } from '../../containers'
 import './style.css'
 
 class CurrentSymbols extends Component { //eslint-disable-line

@@ -4,14 +4,28 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { Button } from 'reactstrap' // eslint-disable-line
 import { isNil } from 'lodash'
-import { moveSyllable, hideModal, changePage, removePage, addPage } from '../../actions'
-import EditText from '../EditText'
-import EditSyllable from '../EditSyllable'
-import Bucvica from '../../containers/Bucvica'
-import Text from '../../containers/Text'
-import Syllable from '../../containers/Syllable'
-import Loading from '../../utils/Loading'
-import RemovePageButton from '../RemovePageButton'
+
+import {
+  moveSyllable,
+  hideModal,
+  changePage,
+  removePage,
+  addPage,
+} from '../../actions'
+
+import {
+  Bucvica,
+  Text,
+  Syllable,
+} from '../../containers'
+
+import { Loading } from '../../utils'
+
+import {
+  EditText,
+  RemovePageButton,
+  EditSyllable,
+} from '../'
 
 
 import './style.css'
@@ -91,7 +105,6 @@ AreaOfSymbols.propTypes = {
   syllables: PropTypes.array,
   form: PropTypes.object,
   actions: PropTypes.object,
-  showModalEdit: PropTypes.bool,
 }
 
 const mapDispatchToProps = dispatch => (

@@ -13,7 +13,6 @@ class RemovePageButton extends PureComponent {
 
   render() {
     const { pageIndex } = this.props
-
     return (
       <button
         name={pageIndex}
@@ -27,9 +26,7 @@ class RemovePageButton extends PureComponent {
 }
 
 const mapDispatchToProps = dispatch => ({ actions: bindActionCreators({ removePage }, dispatch) })
-const mapStateToProps = () => ({})
-
-export default connect(mapStateToProps, mapDispatchToProps)(RemovePageButton)
+export default connect(() => ({}), mapDispatchToProps)(RemovePageButton)
 
 RemovePageButton.propTypes = {
   pageIndex: PropTypes.number,
