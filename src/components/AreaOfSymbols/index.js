@@ -8,11 +8,12 @@ import { moveSyllable, hideModal, changePage, removePage, addPage } from '../../
 import InsertSyllable from '../InsertSyllable'
 import EditText from '../EditText'
 
-
 import Bucvica from '../../containers/Bucvica'
 import Text from '../../containers/Text'
 import Syllable from '../../containers/Syllable'
 import Loading from '../../utils/Loading'
+import RemovePageButton from '../RemovePageButton'
+
 
 import './style.css'
 
@@ -21,7 +22,6 @@ class AreaOfSymbols extends Component { // eslint-disable-line
     super(props)
 
     this.changePage = this.changePage.bind(this)
-    this.removePage = this.removePage.bind(this)
   }
 
   changePage(pageIndex) {
@@ -29,14 +29,41 @@ class AreaOfSymbols extends Component { // eslint-disable-line
     actions.changePage(pageIndex)
   }
 
-  removePage(e, pageIndex) {
-    const { actions } = this.props
-    actions.removePage(pageIndex)
-    e.stopPropagation()
+  renderPages = () => {
+    const { syllables } = this.props
+    let pageTemplate = null
+    
+    if (syllables) {
+      pageTemplate = syllables.map((item, pageIndex) => (
+        <div className="a4" key={pageIndex} onClick={() => this.changePage(pageIndex)}>
+          {pageIndex !== 0 ?
+            <RemovePageButton pageIndex={pageIndex} />
+            : null}
+          <div className="page">
+            {this.renderSyllables(item, pageIndex)}
+          </div>
+        </div>
+      ))
+    }
+    return pageTemplate
   }
 
+
+  renderSyllables = (item, pageIndex) => {
+    const syllablesTemplate = item.map(({ value, text, type }, index) => (
+    /* eslint-disable */
+      type === 'KRUK' ? <Syllable value={value} text={text} key={index} index={index} pageIndex={pageIndex} /> : 
+      type === 'BUCVICA' ? <Bucvica text={text} index={index} pageIndex={pageIndex}/> : 
+      type === 'TEXT' ? <Text text={text} index={index} pageIndex={pageIndex}/> : 
+      type === 'BREAK' ? <hr className="break"/> : null
+      /* eslint-enable */
+    ))
+    return syllablesTemplate
+  }
+
+
   render() {
-    const { syllables, form, showModalEdit, actions } = this.props
+    const { form, showModalEdit, actions } = this.props
 
 
     if (isNil(form.paperStyle)) {
@@ -50,33 +77,7 @@ class AreaOfSymbols extends Component { // eslint-disable-line
         <div className="paperArea">
           <div className="areaOfSymbols mx-auto">
             <div className="paperMargin" >
-              {syllables.map((item, pageIndex) => ( //eslint-disable-line
-                <div className="a4" key={pageIndex} onClick={() => this.changePage(pageIndex)}>
-                  {pageIndex !== 0 ?
-                    <button
-                      name={pageIndex}
-                      onClick={e => this.removePage(e, pageIndex)}
-                      className="page-remove-button"
-                    >
-                      <i className="icon-bin" />
-                    </button>
-                    : null}
-                  <div className="page">
-                    <Bucvica />
-                    {
-                      item.map(({ value, text, type }, index) => (
-                        /* eslint-disable */
-                        type === 'KRUK' ? <Syllable value={value} text={text} key={index} index={index} pageIndex={pageIndex} /> : 
-                        type === 'BUCVICA' ? <Bucvica text={text} index={index} pageIndex={pageIndex}/> : 
-                        type === 'TEXT' ? <Text text={text} index={index} pageIndex={pageIndex}/> : 
-                        type === 'BREAK' ? <hr className="break"/> : null
-                        /* eslint-enable */
-                      ))
-                    }
-                  </div>
-                </div>
-              ))
-              }
+              {this.renderPages()}
               <Button color="primary" className="add-page" onClick={actions.addPage}>Добавить страницу</Button>
             </div>
           </div>
