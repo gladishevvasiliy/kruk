@@ -12,6 +12,8 @@ import {
   InsertText,
 } from '../'
 
+import { Attention } from '../../containers/'
+
 import { Header } from '../../utils'
 import { removeLastSyllable } from '../../actions'
 
@@ -27,6 +29,7 @@ class Paper extends Component {
   render() {
     return (
       <React.Fragment>
+        { (localStorage.getItem('visited') ? null : <Attention />)}
         <Header />
         <div className="Paper">
           <AreaOfSymbols />

@@ -1,18 +1,14 @@
 
 import React, { PureComponent } from 'react'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
 import PropTypes from 'react-proptypes'
-import { removeSyllablebyIndex, changePage } from '../../actions'
-
 
 import './style.css'
 
 class Bucvica extends PureComponent {
   removeLastSyllable() {
-    const { actions, index, pageIndex } = this.props
-    actions.changePage(pageIndex)
-    actions.removeSyllablebyIndex(index)
+    const { removeSyllablebyIndex, changePage, index, pageIndex } = this.props
+    changePage(pageIndex)
+    removeSyllablebyIndex(index)
   }
 
   render() {
@@ -32,22 +28,15 @@ class Bucvica extends PureComponent {
   }
 }
 
-const mapStateToProps = state => ({ form: state.form })
 
-const mapDispatchToProps = dispatch => (
-  { actions: bindActionCreators({
-    removeSyllablebyIndex,
-    changePage,
-  }, dispatch) }
-)
-
-export default connect(mapStateToProps, mapDispatchToProps)(Bucvica)
+export default Bucvica
 
 Bucvica.propTypes = {
   form: PropTypes.object,
   text: PropTypes.string,
-  actions: PropTypes.object,
   pageIndex: PropTypes.number,
   index: PropTypes.number,
+  removeSyllablebyIndex: PropTypes.func,
+  changePage: PropTypes.func,
 }
 

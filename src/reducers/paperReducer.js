@@ -14,7 +14,7 @@ import { ADD_SYLLABLE,
   EDIT_TEXT,
   ADD_PAGE,
   CHANGE_PAGE,
-  REMOVE_PAGE, 
+  REMOVE_PAGE,
 } from '../constants/'
 
 const initialState = {

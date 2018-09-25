@@ -4,9 +4,19 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { saveAs } from 'file-saver/FileSaver'
 import { setSyllables } from '../../actions'
+import { Help } from './../index'
 import './style.css'
 
-class ImportExport extends Component {
+class HeaderButtons extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      showModalHelp: false,
+    }
+
+    this.toggleModalHelp = this.toggleModalHelp.bind()
+  }
+
   handleFile = (e) => {
     const file = e.target.files[0]
     if (file) {
@@ -34,17 +44,26 @@ class ImportExport extends Component {
     saveAs(blob, 'domestikos.json')
   }
 
+  toggleModalHelp = () => {
+    this.setState({
+      showModalHelp: !this.state.showModalHelp,
+    })
+  }
+
   render() {
     return (
-      <div className="import-export">
-        <div id="hidden-export-container" style={{ display: 'none' }} />
-        <div className="file btn btn-primary">
-          Загрузить из файла
-          <input className="input-upload" type="file" name="myfile" onChange={e => this.handleFile(e)} />
+      <React.Fragment>
+        <Help toggle={this.toggleModalHelp} showModalHelp={this.state.showModalHelp} />
+        <div className="import-export">
+          <div id="hidden-export-container" style={{ display: 'none' }} />
+          <div className="file btn-light btn">
+            Загрузить из файла
+            <input className="input-upload" type="file" name="myfile" onChange={e => this.handleFile(e)} />
+          </div>
+          <button className="btn btn-light button-download" onClick={this.downloadFile}>Экспорт в файл</button>
+          <button className="btn button-help btn-primary" onClick={() => this.toggleModalHelp()}>Помощь</button>
         </div>
-        <button className="btn btn-light button-download" onClick={this.downloadFile}>Экспорт в файл</button>
-
-      </div>
+      </React.Fragment>
     )
   }
 }
@@ -56,9 +75,9 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({ actions: bindActionCreators({ setSyllables }, dispatch) })
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(ImportExport)
+export default connect(mapStateToProps, mapDispatchToProps)(HeaderButtons)
 
-ImportExport.propTypes = {
+HeaderButtons.propTypes = {
   paper: PropTypes.object,
   actions: PropTypes.object,
 }

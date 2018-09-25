@@ -1,6 +1,6 @@
 import React from 'react'
 import logo from '../../res/kruk.svg'
-import { ImportExport } from '../../containers'
+import { HeaderButtons } from '../../containers'
 
 
 const Header = () => (
@@ -10,7 +10,7 @@ const Header = () => (
         <img alt="Δομέστικος" src={logo} height="50px" />
         <strong>Δομέστικος</strong>
       </a>
-      <ImportExport />
+      <HeaderButtons />
     </div>
   </div>
 )
