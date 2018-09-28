@@ -69,6 +69,9 @@ class InsertSyllable extends Component {
   }
 
   handleChangeName(item) {
+    if (isNil(item.label)) {
+      return
+    }
     const { actions } = this.props
     actions.getSymbols()
     actions.filterSymbolsByName(item.label)
