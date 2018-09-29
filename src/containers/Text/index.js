@@ -8,6 +8,8 @@ import './style.css'
 class Text extends PureComponent {
   render() {
     const { text, index, pageIndex } = this.props
+    console.log("Text")
+    console.log(pageIndex)
     return (
       <React.Fragment>
         <div

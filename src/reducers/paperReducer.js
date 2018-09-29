@@ -27,6 +27,7 @@ const initialState = {
 export default (state = initialState, action) => {
   const { syllables, currentPageNum } = state
   const currentPageSyllables = state.syllables[currentPageNum] // current page
+  // TODO change paragraph 
 
   switch (action.type) {
     case ADD_SYLLABLE: {

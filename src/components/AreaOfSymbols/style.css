@@ -33,9 +33,15 @@
     margin: 30px;
 }
 
-.page {
+.paragraph {
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.paragraph:after {
+    content: "";
+    flex: auto;
 }
 
 .a4 {
@@ -58,7 +64,10 @@
     display: inline-block;
 }
 
+
+
 .page-remove-button {
+    position: absolute;
     cursor: pointer;
     background-color: #fffc;
     display: none;
@@ -195,6 +204,11 @@
     width: 100%;
     /* margin-top: 0 !important;
     margin-bottom: 1 !important; */
+}
+
+.break::before {
+    content: "";
+    flex: auto;
 }
 
 @media print {
