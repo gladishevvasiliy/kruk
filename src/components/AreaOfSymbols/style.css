@@ -36,6 +36,12 @@
 .page {
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.page:after {
+    content: "";
+    flex: auto;
 }
 
 .a4 {
