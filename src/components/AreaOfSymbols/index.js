@@ -40,9 +40,7 @@ class AreaOfSymbols extends Component { // eslint-disable-line
     if (syllables) {
       pageTemplate = syllables.map((item, pageIndex) => (
         <div className="a4" key={pageIndex} onClick={() => actions.changePage(pageIndex)}>
-          {pageIndex !== 0 ?
-            <RemovePageButton pageIndex={pageIndex} />
-            : null}
+          <RemovePageButton pageIndex={pageIndex} />
           <div className="page">
             {this.renderSyllables(item, pageIndex)}
           </div>
