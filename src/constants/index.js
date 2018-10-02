@@ -29,6 +29,7 @@ export const CHANGE_PAGE = 'CHANGE_PAGE'
 export const REMOVE_PAGE = 'REMOVE_PAGE'
 export const CREATE_TONE_LIST = 'CREATE_TONE_LIST'
 export const GET_COMPOSITIONS = 'GET_COMPOSITIONS'
+export const CHANGE_PARAGRAPH = 'CHANGE_PARAGRAPH'
 
 export const SYMBOLS = [
   { value: 1, label: 'Параклит' },

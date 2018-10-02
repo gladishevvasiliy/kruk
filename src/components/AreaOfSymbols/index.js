@@ -12,6 +12,7 @@ import {
   removePage,
   addPage,
   removeSyllablebyIndex,
+  changeParagraph,
 } from '../../actions'
 
 import {
@@ -51,9 +52,9 @@ class AreaOfSymbols extends Component { // eslint-disable-line
   }
 
   renderOnePage = (item, pageIndex) => {
-    console.log("page"+ pageIndex)
+    const { actions } = this.props
     const syllablesTemplate = item.map((paragraph, paragraphIndex) => (
-      <div className="paragraph"key={paragraphIndex}>
+      <div className="paragraph"key={paragraphIndex} onClick={() => actions.changeParagraph(paragraphIndex)} >
         {this.renderOneParagraph(paragraph, paragraphIndex, pageIndex)}
       </div>
     ))
@@ -61,7 +62,6 @@ class AreaOfSymbols extends Component { // eslint-disable-line
   }
 
   renderOneParagraph = (paragraph, paragraphIndex, pageIndex) => {
-    console.log('--paragraph'+ paragraphIndex)
     const { form, actions } = this.props
     const syllablesTemplate = paragraph.map(({ value, text, type }, index) => (
     /* eslint-disable */
@@ -121,6 +121,7 @@ const mapDispatchToProps = dispatch => (
     removePage,
     addPage,
     removeSyllablebyIndex,
+    changeParagraph,
   }, dispatch) }
 )
 

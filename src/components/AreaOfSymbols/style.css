@@ -44,6 +44,10 @@
     flex: auto;
 }
 
+.paragraph:hover {
+    box-shadow: 0 0 10px  #0059ffc5; 
+}
+
 .a4 {
     width: 210mm;
     height: 297mm;

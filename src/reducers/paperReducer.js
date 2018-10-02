@@ -15,6 +15,7 @@ import { ADD_SYLLABLE,
   ADD_PAGE,
   CHANGE_PAGE,
   REMOVE_PAGE,
+  CHANGE_PARAGRAPH,
 } from '../constants/'
 
 const initialState = {
@@ -22,18 +23,25 @@ const initialState = {
   syllables: isNil(localStorage.getItem('pages')) ? [[]] : JSON.parse(localStorage.getItem('pages')),
   pages: [0],
   currentPageNum: 0,
+  currentParagraphNum: 0,
 }
 
 export default (state = initialState, action) => {
-  const { syllables, currentPageNum } = state
+  const { syllables, currentPageNum, currentParagraphNum } = state
   const currentPageSyllables = state.syllables[currentPageNum] // current page
-  // TODO change paragraph 
+  const currentParagraph = currentPageSyllables[currentParagraphNum]
+
 
   switch (action.type) {
     case ADD_SYLLABLE: {
-      const currentSyllablesWithNew = [...currentPageSyllables, action.payload]
+      let currentSyllablesWithNew = []
+      if (isNil(currentParagraph)) {
+        currentSyllablesWithNew = [action.payload]
+      } else {
+        currentSyllablesWithNew = [...currentParagraph, action.payload]
+      }
       const newSyllables = Array.from(syllables)
-      newSyllables[currentPageNum] = currentSyllablesWithNew
+      newSyllables[currentPageNum][currentParagraphNum] = currentSyllablesWithNew
       localStorage.setItem('pages', JSON.stringify(newSyllables))
       return {
         ...state,
@@ -198,6 +206,15 @@ export default (state = initialState, action) => {
       return {
         ...state,
         currentPageNum: pageIndex,
+      }
+    }
+
+    case CHANGE_PARAGRAPH: {
+      const paragraphIndex = action.payload
+      console.log(paragraphIndex)
+      return {
+        ...state,
+        currentParagraphNum: paragraphIndex,
       }
     }
 
