@@ -7,8 +7,6 @@ import { removeSyllablebyIndex, changePage } from '../../actions'
 class ButtonRemove extends Component {
   removeLastSyllable() {
     const { actions, index, pageIndex } = this.props
-    console.log("ButtonRemove")
-    console.log(pageIndex)
     actions.changePage(pageIndex)
     actions.removeSyllablebyIndex(index)
   }

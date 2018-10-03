@@ -10,6 +10,7 @@ import EditButtons from './EditButtons'
 import InsertComposition from './InsertComposition'
 import InsertText from './InsertText'
 import PaperStyle from './PaperStyle'
+import RemoveParagraphButton from './RemoveParagraphButton'
 
 
 export {
@@ -25,4 +26,5 @@ export {
   InsertComposition,
   InsertText,
   PaperStyle,
+  RemoveParagraphButton,
 }

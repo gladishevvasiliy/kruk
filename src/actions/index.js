@@ -28,6 +28,7 @@ import {
   CREATE_TONE_LIST,
   GET_COMPOSITIONS,
   CHANGE_PARAGRAPH,
+  REMOVE_PARAGRAPH,
 } from '../constants/'
 
 export const addSyllable = syllable => ({ type: ADD_SYLLABLE, payload: syllable })
@@ -86,4 +87,6 @@ export const createToneList = state => ({ type: CREATE_TONE_LIST, payload: state
 
 export const getCompositions = state => ({ type: GET_COMPOSITIONS, payload: state })
 
-export const changeParagraph = paragraphIndex => ({ type: CHANGE_PARAGRAPH, payload: paragraphIndex }) // eslint-disable-line
+export const changeParagraph = paragraphIndex => ({ type: CHANGE_PARAGRAPH, payload: paragraphIndex }) // eslint-disable-line max-len
+
+export const removeParagraph = paragraphIndex => ({ type: REMOVE_PARAGRAPH, payload: paragraphIndex }) // eslint-disable-line max-len

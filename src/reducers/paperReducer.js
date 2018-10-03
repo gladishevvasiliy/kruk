@@ -1,5 +1,6 @@
 import { dropRight, isNil, clone } from 'lodash'
-import { ADD_SYLLABLE,
+import {
+  ADD_SYLLABLE,
   CHANGE_SYLLABLE,
   SET_SYLLABLES,
   REMOVE_LAST_SYLLABLE,
@@ -16,6 +17,7 @@ import { ADD_SYLLABLE,
   CHANGE_PAGE,
   REMOVE_PAGE,
   CHANGE_PARAGRAPH,
+  REMOVE_PARAGRAPH,
 } from '../constants/'
 
 const initialState = {
@@ -29,7 +31,10 @@ const initialState = {
 export default (state = initialState, action) => {
   const { syllables, currentPageNum, currentParagraphNum } = state
   const currentPageSyllables = state.syllables[currentPageNum] // current page
-  const currentParagraph = currentPageSyllables[currentParagraphNum]
+  let currentParagraph = []
+  if (!isNil(currentPageSyllables)) {
+    currentParagraph = currentPageSyllables[currentParagraphNum]
+  }
 
 
   switch (action.type) {
@@ -50,9 +55,9 @@ export default (state = initialState, action) => {
     }
 
     case REMOVE_LAST_SYLLABLE: {
-      const syllablesDropRight = dropRight(currentPageSyllables)
+      const paragraphDropRight = dropRight(currentParagraph)
       const newSyllables = Array.from(syllables)
-      newSyllables[currentPageNum] = syllablesDropRight
+      newSyllables[currentPageNum][currentParagraphNum] = paragraphDropRight
       localStorage.setItem('pages', JSON.stringify(newSyllables))
       return {
         ...state,
@@ -62,17 +67,10 @@ export default (state = initialState, action) => {
 
     case REMOVE_SYLLABLE_BY_INDEX: {
       const index = action.payload
-      const newCurrentSyllables = Array.from(currentPageSyllables)
-      newCurrentSyllables.splice(index, 1) // remove from current page
+      const newCurrentParagraph = Array.from(currentParagraph)
+      newCurrentParagraph.splice(index, 1) // remove from current page
       const newSyllables = Array.from(syllables)
-      // if (isEmpty(newCurrentSyllables) && currentPageNum !== 0) {
-      //   localStorage.setItem('pages', JSON.stringify(newSyllables.splice(currentPageNum, 1)))
-      //   return {
-      //     ...state,
-      //     syllables: newSyllables.splice(currentPageNum, 1),
-      //   }
-      // }
-      newSyllables[currentPageNum] = newCurrentSyllables
+      newSyllables[currentPageNum][currentParagraphNum] = newCurrentParagraph
       localStorage.setItem('pages', JSON.stringify(newSyllables))
       return {
         ...state,
@@ -82,11 +80,11 @@ export default (state = initialState, action) => {
 
     case REPEAT_SYLLABLE_BY_INDEX: {
       const index = action.payload
-      const syllableToRepeat = clone(currentPageSyllables[index])
+      const syllableToRepeat = clone(currentParagraph[index])
       // make new array with repeated syllable
-      const newSyllablesWithRepeat = [...currentPageSyllables, syllableToRepeat]
+      const newSyllablesWithRepeat = [...currentParagraph, syllableToRepeat]
       const newSyllables = Array.from(syllables)
-      newSyllables[currentPageNum] = newSyllablesWithRepeat
+      newSyllables[currentPageNum][currentParagraphNum] = newSyllablesWithRepeat
       localStorage.setItem('pages', JSON.stringify(newSyllables))
       return {
         ...state,
@@ -141,11 +139,11 @@ export default (state = initialState, action) => {
 
     case INSERT_SYLLABLE: {
       const { index, syllable } = action.payload
-      const currentSyllablesWithInsert = Array.from(currentPageSyllables)
+      const currentParagraphWithInsert = Array.from(currentParagraph)
       const afterIndex = parseInt(index) + 1 // eslint-disable-line
-      currentSyllablesWithInsert.splice(afterIndex, 0, syllable)
+      currentParagraphWithInsert.splice(afterIndex, 0, syllable)
       const newSyllables = Array.from(syllables)
-      newSyllables[currentPageNum] = currentSyllablesWithInsert
+      newSyllables[currentPageNum][currentParagraphNum] = currentParagraphWithInsert
       localStorage.setItem('pages', JSON.stringify(newSyllables))
 
       return {
@@ -156,11 +154,12 @@ export default (state = initialState, action) => {
 
     case CHANGE_SYLLABLE: {
       const { indexOfChangingSyllable, syllable } = action.payload
-      const currentSyllablesWithChange = Array.from(currentPageSyllables)
-      currentSyllablesWithChange[indexOfChangingSyllable] = syllable
+      const currentParagraphWithChange = Array.from(currentParagraph)
+      currentParagraphWithChange[indexOfChangingSyllable] = syllable
       const newSyllables = Array.from(syllables)
-      newSyllables[currentPageNum] = currentSyllablesWithChange
+      newSyllables[currentPageNum][currentParagraphNum] = currentParagraphWithChange
       localStorage.setItem('pages', JSON.stringify(newSyllables))
+
       return {
         ...state,
         syllables: newSyllables,
@@ -170,10 +169,10 @@ export default (state = initialState, action) => {
     case EDIT_TEXT: {
       const newText = action.payload
       const { indexOfEditableText } = state
-      const currentSyllablesEditText = Array.from(currentPageSyllables)
-      currentSyllablesEditText[indexOfEditableText].text = newText
+      const currentParagraphEditText = Array.from(currentParagraph)
+      currentParagraphEditText[indexOfEditableText].text = newText
       const newSyllables = Array.from(syllables)
-      newSyllables[currentPageNum] = currentSyllablesEditText
+      newSyllables[currentPageNum][currentParagraphNum] = currentParagraphEditText
       localStorage.setItem('pages', JSON.stringify(newSyllables))
       return {
         ...state,
@@ -211,7 +210,6 @@ export default (state = initialState, action) => {
 
     case CHANGE_PARAGRAPH: {
       const paragraphIndex = action.payload
-      console.log(paragraphIndex)
       return {
         ...state,
         currentParagraphNum: paragraphIndex,
@@ -223,6 +221,19 @@ export default (state = initialState, action) => {
       const newSyllables = Array.from(syllables)
       newSyllables.splice(pageIndex, 1)
       localStorage.setItem('pages', JSON.stringify(newSyllables))
+
+      return {
+        ...state,
+        syllables: newSyllables,
+      }
+    }
+
+    case REMOVE_PARAGRAPH: {
+      const paragraphIndex = action.payload
+      const newSyllables = Array.from(syllables)
+      newSyllables[currentPageNum].splice(paragraphIndex, 1) // choose page, and remove paragraph
+      localStorage.setItem('pages', JSON.stringify(newSyllables))
+
       return {
         ...state,
         syllables: newSyllables,
