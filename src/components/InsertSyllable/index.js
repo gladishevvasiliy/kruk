@@ -88,6 +88,10 @@ class InsertSyllable extends Component {
     actions.filterSymbolsByOptions(currentOptions)
     actions.createPitchList()
 
+    if (isNil(syllableForInsert.values.pitch)) {
+      return
+    }
+
     if (syllableForInsert.values.pitch.label !== '') {
       actions.filterSymbolsByPitch(syllableForInsert.values.pitch.label)
     }
