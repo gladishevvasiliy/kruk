@@ -20,7 +20,7 @@ import {
   Syllable,
 } from '../../containers'
 
-import { Loading } from '../../utils'
+import { Loading, getPageNum } from '../../utils'
 
 import {
   EditText,
@@ -44,6 +44,7 @@ class AreaOfSymbols extends Component { // eslint-disable-line
           <div className="page">
             {this.renderSyllables(item, pageIndex)}
           </div>
+          <span className="pagination" dangerouslySetInnerHTML={{ __html: getPageNum(pageIndex) }} />
         </div>
       ))
     }
