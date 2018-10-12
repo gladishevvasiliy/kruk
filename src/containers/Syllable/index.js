@@ -18,12 +18,14 @@ class Syllable extends Component {
   }
 
   render() {
-    const { form, value, text, index, pageIndex } = this.props
+    const { form, value, text, index, pageIndex, paragraphIndex } = this.props
+    console.log("Syl")
+    console.log(index)
     return (
       <div className={`syllable size${form.paperStyle.values.fontSize}`}>
         <div className="symbol" dangerouslySetInnerHTML={{ __html: value }} />
         <div id={index} className="text" onClick={e => this.editText(e)} dangerouslySetInnerHTML={{ __html: text }} />
-        <EditButtons index={index} pageIndex={pageIndex} />
+        <EditButtons index={index} pageIndex={pageIndex} paragraphIndex={paragraphIndex} />
       </div>
     )
   }
@@ -47,4 +49,5 @@ Syllable.propTypes = {
   text: PropTypes.string,
   index: PropTypes.number,
   pageIndex: PropTypes.number,
+  paragraphIndex: PropTypes.number,
 }

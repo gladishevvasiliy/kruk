@@ -12,6 +12,7 @@ import {
   removePage,
   addPage,
   removeSyllablebyIndex,
+  changeParagraph,
 } from '../../actions'
 
 import {
@@ -25,6 +26,7 @@ import { Loading, getPageNum } from '../../utils'
 import {
   EditText,
   RemovePageButton,
+  RemoveParagraphButton,
   EditSyllable,
 } from '../'
 
@@ -39,10 +41,10 @@ class AreaOfSymbols extends Component { // eslint-disable-line
 
     if (syllables) {
       pageTemplate = syllables.map((item, pageIndex) => (
-        <div className="a4" key={pageIndex} onClick={() => actions.changePage(pageIndex)}>
+        <div className="a4" key={pageIndex} onClick={() => actions.changePage(pageIndex)}> {/* eslint-disable-line */}
           <RemovePageButton pageIndex={pageIndex} />
           <div className="page">
-            {this.renderSyllables(item, pageIndex)}
+            {this.renderOnePage(item, pageIndex)}
           </div>
           <span className="pagination" dangerouslySetInnerHTML={{ __html: getPageNum(pageIndex) }} />
         </div>
@@ -51,14 +53,27 @@ class AreaOfSymbols extends Component { // eslint-disable-line
     return pageTemplate
   }
 
-  renderSyllables = (item, pageIndex) => {
+  renderOnePage = (item, pageIndex) => {
+    const { actions } = this.props
+    const syllablesTemplate = item.map((paragraph, paragraphIndex) => (
+      <div className="paragraphWrapper">
+        <RemoveParagraphButton paragraphIndex={paragraphIndex} />
+        <div className="paragraph" key={paragraphIndex} onClick={() => actions.changeParagraph(paragraphIndex)} > {/* eslint-disable-line */}
+          {this.renderOneParagraph(paragraph, paragraphIndex, pageIndex)}
+        </div>
+      </div>
+    ))
+    return syllablesTemplate
+  }
+
+  renderOneParagraph = (paragraph, paragraphIndex, pageIndex) => {
     const { form, actions } = this.props
-    const syllablesTemplate = item.map(({ value, text, type }, index) => (
+    const syllablesTemplate = paragraph.map(({ value, text, type }, index) => (
     /* eslint-disable */
-      type === 'KRUK' ? <Syllable value={value} text={text} key={index} index={index} pageIndex={pageIndex} /> : 
-      type === 'BUCVICA' ? <Bucvica form={form} removeSyllablebyIndex={actions.removeSyllablebyIndex} changePage={actions.changePage} text={text} index={index} pageIndex={pageIndex}/> : 
-      type === 'TEXT' ? <Text text={text} index={index} pageIndex={pageIndex}/> : 
-      type === 'BREAK' ? <hr className="break"/> : null
+      type === 'KRUK' ? <Syllable value={value} text={text} key={parseInt(index,10)} paragraphIndex={paragraphIndex} pageIndex={pageIndex} index={parseInt(index,10)} /> : 
+      type === 'BUCVICA' ? <Bucvica form={form} removeSyllablebyIndex={actions.removeSyllablebyIndex} changePage={actions.changePage} text={text} index={parseInt(index,10)} paragraphIndex={paragraphIndex} pageIndex={pageIndex}/> : 
+      type === 'TEXT' ? <Text text={text} pageIndex={pageIndex} index={parseInt(index,10)} key={parseInt(`${pageIndex}${paragraphIndex}${index}`, 10)} /> : 
+      type === 'BREAK' ? <hr className="break" /> : null
       /* eslint-enable */
     ))
     return syllablesTemplate
@@ -111,6 +126,7 @@ const mapDispatchToProps = dispatch => (
     removePage,
     addPage,
     removeSyllablebyIndex,
+    changeParagraph,
   }, dispatch) }
 )
 

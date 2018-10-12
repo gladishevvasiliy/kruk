@@ -38,16 +38,51 @@
     margin: 30px;
 }
 
-.page {
+.paragraphWrapper {
+    position: relative;
+}
+
+.paragraph-remove-button {
+    position: absolute;
+    bottom: 0;
+    cursor: pointer;
+    background-color: #fffc;
+    display: none;
+    color: #fff;
+    background-color: #dc354599;
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    border: 1px solid transparent;
+    /* padding: .375rem .75rem; */
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    -webkit-transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;
+    -o-transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;
+}
+
+.paragraphWrapper:hover .paragraph-remove-button {
+    display: inline-block;
+}
+
+.paragraph {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
 }
 
-.page:after {
+.paragraph:after {
     content: "";
     flex: auto;
 }
+
+.paragraph:hover {
+    box-shadow: 0 0 10px  #0059ffc5; 
 
 .a4 {
     position: relative;
@@ -70,7 +105,10 @@
     display: inline-block;
 }
 
+
+
 .page-remove-button {
+    position: absolute;
     cursor: pointer;
     background-color: #fffc;
     display: none;
@@ -208,6 +246,10 @@
     /* margin-top: 0 !important;
     margin-bottom: 1 !important; */
 }
+
+.break::before {
+    content: "";
+    flex: auto;
 
 .pagination {
     position: absolute;

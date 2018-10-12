@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import './style.css'
 
-import { addSyllable } from '../../actions'
+import { changeParagraph, addSyllable } from '../../actions'
 
 class InsertText extends Component {
   constructor(props) {
@@ -30,10 +30,10 @@ class InsertText extends Component {
     }
   }
 
-  addBreak = () => {
-    const { actions } = this.props
-    const breakLine = { value: '', text: '', type: 'BREAK' }
-    actions.addSyllable(breakLine)
+  newParagraph = () => {
+    const { actions, currentParagraphNum } = this.props
+    const newParagraphNum = currentParagraphNum + 1
+    actions.changeParagraph(newParagraphNum)
   }
 
   render() {
@@ -60,17 +60,21 @@ class InsertText extends Component {
             />
           </div>
         </form>
-        <button type="button" className="btn btn-primary" onClick={this.addBreak} >Вставить перенос строки</button>
+        <button type="button" className="btn btn-primary" onClick={this.newParagraph} >Новый абзац</button>
       </div>
     )
   }
 }
 
-const mapStateToProps = state => ({ compositions: state.compositions })
-const mapDispatchToProps = dispatch => ({ actions: bindActionCreators({ addSyllable }, dispatch) })
+const mapStateToProps = state => ({
+  compositions: state.compositions,
+  currentParagraphNum: state.paper.currentParagraphNum,
+})
+const mapDispatchToProps = dispatch => ({ actions: bindActionCreators({ changeParagraph, addSyllable }, dispatch) })
 
 export default connect(mapStateToProps, mapDispatchToProps)(InsertText)
 
 InsertText.propTypes = {
   actions: PropTypes.object,
+  currentParagraphNum: PropTypes.number,
 }
