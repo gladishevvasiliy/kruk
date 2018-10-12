@@ -18,7 +18,7 @@ class EditSyllable extends Component {
     const { showModalEdit, actions } = this.props
     return (
       <Modal isOpen={showModalEdit}>
-        <ModalHeader toggle={this.hideModal}>Заменить крюк</ModalHeader>
+        <ModalHeader toggle={this.hideModal}>Редактирование</ModalHeader>
         <ModalBody>
           <InsertSyllable />
         </ModalBody>

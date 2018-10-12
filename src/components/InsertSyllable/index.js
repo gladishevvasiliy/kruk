@@ -20,6 +20,7 @@ import {
   insertSyllable,
   createOptionsList,
   createPitchList,
+  hideModal,
 } from '../../actions'
 
 import {
@@ -59,11 +60,14 @@ class InsertSyllable extends Component {
 
       if (!isNil(editableSyllable)) {
         actions.changeSyllable(editableSyllable, syllableForInsert)
+        actions.hideModal()
         return
       } if (!isNil(indexToInsert)) {
         actions.insertSyllable(indexToInsert, syllableForInsert)
+        actions.hideModal()
       } else {
         actions.addSyllable(syllableForInsert)
+        actions.hideModal()
       }
     }
   }
@@ -87,6 +91,10 @@ class InsertSyllable extends Component {
     const currentOptions = values(options).map(item => item.label)
     actions.filterSymbolsByOptions(currentOptions)
     actions.createPitchList()
+
+    if (isNil(syllableForInsert.values.pitch)) {
+      return
+    }
 
     if (syllableForInsert.values.pitch.label !== '') {
       actions.filterSymbolsByPitch(syllableForInsert.values.pitch.label)
@@ -197,6 +205,7 @@ const mapDispatchToProps = dispatch => ({
     insertSyllable,
     createOptionsList,
     createPitchList,
+    hideModal,
   }, dispatch) })
 
 export default connect(mapStateToProps, mapDispatchToProps)(InitializeFromStateForm)

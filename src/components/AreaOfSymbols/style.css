@@ -13,6 +13,11 @@
     src: url(../../res/fonts/afonit01.ttf);
    }
 
+   @font-face {
+    font-family: GrebnevUCS;
+    src: url(../../res/fonts/GrebnevUCS.ttf)
+}
+
 
 .paperArea {
     padding-top: 50px;
@@ -36,9 +41,16 @@
 .page {
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.page:after {
+    content: "";
+    flex: auto;
 }
 
 .a4 {
+    position: relative;
     width: 210mm;
     height: 297mm;
     overflow: hidden;
@@ -195,6 +207,17 @@
     width: 100%;
     /* margin-top: 0 !important;
     margin-bottom: 1 !important; */
+}
+
+.pagination {
+    position: absolute;
+    bottom: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    left: 50%;
+    right: 50%;
+    font-family: GrebnevUCS;
+    font-size:  24pt;
 }
 
 @media print {
