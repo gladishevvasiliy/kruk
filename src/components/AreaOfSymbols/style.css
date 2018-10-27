@@ -10,7 +10,7 @@
 
    @font-face {
     font-family: Afonit;
-    src: url(../../res/fonts/afonit01.ttf);
+    src: url(../../res/fonts/afonit01-red-for-kruk.ttf);
    }
 
    @font-face {
@@ -83,6 +83,7 @@
 
 .paragraph:hover {
     box-shadow: 0 0 10px  #0059ffc5; 
+}
 
 .a4 {
     position: relative;
@@ -250,6 +251,7 @@
 .break::before {
     content: "";
     flex: auto;
+}
 
 .pagination {
     position: absolute;
