@@ -157,6 +157,7 @@
 .text {
     font-size: 30pt;
     margin-left: 20px;
+    margin-top: 14px;
     text-align: left;
     font-family: NewDamaskin;
     cursor: pointer;
@@ -313,7 +314,7 @@ font-size: 12pt;
 
 .size40 > .symbol {
     font-size: 40pt;
-    height: 50px;
+    height: 40px;
 }
 
 .size40 > .text {
