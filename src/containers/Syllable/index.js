@@ -19,8 +19,6 @@ class Syllable extends Component {
 
   render() {
     const { form, value, text, index, pageIndex, paragraphIndex } = this.props
-    console.log("Syl")
-    console.log(index)
     return (
       <div className={`syllable size${form.paperStyle.values.fontSize}`}>
         <div className="symbol" dangerouslySetInnerHTML={{ __html: value }} />
