@@ -28,6 +28,7 @@ import {
   RemovePageButton,
   RemoveParagraphButton,
   EditSyllable,
+  RemoveParagraph,
 } from '../'
 
 
@@ -107,6 +108,7 @@ class AreaOfSymbols extends Component { // eslint-disable-line
         </div>
         <EditSyllable />
         <EditText />
+        <RemoveParagraph />
       </React.Fragment>
     )
   }

@@ -17,7 +17,9 @@ import {
   CHANGE_PAGE,
   REMOVE_PAGE,
   CHANGE_PARAGRAPH,
-  REMOVE_PARAGRAPH,
+  DELETE_PARAGRAPH,
+  HIDE_MODAL_DELETE_PARAGRAPH,
+  SHOW_MODAL_DELETE_PARAGRAPH,
 } from '../constants/'
 
 const initialState = {
@@ -228,7 +230,7 @@ export default (state = initialState, action) => {
       }
     }
 
-    case REMOVE_PARAGRAPH: {
+    case DELETE_PARAGRAPH: {
       const paragraphIndex = action.payload
       const newSyllables = Array.from(syllables)
       newSyllables[currentPageNum].splice(paragraphIndex, 1) // choose page, and remove paragraph
@@ -237,6 +239,24 @@ export default (state = initialState, action) => {
       return {
         ...state,
         syllables: newSyllables,
+      }
+    }
+
+    case SHOW_MODAL_DELETE_PARAGRAPH : {
+      const indexOfDeletingParagraph = action.payload
+      return {
+        ...state,
+        showModalDeleteParagraph: true,
+        indexOfDeletingParagraph,
+      }
+    }
+
+    case HIDE_MODAL_DELETE_PARAGRAPH : {
+      return {
+        ...state,
+        showModalDeleteParagraph: false,
+        indexOfDeletingParagraph: null,
+
       }
     }
 
