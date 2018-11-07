@@ -42,8 +42,6 @@ class EditButtons extends Component {
 
   render() {
     const { index } = this.props
-    console.log("EditBtn")
-    console.log(index)
     return (
       <div>
         <React.Fragment>

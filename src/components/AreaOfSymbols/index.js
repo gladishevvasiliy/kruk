@@ -54,12 +54,17 @@ class AreaOfSymbols extends Component { // eslint-disable-line
     return pageTemplate
   }
 
-  renderOnePage = (item, pageIndex) => {
+  changeParagraph = (e, paragraphIndex) => {
+    // e.stopPropagation()
     const { actions } = this.props
+    actions.changeParagraph(paragraphIndex)
+  }
+
+  renderOnePage = (item, pageIndex) => {
     const syllablesTemplate = item.map((paragraph, paragraphIndex) => (
       <div className="paragraphWrapper">
         <RemoveParagraphButton paragraphIndex={paragraphIndex} />
-        <div className="paragraph" key={paragraphIndex} onClick={() => actions.changeParagraph(paragraphIndex)} > {/* eslint-disable-line */}
+        <div className="paragraph" key={paragraphIndex} onClick={(e) => this.changeParagraph(e, paragraphIndex)} > {/* eslint-disable-line */}
           {this.renderOneParagraph(paragraph, paragraphIndex, pageIndex)}
         </div>
       </div>
