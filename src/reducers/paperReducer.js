@@ -22,12 +22,16 @@ import {
   SHOW_MODAL_DELETE_PARAGRAPH,
 } from '../constants/'
 
+let document = [[]]
+if (!isNil(localStorage.getItem('pages'))) {
+  document = JSON.parse(localStorage.getItem('pages'))
+}
+
 const initialState = {
-  syllablesHide: isNil(localStorage.getItem('syllables')) ? [] : JSON.parse(localStorage.getItem('syllables')),
-  syllables: isNil(localStorage.getItem('pages')) ? [[]] : JSON.parse(localStorage.getItem('pages')),
+  syllables: document,
   pages: [0],
-  currentPageNum: 0,
-  currentParagraphNum: 0,
+  currentPageNum: document.length === 0 ? 0 : document.length - 1,
+  currentParagraphNum: isNil(document[document.length - 1]) ? 0 : document[document.length - 1].length === 0 ? 0 : document[document.length - 1].length - 1, // eslint-disable-line
 }
 
 export default (state = initialState, action) => {
@@ -198,6 +202,8 @@ export default (state = initialState, action) => {
         ...state,
         currentPageNum: newPage,
         syllables: [...syllables, []],
+        currentParagraphNum: 0, //  to start on new page from first paragraph
+
       }
     }
 

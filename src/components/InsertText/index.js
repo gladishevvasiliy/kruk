@@ -31,8 +31,12 @@ class InsertText extends Component {
   }
 
   newParagraph = () => {
-    const { actions, currentParagraphNum } = this.props
-    const newParagraphNum = currentParagraphNum + 1
+    const { actions, syllables, currentPageNum, currentParagraphNum } = this.props
+    if (syllables[currentPageNum][currentParagraphNum] === undefined) {
+      return
+    }
+    const numOfLastParagraphOnPage = syllables[currentPageNum].length - 1
+    const newParagraphNum = numOfLastParagraphOnPage + 1
     actions.changeParagraph(newParagraphNum)
   }
 
@@ -69,12 +73,19 @@ class InsertText extends Component {
 const mapStateToProps = state => ({
   compositions: state.compositions,
   currentParagraphNum: state.paper.currentParagraphNum,
+  currentPageNum: state.paper.currentPageNum,
+  syllables: state.paper.syllables,
 })
-const mapDispatchToProps = dispatch => ({ actions: bindActionCreators({ changeParagraph, addSyllable }, dispatch) })
+const mapDispatchToProps = dispatch => ({
+  actions: bindActionCreators({ changeParagraph, addSyllable },
+    dispatch),
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(InsertText)
 
 InsertText.propTypes = {
   actions: PropTypes.object,
   currentParagraphNum: PropTypes.number,
+  currentPageNum: PropTypes.number,
+  syllables: PropTypes.array,
 }
