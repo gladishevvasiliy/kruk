@@ -3,19 +3,19 @@ import { bindActionCreators } from 'redux'
 import PropTypes from 'react-proptypes'
 import { connect } from 'react-redux'
 
-import { removeLastSyllable } from '../../actions'
+import { addSyllable } from '../../actions'
 import { Symbol } from '../../containers'
 import './style.css'
 
 class CurrentSymbols extends Component { //eslint-disable-line
   render() {
-    const { currentSymbols } = this.props
+    const { currentSymbols, actions } = this.props
     return (
       <div className="currentSymbols text-left">
         <h4>Подходящие знамена</h4>
         { currentSymbols.length === 0 ?
           <p>Подходящих знамен нет</p>
-          : <div className="currentSymbolsArea">{ currentSymbols.map(({ value, name, pitch }, index) => <Symbol key={index} value={value} name={name} pitch={pitch} />) }</div>}
+          : <div className="currentSymbolsArea">{ currentSymbols.map(({ value, name, pitch }, index) => <Symbol key={index} value={value} name={name} pitch={pitch} addSyllable={actions.addSyllable} />) }</div>}
       </div>
     )
   }
@@ -27,7 +27,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators({
-    removeLastSyllable,
+    addSyllable,
   }, dispatch) })
 
 export default connect(mapStateToProps, mapDispatchToProps)(CurrentSymbols)

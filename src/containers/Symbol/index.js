@@ -1,23 +1,33 @@
 import React, { Component } from 'react'
 import PropTypes from 'react-proptypes'
+import './style.css'
 
 class Symbol extends Component { // eslint-disable-line
+
+  addSyllable = (value) => {
+    const { addSyllable } = this.props
+    const syllableForInsert = { value }
+    syllableForInsert.text = '-'
+    syllableForInsert.type = 'KRUK'
+
+    addSyllable(syllableForInsert)
+  }
 
   render() {
     const { value, pitch, name } = this.props
     return (
-      <React.Fragment>
+      <div className="previewItem" onClick={() => this.addSyllable(value)}>
         <div
-          className="previewSymbol"
+          className="previewKruk"
           dangerouslySetInnerHTML={{ __html: value }}
           data-toggle="tooltip"
           data-html="true"
           title={`${name}, помета: ${pitch}`}
         />
-        <div>
+        <div className="sourceHtml">
           {value}
         </div>
-      </React.Fragment>
+      </div>
     )
   }
 }
