@@ -1,0 +1,27 @@
+.previewKruk {
+    font-family: "Kruk";
+    font-size: 37pt;
+}
+
+.previewItem {
+    display: inline-grid;
+    grid-template-columns: 100px 100px;
+    margin-left: 4px;
+    margin-bottom: 10px;
+    padding: 5px;
+    border: 1px solid #ced4da;
+    width: 280px;
+    height: 70px;
+    border-radius: .25rem;
+}
+
+.previewItem:hover {
+    border-color: #5269b3;
+    box-shadow: 0 0 0 3px rgba(82, 108, 179, 0.25);
+    cursor: pointer;
+}
+
+.sourceHtml{
+    font-size: 10px;
+    color: #ced4da;
+}
