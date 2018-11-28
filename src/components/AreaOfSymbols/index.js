@@ -61,10 +61,11 @@ class AreaOfSymbols extends Component { // eslint-disable-line
   }
 
   renderOnePage = (item, pageIndex) => {
+    const { currentPageNum, currentParagraphNum } = this.props
     const syllablesTemplate = item.map((paragraph, paragraphIndex) => (
       <div className="paragraphWrapper">
         <RemoveParagraphButton paragraphIndex={paragraphIndex} />
-        <div className="paragraph" key={paragraphIndex} onClick={(e) => this.changeParagraph(e, paragraphIndex)} > {/* eslint-disable-line */}
+        <div className={ pageIndex + '' + paragraphIndex == currentPageNum + '' + currentParagraphNum ? "paragraph activeParagraph" : "paragraph" } key={paragraphIndex + '' + pageIndex} onClick={(e) => this.changeParagraph(e, paragraphIndex)} > {/* eslint-disable-line */}
           {this.renderOneParagraph(paragraph, paragraphIndex, pageIndex)}
         </div>
       </div>
@@ -142,6 +143,9 @@ const mapStateToProps = state => ({
   form: state.form,
   showModalEdit: state.paper.showModalEdit,
   showModalEditText: state.paper.showModalEditText,
+  currentPageNum: state.paper.currentPageNum,
+  currentParagraphNum: state.paper.currentParagraphNum,
+
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(AreaOfSymbols)
