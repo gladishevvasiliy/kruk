@@ -31,6 +31,7 @@ import {
   DELETE_PARAGRAPH,
   SHOW_MODAL_DELETE_PARAGRAPH,
   HIDE_MODAL_DELETE_PARAGRAPH,
+  CHECK_PARAGRAPH_IS_EMPTY,
 } from '../constants/'
 
 export const addSyllable = syllable => ({ type: ADD_SYLLABLE, payload: syllable })
@@ -95,5 +96,6 @@ export const showModalDeleteParagraph = paragraphIndex => ({ type: SHOW_MODAL_DE
 
 export const hideModalDeleteParagraph = state => ({ type: HIDE_MODAL_DELETE_PARAGRAPH, payload: state }) // eslint-disable-line max-len
 
-
 export const deleteParagraph = paragraphIndex => ({ type: DELETE_PARAGRAPH, payload: paragraphIndex }) // eslint-disable-line max-len
+
+export const checkParagraphIsEmpty = state => ({ type: CHECK_PARAGRAPH_IS_EMPTY, payload: state }) // eslint-disable-line max-len

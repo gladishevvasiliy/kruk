@@ -11,6 +11,7 @@ import {
   showModalEditText,
   changePage,
   changeParagraph,
+  checkParagraphIsEmpty,
 } from '../../actions'
 
 class EditButtons extends Component {
@@ -19,6 +20,7 @@ class EditButtons extends Component {
     actions.changePage(pageIndex)
     actions.changeParagraph(paragraphIndex)
     actions.removeSyllablebyIndex(index)
+    actions.checkParagraphIsEmpty()
   }
 
   repeatSyllableByIndex() {
@@ -66,6 +68,7 @@ const mapDispatchToProps = dispatch => ({
     showModalEditText,
     changePage,
     changeParagraph,
+    checkParagraphIsEmpty,
   }, dispatch) }
 )
 

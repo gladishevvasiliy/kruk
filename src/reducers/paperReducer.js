@@ -20,6 +20,7 @@ import {
   DELETE_PARAGRAPH,
   HIDE_MODAL_DELETE_PARAGRAPH,
   SHOW_MODAL_DELETE_PARAGRAPH,
+  CHECK_PARAGRAPH_IS_EMPTY,
 } from '../constants/'
 
 let document = [[]]
@@ -264,6 +265,21 @@ export default (state = initialState, action) => {
         indexOfDeletingParagraph: null,
 
       }
+    }
+
+    case CHECK_PARAGRAPH_IS_EMPTY : {
+      console.log("theeeeeeeeeeee")
+      if (currentParagraph.length === 0) { // isNil?
+        const newSyllables = Array.from(syllables)
+        newSyllables[currentPageNum].splice(currentParagraphNum, 1)
+        localStorage.setItem('pages', JSON.stringify(newSyllables))
+
+        return {
+          ...state,
+          syllables: newSyllables,
+        }
+      }
+      return state
     }
 
     default:
