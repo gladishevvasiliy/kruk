@@ -74,10 +74,11 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    border: solid 1px #fff;
 }
 
 .activeParagraph {
-    box-shadow: 0 0 0 1px #ced4da;
+    box-shadow: 0 0 0 1px rgba(0, 123, 255, 0.733);
     border-radius: .25rem;
 }
 
@@ -88,6 +89,7 @@
 
 .paragraph:hover {
     box-shadow: 0 0 0 .2rem rgba(0,123,255,.25);
+    border-color: rgba(0, 123, 255, 0.733);
     border-radius: .25rem;
 }
 
@@ -105,8 +107,8 @@
 }
 
 .a4:hover {
+    border-color: rgba(0, 123, 255, 0.733);
     box-shadow: 0 0 0 .2rem rgba(0,123,255,.25);
-    border: solid 1px #FFF;
     border-radius: .25rem;
 }
 
@@ -114,7 +116,10 @@
     display: inline-block;
 }
 
-
+.activePage {
+    box-shadow: 0 0 0 1px rgba(0, 123, 255, 0.733);
+    border-radius: .25rem;
+}
 
 .page-remove-button {
     position: absolute;

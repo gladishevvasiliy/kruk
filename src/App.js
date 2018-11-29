@@ -4,6 +4,7 @@ import { Route, Router, hashHistory } from 'react-router'
 import { Provider } from 'react-redux'
 import rootReducer from './reducers'
 import { Paper } from './components'
+import { withErrorHandling, DivWithErrorHandling } from './utils'
 import './App.css'
 import './res/icons/style.css'
 

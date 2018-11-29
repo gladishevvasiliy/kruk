@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import PropTypes from 'react-proptypes'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import { Alert } from 'reactstrap'
+import { isNil } from 'lodash'
 
 import {
   InsertSyllable,
@@ -27,6 +29,9 @@ class Paper extends Component {
   }
 
   render() {
+    const { paper } = this.props
+
+    const showError = isNil(paper.syllables[paper.currentPageNum])
     return (
       <React.Fragment>
         { (localStorage.getItem('visited') ? null : <Attention />)}
@@ -36,16 +41,10 @@ class Paper extends Component {
           <div className="control">
             <div className="InputSymbol control-block">
               <InsertSyllable />
-              <div className="removeLast">
-                <div />
-                <button
-                  type="button"
-                  className="removeButton btn btn-danger"
-                  onClick={this.handleremoveLastSyllable}
-                >
-                  <i className="icon-bin" />
-                  Удалить последний слог
-                </button>
+              <div>
+                <Alert style={{ display: showError ? 'block' : 'none' }} className="errorNoParagraph" color="danger">
+                  Не выбрана страница и абзац для ввода. Кликните по странице или абзацу, в который вы хотите ввести крюк.
+                </Alert>
               </div>
             </div>
             <div className="control-block">

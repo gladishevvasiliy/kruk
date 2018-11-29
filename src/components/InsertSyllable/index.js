@@ -46,7 +46,11 @@ class InsertSyllable extends Component {
   handleKeyPress(e) {
     if (e.key === 'Enter') {
       e.preventDefault()
-      const { symbols, actions, editableSyllable, indexToInsert } = this.props
+      const { symbols, actions, editableSyllable, indexToInsert, paper } = this.props
+
+      // if (isNil(paper.syllables[paper.currentPageNum])) {
+      //   return
+      // }
 
       if (isNil(symbols.symbolsFilteredByPitch)) {
         return
@@ -112,7 +116,7 @@ class InsertSyllable extends Component {
   }
 
   render() {
-    const { symbols } = this.props
+    const { symbols, paper } = this.props
     const options = symbols.options
     const pitchs = symbols.pitchs
     if (isNil(symbols)) return <Loading />
@@ -160,7 +164,7 @@ class InsertSyllable extends Component {
                 label="Слог"
                 name="syllable"
                 className="inputTextUCS form-control"
-                disabled={symbols.currentSymbols.length !== 1}
+                disabled={symbols.currentSymbols.length !== 1 || isNil(paper.syllables[paper.currentPageNum])}
               />
             </div>
           </form>

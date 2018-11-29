@@ -12,6 +12,13 @@
     bottom: 0;
 }
 
+.errorNoParagraph {
+    margin-left: 40px;
+    margin-top: 10px;
+    width: 337px;
+    text-align: left
+}
+
 .hr {
     margin-top: 100px;
 }

@@ -37,13 +37,12 @@ import './style.css'
 class AreaOfSymbols extends Component { // eslint-disable-line
 
   renderPages = () => {
-    const { syllables, actions, showPagination } = this.props
+    const { syllables, actions, showPagination, currentPageNum } = this.props
     let pageTemplate = null
-    console.log(showPagination)
-
+    
     if (syllables) {
       pageTemplate = syllables.map((item, pageIndex) => (
-        <div className="a4" key={pageIndex} onClick={() => actions.changePage(pageIndex)}> {/* eslint-disable-line */}
+        <div className={ pageIndex === currentPageNum ? "a4 activePage" : "a4" } key={pageIndex} onClick={() => actions.changePage(pageIndex)}> {/* eslint-disable-line */}
           <RemovePageButton pageIndex={pageIndex} />
           <div className="page">
             {this.renderOnePage(item, pageIndex)}
@@ -88,7 +87,7 @@ class AreaOfSymbols extends Component { // eslint-disable-line
   }
 
   render() {
-    const { form, actions, showPagination } = this.props
+    const { form, actions } = this.props
 
 
     if (isNil(form.paperStyle)) {

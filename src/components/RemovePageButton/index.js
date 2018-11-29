@@ -2,11 +2,12 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'react-proptypes'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { removePage } from '../../actions'
+import { changePage, removePage } from '../../actions'
 
 class RemovePageButton extends PureComponent {
   removePage = (e, pageIndex) => {
     const { actions } = this.props
+    actions.changePage(pageIndex)
     actions.removePage(pageIndex)
     e.stopPropagation()
   }
@@ -25,7 +26,7 @@ class RemovePageButton extends PureComponent {
   }
 }
 
-const mapDispatchToProps = dispatch => ({ actions: bindActionCreators({ removePage }, dispatch) })
+const mapDispatchToProps = dispatch => ({ actions: bindActionCreators({ removePage, changePage }, dispatch) })
 export default connect(() => ({}), mapDispatchToProps)(RemovePageButton)
 
 RemovePageButton.propTypes = {

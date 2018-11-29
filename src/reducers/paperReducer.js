@@ -31,7 +31,6 @@ if (!isNil(localStorage.getItem('pages'))) {
 
 const initialState = {
   syllables: document,
-  pages: [0],
   currentPageNum: document.length === 0 ? 0 : document.length - 1,
   currentParagraphNum: isNil(document[document.length - 1]) ? 0 : document[document.length - 1].length === 0 ? 0 : document[document.length - 1].length - 1, // eslint-disable-line
   showPagination: true,
@@ -199,11 +198,15 @@ export default (state = initialState, action) => {
     }
 
     case ADD_PAGE: {
-      const newPage = currentPageNum + 1
+      let newPageNum = currentPageNum + 1
+
+      if (syllables.length === 0) { // if first page
+        newPageNum = 0
+      }
 
       return {
         ...state,
-        currentPageNum: newPage,
+        currentPageNum: newPageNum,
         syllables: [...syllables, []],
         currentParagraphNum: 0, //  to start on new page from first paragraph
 
@@ -229,10 +232,18 @@ export default (state = initialState, action) => {
 
     case REMOVE_PAGE: {
       const pageIndex = action.payload
+
       const newSyllables = Array.from(syllables)
       newSyllables.splice(pageIndex, 1)
       localStorage.setItem('pages', JSON.stringify(newSyllables))
 
+      if (pageIndex === currentPageNum) { // if you delete active page
+        return {
+          ...state,
+          syllables: newSyllables,
+          currentPageNum: pageIndex - 1,
+        }
+      }
       return {
         ...state,
         syllables: newSyllables,

@@ -108,7 +108,7 @@ const mapDispatchToProps = dispatch => ({
     addSyllable,
     toggleShowPagination,
   },
-    dispatch),
+  dispatch),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(InsertText)

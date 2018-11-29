@@ -1,4 +1,6 @@
 import { RFReactSelect, RFReactMultiSelect } from './RFReactSelect'
+import { withErrorHandling, DivWithErrorHandling } from './withErrorHandling'
+
 import Loading from './Loading'
 import Header from './Header'
 import RangeInput from './RangeInput'
@@ -11,4 +13,6 @@ export {
   Header,
   RangeInput,
   getPageNum,
+  withErrorHandling,
+  DivWithErrorHandling,
 }
