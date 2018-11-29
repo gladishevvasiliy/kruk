@@ -37,8 +37,9 @@ import './style.css'
 class AreaOfSymbols extends Component { // eslint-disable-line
 
   renderPages = () => {
-    const { syllables, actions } = this.props
+    const { syllables, actions, showPagination } = this.props
     let pageTemplate = null
+    console.log(showPagination)
 
     if (syllables) {
       pageTemplate = syllables.map((item, pageIndex) => (
@@ -47,7 +48,7 @@ class AreaOfSymbols extends Component { // eslint-disable-line
           <div className="page">
             {this.renderOnePage(item, pageIndex)}
           </div>
-          <span className="pagination" dangerouslySetInnerHTML={{ __html: getPageNum(pageIndex) }} />
+          <span className="pagination" style={{ display: showPagination ? 'inline' : 'none' }} dangerouslySetInnerHTML={{ __html: getPageNum(pageIndex) }} />
         </div>
       ))
     }
@@ -65,7 +66,7 @@ class AreaOfSymbols extends Component { // eslint-disable-line
     const syllablesTemplate = item.map((paragraph, paragraphIndex) => (
       <div className="paragraphWrapper">
         <RemoveParagraphButton paragraphIndex={paragraphIndex} />
-        <div className={ pageIndex + '' + paragraphIndex == currentPageNum + '' + currentParagraphNum ? "paragraph activeParagraph" : "paragraph" } key={paragraphIndex + '' + pageIndex} onClick={(e) => this.changeParagraph(e, paragraphIndex)} > {/* eslint-disable-line */}
+        <div className={ pageIndex + '' + paragraphIndex === currentPageNum + '' + currentParagraphNum ? "paragraph activeParagraph" : "paragraph" } key={paragraphIndex + '' + pageIndex} onClick={(e) => this.changeParagraph(e, paragraphIndex)} > {/* eslint-disable-line */}
           {this.renderOneParagraph(paragraph, paragraphIndex, pageIndex)}
         </div>
       </div>
@@ -87,7 +88,7 @@ class AreaOfSymbols extends Component { // eslint-disable-line
   }
 
   render() {
-    const { form, actions } = this.props
+    const { form, actions, showPagination } = this.props
 
 
     if (isNil(form.paperStyle)) {
@@ -124,6 +125,7 @@ AreaOfSymbols.propTypes = {
   syllables: PropTypes.array,
   form: PropTypes.object,
   actions: PropTypes.object,
+  showPagination: PropTypes.boolean,
 }
 
 const mapDispatchToProps = dispatch => (
@@ -145,7 +147,7 @@ const mapStateToProps = state => ({
   showModalEditText: state.paper.showModalEditText,
   currentPageNum: state.paper.currentPageNum,
   currentParagraphNum: state.paper.currentParagraphNum,
-
+  showPagination: state.paper.showPagination,
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(AreaOfSymbols)

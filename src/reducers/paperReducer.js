@@ -21,6 +21,7 @@ import {
   HIDE_MODAL_DELETE_PARAGRAPH,
   SHOW_MODAL_DELETE_PARAGRAPH,
   CHECK_PARAGRAPH_IS_EMPTY,
+  TOGGLE_SHOW_PAGINATION,
 } from '../constants/'
 
 let document = [[]]
@@ -33,6 +34,7 @@ const initialState = {
   pages: [0],
   currentPageNum: document.length === 0 ? 0 : document.length - 1,
   currentParagraphNum: isNil(document[document.length - 1]) ? 0 : document[document.length - 1].length === 0 ? 0 : document[document.length - 1].length - 1, // eslint-disable-line
+  showPagination: true,
 }
 
 export default (state = initialState, action) => {
@@ -249,7 +251,7 @@ export default (state = initialState, action) => {
       }
     }
 
-    case SHOW_MODAL_DELETE_PARAGRAPH : {
+    case SHOW_MODAL_DELETE_PARAGRAPH: {
       const indexOfDeletingParagraph = action.payload
       return {
         ...state,
@@ -258,7 +260,7 @@ export default (state = initialState, action) => {
       }
     }
 
-    case HIDE_MODAL_DELETE_PARAGRAPH : {
+    case HIDE_MODAL_DELETE_PARAGRAPH: {
       return {
         ...state,
         showModalDeleteParagraph: false,
@@ -267,8 +269,7 @@ export default (state = initialState, action) => {
       }
     }
 
-    case CHECK_PARAGRAPH_IS_EMPTY : {
-      console.log("theeeeeeeeeeee")
+    case CHECK_PARAGRAPH_IS_EMPTY: {
       if (currentParagraph.length === 0) { // isNil?
         const newSyllables = Array.from(syllables)
         newSyllables[currentPageNum].splice(currentParagraphNum, 1)
@@ -280,6 +281,20 @@ export default (state = initialState, action) => {
         }
       }
       return state
+    }
+
+    case TOGGLE_SHOW_PAGINATION: {
+      const { showPagination } = state
+      if (showPagination) {
+        return {
+          ...state,
+          showPagination: false,
+        }
+      }
+      return {
+        ...state,
+        showPagination: true,
+      }
     }
 
     default:

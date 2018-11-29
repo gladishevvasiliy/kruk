@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import './style.css'
 
-import { changeParagraph, addSyllable } from '../../actions'
+import { changeParagraph, addSyllable, toggleShowPagination } from '../../actions'
 
 class InsertText extends Component {
   constructor(props) {
@@ -40,6 +40,11 @@ class InsertText extends Component {
     actions.changeParagraph(newParagraphNum)
   }
 
+  toggleShowPagination = () => {
+    const { actions } = this.props
+    actions.toggleShowPagination()
+  }
+
   render() {
     return (
       <div className="insert-text text-left">
@@ -64,7 +69,28 @@ class InsertText extends Component {
             />
           </div>
         </form>
-        <button type="button" className="btn btn-primary" onClick={this.newParagraph} >Новый абзац</button>
+        <button
+          type="button"
+          className="btn btn-primary"
+          onClick={this.newParagraph}
+        >
+          Новый абзац
+        </button>
+        <div className="toggleShowPagination custom-control custom-checkbox">
+          <input
+            type="checkbox"
+            defaultChecked
+            className="custom-control-input"
+            id="showPagination"
+            onChange={this.toggleShowPagination}
+          />
+          <label
+            className="custom-control-label"
+            htmlFor="showPagination"
+          >
+          Отображать номера страниц
+          </label>
+        </div>
       </div>
     )
   }
@@ -77,7 +103,11 @@ const mapStateToProps = state => ({
   syllables: state.paper.syllables,
 })
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators({ changeParagraph, addSyllable },
+  actions: bindActionCreators({
+    changeParagraph,
+    addSyllable,
+    toggleShowPagination,
+  },
     dispatch),
 })
 
