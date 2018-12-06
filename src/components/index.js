@@ -12,6 +12,7 @@ import InsertText from './InsertText'
 import PaperStyle from './PaperStyle'
 import RemoveParagraphButton from './RemoveParagraphButton'
 import RemoveParagraph from './RemoveParagraph'
+import RemovePageModal from './RemovePageModal'
 
 
 export {
@@ -29,4 +30,5 @@ export {
   PaperStyle,
   RemoveParagraphButton,
   RemoveParagraph,
+  RemovePageModal,
 }

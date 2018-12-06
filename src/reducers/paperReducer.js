@@ -22,6 +22,7 @@ import {
   SHOW_MODAL_DELETE_PARAGRAPH,
   CHECK_PARAGRAPH_IS_EMPTY,
   TOGGLE_SHOW_PAGINATION,
+  TOGGLE_MODAL_DELETE_PAGE,
 } from '../constants/'
 
 let document = [[]]
@@ -34,6 +35,7 @@ const initialState = {
   currentPageNum: document.length === 0 ? 0 : document.length - 1,
   currentParagraphNum: isNil(document[document.length - 1]) ? 0 : document[document.length - 1].length === 0 ? 0 : document[document.length - 1].length - 1, // eslint-disable-line
   showPagination: true,
+  showModalDeletePage: false,
 }
 
 export default (state = initialState, action) => {
@@ -305,6 +307,23 @@ export default (state = initialState, action) => {
       return {
         ...state,
         showPagination: true,
+      }
+    }
+
+    case TOGGLE_MODAL_DELETE_PAGE: {
+      const indexOfDeletingPage = action.payload
+      console.log(state.showModalDeletePage)
+      if (state.showModalDeletePage) {
+        return {
+          ...state,
+          showModalDeletePage: false,
+          indexOfDeletingPage: null,
+        }
+      }
+      return {
+        ...state,
+        showModalDeletePage: true,
+        indexOfDeletingPage,
       }
     }
 

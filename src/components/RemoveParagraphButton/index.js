@@ -2,11 +2,12 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'react-proptypes'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { showModalDeleteParagraph } from '../../actions'
+import { showModalDeleteParagraph, changePage } from '../../actions'
 
 class RemoveParagraphButton extends PureComponent {
   removeParagraph = (e, paragraphIndex) => {
-    const { actions } = this.props
+    const { actions, pageIndex } = this.props
+    actions.changePage(pageIndex)
     actions.showModalDeleteParagraph(paragraphIndex)
     e.stopPropagation()
   }
@@ -26,12 +27,13 @@ class RemoveParagraphButton extends PureComponent {
 }
 
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators({ showModalDeleteParagraph }, dispatch),
+  actions: bindActionCreators({ showModalDeleteParagraph, changePage }, dispatch),
 })
 
 export default connect(() => ({}), mapDispatchToProps)(RemoveParagraphButton)
 
 RemoveParagraphButton.propTypes = {
   paragraphIndex: PropTypes.number,
+  pageIndex: PropTypes.number,
   actions: PropTypes.object,
 }

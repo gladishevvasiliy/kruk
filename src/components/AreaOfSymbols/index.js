@@ -29,6 +29,7 @@ import {
   RemoveParagraphButton,
   EditSyllable,
   RemoveParagraph,
+  RemovePageModal,
 } from '../'
 
 
@@ -39,16 +40,18 @@ class AreaOfSymbols extends Component { // eslint-disable-line
   renderPages = () => {
     const { syllables, actions, showPagination, currentPageNum } = this.props
     let pageTemplate = null
-    
+
     if (syllables) {
       pageTemplate = syllables.map((item, pageIndex) => (
-        <div className={ pageIndex === currentPageNum ? "a4 activePage" : "a4" } key={pageIndex} onClick={() => actions.changePage(pageIndex)}> {/* eslint-disable-line */}
-          <RemovePageButton pageIndex={pageIndex} />
-          <div className="page">
-            {this.renderOnePage(item, pageIndex)}
+        <React.Fragment>
+          <div className={ pageIndex === currentPageNum ? "a4 activePage" : "a4" } key={pageIndex} onClick={() => actions.changePage(pageIndex)}> {/* eslint-disable-line */}
+            <RemovePageButton pageIndex={pageIndex} />
+            <div className="page">
+              {this.renderOnePage(item, pageIndex)}
+            </div>
+            <span className="pagination" style={{ display: showPagination ? 'inline' : 'none' }} dangerouslySetInnerHTML={{ __html: getPageNum(pageIndex) }} />
           </div>
-          <span className="pagination" style={{ display: showPagination ? 'inline' : 'none' }} dangerouslySetInnerHTML={{ __html: getPageNum(pageIndex) }} />
-        </div>
+        </React.Fragment>
       ))
     }
     return pageTemplate
@@ -64,7 +67,7 @@ class AreaOfSymbols extends Component { // eslint-disable-line
     const { currentPageNum, currentParagraphNum } = this.props
     const syllablesTemplate = item.map((paragraph, paragraphIndex) => (
       <div className="paragraphWrapper">
-        <RemoveParagraphButton paragraphIndex={paragraphIndex} />
+        <RemoveParagraphButton paragraphIndex={paragraphIndex} pageIndex={pageIndex} />
         <div className={ pageIndex + '' + paragraphIndex === currentPageNum + '' + currentParagraphNum ? "paragraph activeParagraph" : "paragraph" } key={paragraphIndex + '' + pageIndex} onClick={(e) => this.changeParagraph(e, paragraphIndex)} > {/* eslint-disable-line */}
           {this.renderOneParagraph(paragraph, paragraphIndex, pageIndex)}
         </div>
@@ -115,6 +118,7 @@ class AreaOfSymbols extends Component { // eslint-disable-line
         <EditSyllable />
         <EditText />
         <RemoveParagraph />
+        <RemovePageModal />
       </React.Fragment>
     )
   }
@@ -125,6 +129,7 @@ AreaOfSymbols.propTypes = {
   form: PropTypes.object,
   actions: PropTypes.object,
   showPagination: PropTypes.boolean,
+  currentPageNum: PropTypes.number,
 }
 
 const mapDispatchToProps = dispatch => (

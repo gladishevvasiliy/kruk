@@ -33,6 +33,7 @@ import {
   HIDE_MODAL_DELETE_PARAGRAPH,
   CHECK_PARAGRAPH_IS_EMPTY,
   TOGGLE_SHOW_PAGINATION,
+  TOGGLE_MODAL_DELETE_PAGE,
 } from '../constants/'
 
 export const addSyllable = syllable => ({ type: ADD_SYLLABLE, payload: syllable })
@@ -102,4 +103,6 @@ export const deleteParagraph = paragraphIndex => ({ type: DELETE_PARAGRAPH, payl
 export const checkParagraphIsEmpty = state => ({ type: CHECK_PARAGRAPH_IS_EMPTY, payload: state }) // eslint-disable-line max-len
 
 export const toggleShowPagination = state => ({ type: TOGGLE_SHOW_PAGINATION, payload: state }) // eslint-disable-line max-len
+
+export const toggleModalDeletePage = pageIndex => ({ type: TOGGLE_MODAL_DELETE_PAGE, payload: pageIndex }) // eslint-disable-line max-len
 

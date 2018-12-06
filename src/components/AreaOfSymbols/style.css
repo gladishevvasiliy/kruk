@@ -36,6 +36,7 @@
 
 .paperMargin {
     margin: 30px;
+    position: relative;
 }
 
 .paragraphWrapper {
@@ -44,7 +45,7 @@
 
 .paragraph-remove-button {
     position: absolute;
-    bottom: 0;
+    bottom: 7px;
     cursor: pointer;
     background-color: #fffc;
     display: none;
@@ -112,7 +113,7 @@
     border-radius: .25rem;
 }
 
-.a4:hover .page-remove-button {
+.paperMargin:hover .page-remove-button {
     display: inline-block;
 }
 
@@ -123,11 +124,10 @@
 
 .page-remove-button {
     position: absolute;
+    left: 40.5%;
+    top: 10px;
     cursor: pointer;
-    background-color: #fffc;
     display: none;
-    color: #fff;
-    background-color: #dc354599;
     font-weight: 400;
     text-align: center;
     white-space: nowrap;
@@ -142,11 +142,7 @@
     -o-transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;
-    z-index: 1000000;
-}
-
-.page-remove-button:hover {
-    background-color: #dc3546dc;
+    z-index: 1040;
 }
 
 .droppable {

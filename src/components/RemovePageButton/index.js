@@ -2,31 +2,33 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'react-proptypes'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { changePage, removePage } from '../../actions'
+import { Button } from 'reactstrap'
+import { changePage, toggleModalDeletePage } from '../../actions'
 
 class RemovePageButton extends PureComponent {
   removePage = (e, pageIndex) => {
     const { actions } = this.props
     actions.changePage(pageIndex)
-    actions.removePage(pageIndex)
+    actions.toggleModalDeletePage(pageIndex)
     e.stopPropagation()
   }
 
   render() {
     const { pageIndex } = this.props
     return (
-      <button
+      <Button
+        color="danger"
         name={pageIndex}
         onClick={e => this.removePage(e, pageIndex)}
         className="page-remove-button"
       >
-        <i className="icon-bin" />
-      </button>
+        Удалить страницу
+      </Button>
     )
   }
 }
 
-const mapDispatchToProps = dispatch => ({ actions: bindActionCreators({ removePage, changePage }, dispatch) })
+const mapDispatchToProps = dispatch => ({ actions: bindActionCreators({ toggleModalDeletePage, changePage }, dispatch) })
 export default connect(() => ({}), mapDispatchToProps)(RemovePageButton)
 
 RemovePageButton.propTypes = {
