@@ -21,14 +21,31 @@ class Attention extends React.Component {
   render() {
     return (
       <div>
-        <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+        <Modal
+          isOpen={this.state.modal}
+          toggle={this.toggle}
+          className={this.props.className}
+        >
           <ModalHeader toggle={this.toggle}>Предупреждение</ModalHeader>
           <ModalBody>
             {/* eslint-disable-next-line */}
-            <h5>Здравствуйте!</h5><br /> Программа &quot;Доместикос&quot; находится в стадии тестирования, поэтому разработчик не отвечает за последствия работы приложения. <br /><br /> Не рекомендуется набирать большие тексты (если вы потратите на это много времени, а из-за ошибки что-то пойдет не так, это будет печально). <br /><br />В любом случае прошу прощения за возможные недоразумения, и прошу все замеченные ошибки присылать по адресу <b>gladishevvasiliy@gmail.com</b>. <br /><br />Благодарю за внимание!
+            <h5>Здравствуйте!</h5>
+            <br /> Программа &quot;Доместикос&quot; находится в стадии
+            тестирования, поэтому разработчик не отвечает за последствия работы
+            приложения. <br />
+            <br /> Не рекомендуется набирать большие тексты (если вы потратите
+            на это много времени, а из-за ошибки что-то пойдет не так, это будет
+            печально). <br />
+            <br />В любом случае прошу прощения за возможные недоразумения, и
+            прошу все замеченные ошибки присылать по адресу{' '}
+            <b>gladishevvasiliy@gmail.com</b>. <br />
+            <br />
+            Благодарю за внимание!
           </ModalBody>
           <ModalFooter>
-            <Button color="primary" onClick={this.toggle}>Я понял</Button>
+            <Button color="primary" onClick={this.toggle}>
+              Я понял
+            </Button>
           </ModalFooter>
         </Modal>
       </div>
