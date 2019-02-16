@@ -1,0 +1,28 @@
+@font-face {
+    font-family: Grebnev;
+    src: url(../../res/fonts/GrebnevUCS.ttf);
+  }
+
+.loading-screen {
+    height: 400px;
+    position: relative;
+    background-color: gray; /* for demonstration */
+}
+
+.loading-gif {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -50px 0px 0px -50px;
+}
+
+.title {
+    margin-top: 50px;
+    font-size: 60pt!important;
+    font-family: Grebnev;
+    
+}
+
+.title::first-letter {
+    color: red;
+  }

@@ -132,7 +132,7 @@ class InsertSyllable extends Component {
               options={KRUKI}
               onChange={this.handleChangeName}
               component={RFReactSelect}
-              className="input"
+              className="input input-name"
             />
           </div>
           <div className="field" >
@@ -143,7 +143,7 @@ class InsertSyllable extends Component {
               options={options}
               onChange={this.handleChangeOptions}
               component={RFReactMultiSelect}
-              className="input"
+              className="input input-option"
             />
           </div>
           <div className="field" >
@@ -154,7 +154,7 @@ class InsertSyllable extends Component {
               options={pitchs}
               onChange={this.handleChangePitch}
               component={RFReactSelect}
-              className="input"
+              className="input input-pitch"
             />
           </div>
           <form onKeyPress={this.handleKeyPress}>  {/* eslint-disable-line */}

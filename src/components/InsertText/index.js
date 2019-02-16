@@ -49,23 +49,23 @@ class InsertText extends Component {
     return (
       <div className="insert-text text-left">
         <h4>Вставка текста</h4>
-        <form onKeyPress={this.addBucvica}>  {/* eslint-disable-line */}
-          <div className="field" >
-            <label htmlFor="Name">Вставить буквицу</label>
-            <input
-              label="Буквица"
-              name="bucvica"
-              className="form-control"
-            />
-          </div>
-        </form>
         <form onKeyPress={this.addText}>  {/* eslint-disable-line */}
-          <div className="field" >
+          <div className="field field-insert-text" >
             <label htmlFor="Name">Вставить текст</label>
             <input
               label="Текст"
               name="text"
               className="form-control ucs-text"
+            />
+          </div>
+        </form>
+        <form onKeyPress={this.addBucvica}>  {/* eslint-disable-line */}
+          <div className="field field-insert-bucvica" >
+            <label htmlFor="Name">Вставить буквицу</label>
+            <input
+              label="Буквица"
+              name="bucvica"
+              className="form-control"
             />
           </div>
         </form>

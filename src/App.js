@@ -3,7 +3,7 @@ import { createStore } from 'redux'
 import { Route, Router, hashHistory } from 'react-router'
 import { Provider } from 'react-redux'
 import rootReducer from './reducers'
-import { Paper } from './components'
+import { PaperWrapper } from './components'
 import './App.css'
 import './res/icons/style.css'
 
@@ -20,7 +20,7 @@ const App = () => (
     <Provider store={store}>
       <div className="App">
         <Router history={history}>
-          <Route path="/" component={Paper} />
+          <Route path="/" component={PaperWrapper} />
         </Router>
       </div>
     </Provider>

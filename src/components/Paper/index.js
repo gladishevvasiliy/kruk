@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { Alert } from 'reactstrap'
 import { isNil } from 'lodash'
+import Tour from 'reactour'
 
 import {
   InsertSyllable,
@@ -16,16 +17,31 @@ import {
 
 import { Attention } from '../../containers/'
 
-import { Header } from '../../utils'
-import { removeLastSyllable } from '../../actions'
+import { Header, getDataFromServer } from '../../utils'
+import { removeLastSyllable, setSymbols } from '../../actions'
+import { GUIDE_STEPS } from '../../res/'
 
 import '../../res/bootstrap/css/bootstrap.min.css'
 import './style.css'
 
 class Paper extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      isTourOpen: false,
+    }
+  }
+
   handleremoveLastSyllable = () => {
     const { actions } = this.props
     actions.removeLastSyllable()
+  }
+
+  closeTour = () => {
+    this.setState({
+      isTourOpen: false,
+    })
   }
 
   render() {
@@ -34,7 +50,14 @@ class Paper extends Component {
     const showError = isNil(paper.syllables[paper.currentPageNum])
     return (
       <React.Fragment>
-        { (localStorage.getItem('visited') ? null : <Attention />)}
+        <Tour
+          steps={GUIDE_STEPS}
+          isOpen={this.state.isTourOpen}
+          onRequestClose={this.closeTour}
+          className="helper"
+          closeWithMask={false}
+        />
+        {localStorage.getItem('visited') ? null : <Attention />}
         <Header />
         <div className="Paper">
           <AreaOfSymbols />
@@ -42,8 +65,13 @@ class Paper extends Component {
             <div className="InputSymbol control-block">
               <InsertSyllable />
               <div>
-                <Alert style={{ display: showError ? 'block' : 'none' }} className="errorNoParagraph" color="danger">
-                  Не выбрана страница и абзац для ввода. Кликните по странице или абзацу, в который вы хотите ввести крюк.
+                <Alert
+                  style={{ display: showError ? 'block' : 'none' }}
+                  className="errorNoParagraph"
+                  color="danger"
+                >
+                  Не выбрана страница и абзац для ввода. Кликните по странице
+                  или абзацу, в который вы хотите ввести крюк.
                 </Alert>
               </div>
             </div>
@@ -64,20 +92,25 @@ class Paper extends Component {
   }
 }
 
-
 const mapStateToProps = state => ({
   paper: state.paper,
 })
 
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators({
-    removeLastSyllable,
-  }, dispatch),
+  actions: bindActionCreators(
+    {
+      removeLastSyllable,
+      setSymbols,
+    },
+    dispatch
+  ),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Paper)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Paper)
 
 Paper.propTypes = {
   actions: PropTypes.object,
 }
-

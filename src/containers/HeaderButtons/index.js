@@ -61,7 +61,7 @@ class HeaderButtons extends Component {
             <input className="input-upload" type="file" name="myfile" onChange={e => this.handleFile(e)} />
           </div>
           <button className="btn btn-light button-download" onClick={this.downloadFile}>Экспорт в файл</button>
-          <button className="btn button-help btn-primary" onClick={() => this.toggleModalHelp()}>Помощь</button>
+          <button className="btn button-help btn-primary button-help" onClick={() => this.toggleModalHelp()}>Помощь</button>
         </div>
       </React.Fragment>
     )

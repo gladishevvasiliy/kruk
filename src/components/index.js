@@ -1,4 +1,5 @@
 import Paper from './Paper'
+import PaperWrapper from './PaperWrapper'
 import AreaOfSymbols from './AreaOfSymbols'
 import InsertSyllable from './InsertSyllable'
 import EditSyllable from './EditSyllable'
@@ -14,9 +15,9 @@ import RemoveParagraphButton from './RemoveParagraphButton'
 import RemoveParagraph from './RemoveParagraph'
 import RemovePageModal from './RemovePageModal'
 
-
 export {
   Paper,
+  PaperWrapper,
   AreaOfSymbols,
   InsertSyllable,
   EditSyllable,

@@ -16,3 +16,10 @@ export {
   withErrorHandling,
   DivWithErrorHandling,
 }
+
+export const getDataFromServer = (url: string) => {
+  return fetch(url).then(resp => {
+    const data = resp.json()
+    return data
+  })
+}

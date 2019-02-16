@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'icomoon';
-  src:  url('fonts/icomoon.eot?aa1jf5');
-  src:  url('fonts/icomoon.eot?aa1jf5#iefix') format('embedded-opentype'),
-    url('fonts/icomoon.ttf?aa1jf5') format('truetype'),
-    url('fonts/icomoon.woff?aa1jf5') format('woff'),
-    url('fonts/icomoon.svg?aa1jf5#icomoon') format('svg');
+  src:  url('fonts/icomoon.eot?x2bcmk');
+  src:  url('fonts/icomoon.eot?x2bcmk#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?x2bcmk') format('truetype'),
+    url('fonts/icomoon.woff?x2bcmk') format('woff'),
+    url('fonts/icomoon.svg?x2bcmk#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -12,7 +12,6 @@
 [class^="icon-"], [class*=" icon-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
   font-family: 'icomoon' !important;
-  font-size:10pt;
   speak: none;
   font-style: normal;
   font-weight: normal;
@@ -39,4 +38,29 @@
 }
 .icon-text:before {
   content: "\ea6d";
+}
+.icon-spinner:before {
+  content: "\e97a";
+}
+
+@keyframes anim-rotate {
+	0% {
+		transform: rotate(0);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+.spinner {
+	display: inline-block;
+	font-size:4em;
+	height: 1em;
+	line-height: 1;
+	animation: anim-rotate 2s infinite linear;
+	color: #000;
+	text-shadow: 0 0 .25em rgba(255,255,255, .3);
+}
+.spinner--steps {
+	animation: anim-rotate 1s infinite steps(8);
 }

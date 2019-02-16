@@ -1,7 +1,9 @@
 import { filter, find, clone, difference, uniq, concat } from 'lodash'
 import { KRUKI, COMPOSITIONS } from '../res/index'
+import { getDataFromServer } from '../utils'
 
 import {
+  SET_SYMBOLS,
   FILTER_SYMBOLS_BY_NAME,
   CREATE_OPTIONS_LIST,
   FILTER_SYMBOLS_BY_OPTIONS,
@@ -16,15 +18,19 @@ import {
 } from '../constants/'
 
 const initialState = {
-  symbols: KRUKI,
+  symbols: [],
   compositions: COMPOSITIONS,
   error: '',
   currentSymbols: [],
   options: [],
-  tones:[],
+  tones: [],
 }
 
-const checkError = (symbols) => {
+getDataFromServer('http://84.201.133.135:1235/kruk/all').then(data => {
+  initialState.symbols = data
+})
+
+const checkError = symbols => {
   if (symbols.length === 0) {
     return 'Ошибка. Такого крюка в базе нет.'
   }
@@ -33,11 +39,23 @@ const checkError = (symbols) => {
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case SET_SYMBOLS: {
+      console.log(SET_SYMBOLS)
+      const symbols = action.payload
+      return {
+        ...state,
+        symbols,
+      }
+    }
+
     case FILTER_SYMBOLS_BY_NAME: {
       console.log(FILTER_SYMBOLS_BY_NAME)
       const { symbols } = state
       const currentNameOfSymbol = action.payload
-      const symbolsFilteredByName = find(symbols, symbol => symbol.label === currentNameOfSymbol)
+      const symbolsFilteredByName = find(
+        symbols,
+        symbol => symbol.name === currentNameOfSymbol
+      )
       console.log(symbolsFilteredByName)
 
       return {
@@ -51,9 +69,12 @@ export default (state = initialState, action) => {
       console.log(FILTER_SYMBOLS_BY_OPTIONS) // TODO без важности порядка опций
       const { symbols } = state
       const currentOptionsOfSymbol = action.payload
-      const symbolsFilteredByOptions = filter(symbols.value, symbol =>
-        difference(currentOptionsOfSymbol, symbol.opts).length === 0
-        && difference(symbol.opts, currentOptionsOfSymbol).length === 0)
+      const symbolsFilteredByOptions = filter(
+        symbols.symbols,
+        symbol =>
+          difference(currentOptionsOfSymbol, symbol.opts).length === 0 &&
+          difference(symbol.opts, currentOptionsOfSymbol).length === 0
+      )
       console.log(symbolsFilteredByOptions)
       return {
         ...state,
@@ -67,7 +88,10 @@ export default (state = initialState, action) => {
       console.log(FILTER_SYMBOLS_BY_PITCH)
       const { symbolsFilteredByOptions } = state
       const currentPitchOfSymbol = action.payload
-      const symbolsFilteredByPitch = filter(symbolsFilteredByOptions, ({ pitch }) => pitch === currentPitchOfSymbol) // eslint-disable-line max-len
+      const symbolsFilteredByPitch = filter(
+        symbolsFilteredByOptions,
+        ({ pitch }) => pitch === currentPitchOfSymbol
+      ) // eslint-disable-line max-len
       console.log(symbolsFilteredByPitch)
 
       return {
@@ -94,13 +118,18 @@ export default (state = initialState, action) => {
 
     case CREATE_OPTIONS_LIST: {
       const { symbols } = state
-      const choosedSymbols = symbols.value
+      const choosedSymbols = symbols.symbols
       let emptyArray = []
       // map array  of symbols, and in everi item add array of opts to emptyArray
-      choosedSymbols.map((symbol) => { emptyArray = concat(emptyArray, symbol.opts) }) // eslint-disable-line
+      choosedSymbols.map(symbol => {
+        emptyArray = concat(emptyArray, symbol.opts)
+      }) // eslint-disable-line
       const uniqOptions = uniq(emptyArray) // uniq our array of opts
       let index = 0
-      const labels = uniqOptions.map(option => ({ value: index++, label: option })) // eslint-disable-line
+      const labels = uniqOptions.map(option => ({
+        value: index++,
+        label: option,
+      })) // eslint-disable-line
 
       return {
         ...state,
@@ -112,10 +141,15 @@ export default (state = initialState, action) => {
       const { currentSymbols } = state
       const choosedSymbols = currentSymbols
       let emptyArray = []
-      choosedSymbols.map((symbol) => { emptyArray = concat(emptyArray, symbol.pitch) }) // eslint-disable-line
+      choosedSymbols.map(symbol => {
+        emptyArray = concat(emptyArray, symbol.pitch)
+      }) // eslint-disable-line
       const uniqOptions = uniq(emptyArray) // uniq our array of opts
       let index = 0
-      const labels = uniqOptions.map(pitch => ({ value: index++, label: pitch })) // eslint-disable-line
+      const labels = uniqOptions.map(pitch => ({
+        value: index++,
+        label: pitch,
+      })) // eslint-disable-line
 
       return {
         ...state,
@@ -126,7 +160,9 @@ export default (state = initialState, action) => {
     case CREATE_TONE_LIST: {
       const currentCompositions = action.payload
       let emptyArray = []
-      currentCompositions.map((composition) => { emptyArray = concat(emptyArray, composition.tone) }) // eslint-disable-line
+      currentCompositions.map(composition => {
+        emptyArray = concat(emptyArray, composition.tone)
+      }) // eslint-disable-line
       const uniqTones = uniq(emptyArray) // uniq our array of opts
       let index = 0
       const labels = uniqTones.map(tone => ({ value: index++, label: tone })) // eslint-disable-line
@@ -144,7 +180,7 @@ export default (state = initialState, action) => {
       console.log(GET_SYMBOLS)
       return {
         ...state,
-        symbols: KRUKI,
+        symbols: initialState.symbols,
       }
 
     case GET_COMPOSITIONS:

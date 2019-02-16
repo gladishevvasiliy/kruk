@@ -1,5 +1,5 @@
 // FOR REACT-REDUX
-
+export const SET_SYMBOLS = 'SET_SYMBOLS'
 export const ADD_SYLLABLE = 'ADD_SYMBOL'
 export const SET_SYLLABLES = 'SET_SYLLABLES'
 export const TEST_MSG = 'TEST_MSG'
@@ -92,7 +92,6 @@ export const SYMBOLS = [
   { value: 52, label: 'Статья в кулизме' },
   { value: 53, label: 'Запятая с крыжом' },
   { value: 54, label: 'Стрела простая' },
-
 ]
 
 export const PITCH = [

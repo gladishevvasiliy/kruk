@@ -12,6 +12,10 @@
     bottom: 0;
 }
 
+.helper {
+    width: 3000px;
+}
+
 .errorNoParagraph {
     margin-left: 40px;
     margin-top: 10px;
